@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".selectFileSize">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/encryption"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:fontFamily="@font/andada"
+            android:text="@string/files"
+            android:textAlignment="center"
+            android:textColor="#F7F7F7"
+            android:textSize="36sp" />
+
+        <RadioGroup
+            android:layout_width="324dp"
+            android:layout_height="412dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:background="#90B1B0B0">
+
+            <RadioButton
+                android:id="@+id/button"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="15dp"
+                android:height="60dip"
+                android:buttonTint="@color/blue"
+                android:fontFamily="@font/andada"
+                android:gravity="center_horizontal"
+                android:onClick="encryptFile"
+                android:text="@string/_1kb"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="#BF000000"
+                android:textColorHighlight="#003B85C2"
+                android:textColorLink="#456CD6"
+                android:textSize="24sp"
+                android:textStyle="bold" /><!--changed the color of the radio button click.. defined "blue" in values->colors with buttonTint -->
+
+            <RadioButton
+                android:id="@+id/button2"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="15dp"
+                android:height="60dip"
+                android:buttonTint="@color/blue"
+                android:fontFamily="@font/andada"
+                android:gravity="center_horizontal"
+                android:text="@string/_10kb"
+                android:textAllCaps="true"
+                android:textColor="#BF000000"
+                android:textColorHighlight="#003B85C2"
+                android:textColorLink="#456CD6"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/button6"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="15dp"
+                android:height="60dip"
+                android:buttonTint="@color/blue"
+                android:fontFamily="@font/andada"
+                android:gravity="center_horizontal"
+                android:text="@string/_100kb"
+                android:textAllCaps="true"
+                android:textColor="#BF000000"
+                android:textColorHighlight="#003B85C2"
+                android:textColorLink="#456CD6"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/button3"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="15dp"
+                android:height="60dip"
+                android:buttonTint="@color/blue"
+                android:fontFamily="@font/andada"
+                android:gravity="center_horizontal"
+                android:text="@string/_1mb"
+                android:textAllCaps="true"
+                android:textColor="#BF000000"
+                android:textColorHighlight="#003B85C2"
+                android:textColorLink="#456CD6"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/button4"
+                style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="15dp"
+                android:height="60dip"
+                android:buttonTint="@color/blue"
+                android:fontFamily="@font/andada"
+                android:gravity="center_horizontal"
+                android:text="@string/_10mb"
+                android:textAllCaps="true"
+                android:textColor="#BF000000"
+                android:textColorHighlight="#003B85C2"
+                android:textColorLink="#456CD6"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/button5"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="15dp"
+                android:height="60dip"
+                android:buttonTint="@color/blue"
+                android:fontFamily="@font/andada"
+                android:gravity="center_horizontal"
+                android:text="@string/_100mb"
+                android:textAllCaps="true"
+                android:textColor="#BF000000"
+                android:textColorHighlight="#003B85C2"
+                android:textColorLink="#456CD6"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="324dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="#61FFFFFF"
+            android:text="Button" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

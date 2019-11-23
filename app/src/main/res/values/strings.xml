@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Encryption Performance</string>
+    <string name="des">DES</string>
+    <string name="test">TEST</string>
+    <string name="aes">AES</string>
+    <string name="blowfish">Blowfish</string>
+    <string name="todo">TODO</string>
+    <string name="_3des">3DES</string>
+    <string name="add">Add</string>
+    <string name="todooo">todooo</string>
+    <string name="_100mb">100mb</string>
+    <string name="files">FILES</string>
+    <string name="_1mb">1mb</string>
+    <string name="_10kb">10kb</string>
+    <string name="_100kb">100kb</string>
+    <string name="_1kb">1kb</string>
+    <string name="_10mb">10mb</string>
+</resources>
