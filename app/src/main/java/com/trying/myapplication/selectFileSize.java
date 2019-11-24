@@ -23,23 +23,31 @@ public class selectFileSize extends AppCompatActivity {
 
 
 
-    public selectFileSize() throws Exception {
+    public selectFileSize()  {
     }
     private File file;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_file_size);
-        Button btn1 = (Button) findViewById(R.id.btn1KB);
-        final TextView txt1 = (TextView) findViewById(R.id.txtView);
-        file = new File(Environment.getExternalStorageDirectory(), "_7KBfile.txt");
+        Button btn1KB = (Button) findViewById(R.id.btn1KB);
+        Button btn5KB = (Button) findViewById(R.id.btn5KB);
+        Button btn10KB = (Button) findViewById(R.id.btn10KB);
+        Button btn50KB = (Button) findViewById(R.id.btn50KB);
+        Button btn100KB = (Button) findViewById(R.id.btn100KB);
+        Button btn1MB = (Button) findViewById(R.id.btn1MB);
 
-        btn1.setOnClickListener(new View.OnClickListener() {
+
+        Button btnEncrypt = (Button) findViewById(R.id.btnEncrypt);
+
+
+        final TextView txt1 = (TextView) findViewById(R.id.txtView);
+       // file = new File(Environment.getExternalStorageDirectory(), "_1KBfile.txt");
+
+        btn1KB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                String test1 = "GRESA";
-                String text2 = ReadFile.readFile("_7KBfile.txt", selectFileSize.this);
+                String text2 = ReadFile.readFile("_1KBfile.txt", selectFileSize.this);
                 try {
                     String text3 = AES.encrypt(text2);
                     String text4 = AES.decrypt(text3);
@@ -47,13 +55,90 @@ public class selectFileSize extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-               // txt1.setText(ReadFile.readFile("_7KBfile.txt", selectFileSize.this));
-                String test123 = ReadFile.readFile("_7KBfile.txt",selectFileSize.this);
-                Log.d("CREATION", ReadFile.readFile("_7KBfile.txt",selectFileSize.this));
+                String test123 = ReadFile.readFile("_1KBfile.txt",selectFileSize.this);
             }
         });
 
+        btn5KB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String text2 = ReadFile.readFile("_5KBfile.txt", selectFileSize.this);
+                try {
+                    String text3 = AES.encrypt(text2);
+                    String text4 = AES.decrypt(text3);
+                    txt1.setText(text4);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                String test123 = ReadFile.readFile("_5KBfile.txt",selectFileSize.this);
+            }
+        });
+
+        btn10KB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String text2 = ReadFile.readFile("_10KBfile.txt", selectFileSize.this);
+                try {
+                    String text3 = AES.encrypt(text2);
+                    String text4 = AES.decrypt(text3);
+                    txt1.setText(text4);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                String test123 = ReadFile.readFile("_10KBfile.txt",selectFileSize.this);
+            }
+        });
+
+        btn50KB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String text2 = ReadFile.readFile("_50KBfile.txt", selectFileSize.this);
+                try {
+                    String text3 = AES.encrypt(text2);
+                    String text4 = AES.decrypt(text3);
+                    txt1.setText(text4);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                String test123 = ReadFile.readFile("_50KBfile.txt",selectFileSize.this);
+            }
+        });
+
+
+        btn100KB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String text2 = ReadFile.readFile("_100KBfile.txt", selectFileSize.this);
+                try {
+                    String text3 = AES.encrypt(text2);
+                    String text4 = AES.decrypt(text3);
+                    txt1.setText(text4);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                String test123 = ReadFile.readFile("_100KBfile.txt",selectFileSize.this);
+            }
+        });
+
+        btn1MB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String text2 = ReadFile.readFile("_1MBfile.txt", selectFileSize.this);
+                try {
+                    String text3 = AES.encrypt(text2);
+                    String text4 = AES.decrypt(text3);
+                    txt1.setText(text4);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                String test123 = ReadFile.readFile("_1MBfile.txt",selectFileSize.this);
+            }
+        });
+
+
+
     }
+
 
 
     public void encryptFile(View view) {

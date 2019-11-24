@@ -17,7 +17,7 @@ public class ReadFile {
 
         try {
             //AssetManager aManager = selectFileSize.this.getAssets();
-            InputStream inputStream = context.getAssets().open("_7KBfile.txt");
+            InputStream inputStream = context.getAssets().open(filepath);
             final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             final StringBuilder stringBuilder = new StringBuilder();
             boolean done = false;
