@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class ReadFile {
+class ReadFile {
 
     private static final String TAG = "ssasss";
 
-    public static String readFile(String filepath, Context context){
+    static String readFile(String filepath, Context context){
         File file=new File(filepath);
 
         try {

@@ -21,11 +21,8 @@ import java.io.InputStreamReader;
 
 public class selectFileSize extends AppCompatActivity {
 
-
-
     public selectFileSize()  {
     }
-    private File file;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +52,6 @@ public class selectFileSize extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                String test123 = ReadFile.readFile("_1KBfile.txt",selectFileSize.this);
             }
         });
 
@@ -70,7 +66,6 @@ public class selectFileSize extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                String test123 = ReadFile.readFile("_5KBfile.txt",selectFileSize.this);
             }
         });
 

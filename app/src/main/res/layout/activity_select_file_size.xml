@@ -95,7 +95,7 @@
                 android:buttonTint="@color/blue"
                 android:fontFamily="@font/andada"
                 android:gravity="center_horizontal"
-                android:text="50KB"
+                android:text="@string/_50kb"
                 android:textAllCaps="true"
                 android:textColor="#BF000000"
                 android:textColorHighlight="#003B85C2"
@@ -152,7 +152,7 @@
             android:layout_margin="10dp"
             android:background="#61FFFFFF"
             android:fontFamily="@font/andada"
-            android:text="ENCRYPT"
+            android:text="@string/encrypt"
             android:textSize="24sp" />
 
         <TextView

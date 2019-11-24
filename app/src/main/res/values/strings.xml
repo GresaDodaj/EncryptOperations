@@ -16,4 +16,6 @@
     <string name="_1kb">1kb</string>
     <string name="_10mb">10mb</string>
     <string name="_5kb">5KB</string>
+    <string name="_50kb">50KB</string>
+    <string name="encrypt">ENCRYPT</string>
 </resources>
