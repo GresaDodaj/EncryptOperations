@@ -156,6 +156,13 @@
             android:textSize="24sp" />
 
         <TextView
+            android:id="@+id/txt2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ABDB1717"
+            android:textColor="#FFFFFF" />
+
+        <TextView
             android:id="@+id/txtView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
