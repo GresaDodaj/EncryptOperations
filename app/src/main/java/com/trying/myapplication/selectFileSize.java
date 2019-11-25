@@ -33,7 +33,7 @@ public class selectFileSize extends AppCompatActivity {
         Button btn50KB = findViewById(R.id.btn50KB);
         Button btn100KB = findViewById(R.id.btn100KB);
         Button btn1MB = findViewById(R.id.btn1MB);
-
+        Button btnDES = findViewById(R.id.btnDES);
 
         Button btnEncrypt = (Button) findViewById(R.id.btnEncrypt);
 
@@ -177,6 +177,19 @@ public class selectFileSize extends AppCompatActivity {
             }
         });
 
+        btnDES.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+               String value = "0E329231";
+
+               //String encrypted = DES.encrypt(value,selectFileSize.this);
+               //String decrypted = DES.decrypt(value,selectFileSize.this);
+               //txt1.setText(encrypted);
+
+                String test123 = ReadFile.readFile("_1MBfile.txt",selectFileSize.this);
+            }
+        });
 
     }
 

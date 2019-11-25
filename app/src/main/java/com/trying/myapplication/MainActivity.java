@@ -13,10 +13,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        LinearLayout aesButton = (LinearLayout) findViewById(R.id.btnAES);
-        LinearLayout desButton = (LinearLayout) findViewById(R.id.btnDES);
-        LinearLayout _3desButton = (LinearLayout) findViewById(R.id.btn3DES);
-        LinearLayout blowfishButton = (LinearLayout) findViewById(R.id.btnBlowfish);
+        LinearLayout aesButton = findViewById(R.id.btnAES);
+        LinearLayout desButton = findViewById(R.id.btnDES);
+        LinearLayout _3desButton = findViewById(R.id.btn3DES);
+        LinearLayout blowfishButton = findViewById(R.id.btnBlowfish);
 
         aesButton.setOnClickListener(onClickListener);
         desButton.setOnClickListener(onClickListener);
