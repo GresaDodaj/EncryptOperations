@@ -1,7 +1,5 @@
 package com.trying.myapplication;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,18 +21,6 @@ public class MainActivity extends AppCompatActivity {
         _3desButton.setOnClickListener(onClickListener);
         blowfishButton.setOnClickListener(onClickListener);
 
-
-     /*   desButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view ) {
-
-                Intent intent = new Intent(MainActivity.this, selectFileSize.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });*/
-
-
     }
     //e kom deklaru qe me thirr te njejten kalse prej krejt butonave.. ne vend se me shkru des.setOnClickListener(new View.OnClickListener() {
     //            @Override
@@ -43,15 +29,29 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(MainActivity.this, selectFileSize.class);
+
             switch(v.getId()){
                 case R.id.btnAES:
-                case R.id.btnDES:
-                case R.id.btn3DES:
-                case R.id.btnBlowfish:
-                    //Intent intent = new Intent(MainActivity.this, selectFileSize.class);
+                    intent.putExtra("ALG","AES");//to send a variable with the intent instance
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     break;
+                case R.id.btnDES:
+                    intent.putExtra("ALG","DES");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    break;
+                case R.id.btn3DES:
+                    intent.putExtra("ALG","3DES");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    break;
+                case R.id.btnBlowfish:
+                    intent.putExtra("ALG","BLOWFISH");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    break;
+                    //Intent intent = new Intent(MainActivity.this, selectFileSize.class);
 
             }
 

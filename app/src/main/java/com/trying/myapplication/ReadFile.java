@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 
 class ReadFile {
 
-    private static final String TAG = "ssasss";
+    private static final String TAG = "Gresa";
 
     static String readFile(String filepath, Context context){
         File file=new File(filepath);
