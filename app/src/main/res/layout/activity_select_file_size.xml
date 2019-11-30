@@ -146,7 +146,7 @@
         <Button
             android:id="@+id/btnEncrypt"
             android:layout_width="145dp"
-            android:layout_height="16dp"
+            android:layout_height="32dp"
             android:layout_gravity="center_horizontal"
             android:layout_margin="10dp"
             android:background="#61FFFFFF"
@@ -157,23 +157,17 @@
         <TextView
             android:id="@+id/txt2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="33dp"
             android:background="#ABDB1717"
-            android:textColor="#FFFFFF"
-            android:scrollbars = "vertical"/>
+            android:scrollbars="vertical"
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/txtView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:background="#F0E6E6"
             android:textColor="#000000" />
-
-        <Button
-            android:id="@+id/btnDES"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/_3des" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

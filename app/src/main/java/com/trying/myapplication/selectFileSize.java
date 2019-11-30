@@ -27,15 +27,13 @@ public class selectFileSize extends AppCompatActivity {
         Button btn50KB = findViewById(R.id.btn50KB);
         Button btn100KB = findViewById(R.id.btn100KB);
         Button btn1MB = findViewById(R.id.btn1MB);
-        Button btnDES = findViewById(R.id.btnDES);
         Button btnEncrypt = findViewById(R.id.btnEncrypt);
         final TextView txt2 = findViewById(R.id.txt2);
         final TextView txt1 = findViewById(R.id.txtView);
 
 
         Bundle var = getIntent().getExtras();
-        final String algorithm = var.getString("ALG"); //Getting the value from the intent
-        final String alg = algorithm;
+        final String alg = var.getString("ALG");
        // file = new File(Environment.getExternalStorageDirectory(), "_1KBfile.txt");
         txt2.setMovementMethod(new ScrollingMovementMethod());
         btn1KB.setOnClickListener(new View.OnClickListener() {
@@ -51,26 +49,43 @@ public class selectFileSize extends AppCompatActivity {
                         //String text4 = AES.decrypt(text3);
                         long endTime = System.nanoTime();
                         //time of the execution in nanoseconds/1000000 = time in milliseconds
-                        long duration = (endTime - startTime) / 1000000;
+                        long timeLength = (endTime - startTime) / 1000000;
                         txt1.setText(text3);
-                        txt2.setText((int) duration + " milliseconds");
+                        txt2.setText((int) timeLength + " milliseconds");
                     }
                     else if (alg.equals("3DES")){
-                        txt1.setText("je;;s");
                         try {
                             byte[] tripleKey = tripleDES.initKey();
                             String key = (LABEL + "3DES key: " + tripleDES.byte_to_string(tripleKey));
                             long startTime = System.nanoTime();
                             byte[] encryptResult = tripleDES.encrypt(text2.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
-                            long duration = (endTime - startTime) / 1000000;
+                            long timeLength = (endTime - startTime) / 1000000;
                             String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
                             byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
                             String data = (LABEL + "3DES: " + new String(decryptResult));
                             txt1.setText(encrypted);
-                            txt2.setText((int) duration + " milliseconds");
+                            txt2.setText((int) timeLength + " milliseconds");
                         } catch (Exception e) {
                             Log.e(TAG, "3DES: " + e.getMessage());
+                        }
+                    }
+                    else if (alg.equals("BLOWFISH")){
+                        try {
+                            blowfish.generate_symetric_key();
+                            byte[] text2Bytes = text2.getBytes();
+                            long startTime = System.nanoTime();
+                            byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
+                            long endTime = System.nanoTime();
+                            long timeLength = (endTime - startTime) / 1000000;
+                            String encryptedData = new String(encryptedBytes);
+                            txt1.setText(encryptedData);
+                            byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
+                            String decryptedData = new String(decryptedBytes );
+                            txt2.setText((int) timeLength + " milliseconds");
+                        }
+                        catch(Exception e) {
+                            System.out.println(e);
                         }
                     }
                 } catch (Exception e) {
@@ -90,26 +105,44 @@ public class selectFileSize extends AppCompatActivity {
                         //String text4 = AES.decrypt(text3);
                         long endTime = System.nanoTime();
                         //time of the execution in nanoseconds/1000000 = time in milliseconds
-                        long duration = (endTime - startTime) / 1000000;
+                        long timeLength = (endTime - startTime) / 1000000;
                         txt1.setText(text3);
-                        txt2.setText((int) duration + " milliseconds");
+                        txt2.setText((int) timeLength + " milliseconds");
                     }
                     else if (alg.equals("3DES")){
-                        txt1.setText("je;;s");
                         try {
                             byte[] tripleKey = tripleDES.initKey();
                             String key = (LABEL + "3DES key: " + tripleDES.byte_to_string(tripleKey));
                             long startTime = System.nanoTime();
                             byte[] encryptResult = tripleDES.encrypt(text2.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
-                            long duration = (endTime - startTime) / 1000000;
+                            long timeLength = (endTime - startTime) / 1000000;
                             String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
                             byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
                             String data = (LABEL + "3DES: " + new String(decryptResult));
                             txt1.setText(encrypted);
-                            txt2.setText((int) duration + " milliseconds");
+                            txt2.setText((int) timeLength + " milliseconds");
+
+
                         } catch (Exception e) {
                             Log.e(TAG, "3DES: " + e.getMessage());
+                        }
+                    }
+                    else if (alg.equals("BLOWFISH")) {
+                        try {
+                            blowfish.generate_symetric_key();
+                            byte[] text2Bytes = text2.getBytes();
+                            long startTime = System.nanoTime();
+                            byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
+                            long endTime = System.nanoTime();
+                            long timeLength = (endTime - startTime) / 1000000;
+                            String encryptedData = new String(encryptedBytes);
+                            txt1.setText(encryptedData);
+                            byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
+                            String decryptedData = new String(decryptedBytes );
+                            txt2.setText((int) timeLength + " milliseconds");
+                        } catch (Exception e) {
+                            System.out.println(e);
                         }
                     }
                 } catch (Exception e) {
@@ -129,32 +162,49 @@ public class selectFileSize extends AppCompatActivity {
                         //String text4 = AES.decrypt(text3);
                         long endTime = System.nanoTime();
                         //time of the execution in nanoseconds/1000000 = time in milliseconds
-                        long duration = (endTime - startTime) / 1000000;
+                        long timeLength = (endTime - startTime) / 1000000;
                         txt1.setText(text3);
-                        txt2.setText((int) duration + " milliseconds");
+                        txt2.setText((int) timeLength + " milliseconds");
                     }
                     else if (alg.equals("3DES")){
-                        txt1.setText("je;;s");
                         try {
                             byte[] tripleKey = tripleDES.initKey();
                             String key = (LABEL + "3DES key: " + tripleDES.byte_to_string(tripleKey));
                             long startTime = System.nanoTime();
                             byte[] encryptResult = tripleDES.encrypt(text2.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
-                            long duration = (endTime - startTime) / 1000000;
+                            long timeLength = (endTime - startTime) / 1000000;
                             String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
                             byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
                             String data = (LABEL + "3DES: " + new String(decryptResult));
                             txt1.setText(encrypted);
-                            txt2.setText((int) duration + " milliseconds");
+                            txt2.setText((int) timeLength + " milliseconds");
                         } catch (Exception e) {
                             Log.e(TAG, "3DES: " + e.getMessage());
+                        }
+                    }
+
+                    else if (alg.equals("BLOWFISH")){
+                        try {
+                            blowfish.generate_symetric_key();
+                            byte[] text2Bytes = text2.getBytes();
+                            long startTime = System.nanoTime();
+                            byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
+                            long endTime = System.nanoTime();
+                            long timeLength = (endTime - startTime) / 1000000;
+                            String encryptedData = new String(encryptedBytes);
+                            txt1.setText(encryptedData);
+                            byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
+                            String decryptedData = new String(decryptedBytes );
+                            txt2.setText((int) timeLength + " milliseconds");
+                        }
+                        catch(Exception e) {
+                            System.out.println(e);
                         }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                String test123 = ReadFile.readFile("_10KBfile.txt",selectFileSize.this);
             }
         });
 
@@ -169,26 +219,43 @@ public class selectFileSize extends AppCompatActivity {
                         //String text4 = AES.decrypt(text3);
                         long endTime = System.nanoTime();
                         //time of the execution in nanoseconds/1000000 = time in milliseconds
-                        long duration = (endTime - startTime) / 1000000;
+                        long timeLength = (endTime - startTime) / 1000000;
                         txt1.setText(text3);
-                        txt2.setText((int) duration + " milliseconds");
+                        txt2.setText((int) timeLength + " milliseconds");
                     }
                     else if (alg.equals("3DES")){
-                        txt1.setText("je;;s");
                         try {
                             byte[] tripleKey = tripleDES.initKey();
                             String key = (LABEL + "3DES key: " + tripleDES.byte_to_string(tripleKey));
                             long startTime = System.nanoTime();
                             byte[] encryptResult = tripleDES.encrypt(text2.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
-                            long duration = (endTime - startTime) / 1000000;
+                            long timeLength = (endTime - startTime) / 1000000;
                             String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
                             byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
                             String data = (LABEL + "3DES: " + new String(decryptResult));
                             txt1.setText(encrypted);
-                            txt2.setText((int) duration + " milliseconds");
+                            txt2.setText((int) timeLength + " milliseconds");
                         } catch (Exception e) {
                             Log.e(TAG, "3DES: " + e.getMessage());
+                        }
+                    }
+                    else if (alg.equals("BLOWFISH")){
+                        try {
+                            blowfish.generate_symetric_key();
+                            byte[] text2Bytes = text2.getBytes();
+                            long startTime = System.nanoTime();
+                            byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
+                            long endTime = System.nanoTime();
+                            long timeLength = (endTime - startTime) / 1000000;
+                            String encryptedData = new String(encryptedBytes);
+                            txt1.setText(encryptedData);
+                            byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
+                            String decryptedData = new String(decryptedBytes );
+                            txt2.setText((int) timeLength + " milliseconds");
+                        }
+                        catch(Exception e) {
+                            System.out.println(e);
                         }
                     }
                 } catch (Exception e) {
@@ -210,31 +277,49 @@ public class selectFileSize extends AppCompatActivity {
                         //String text4 = AES.decrypt(text3);
                         long endTime = System.nanoTime();
                         //time of the execution in nanoseconds/1000000 = time in milliseconds
-                        long duration = (endTime - startTime) / 1000000;
+                        long timeLength = (endTime - startTime) / 1000000;
                         txt1.setText(text3);
-                        txt2.setText((int) duration + " milliseconds");
+                        txt2.setText((int) timeLength + " milliseconds");
                     }
                     else if (alg.equals("3DES")){
-                        txt1.setText("je;;s");
                         try {
                             byte[] tripleKey = tripleDES.initKey();
                             String key = (LABEL + "3DES key: " + tripleDES.byte_to_string(tripleKey));
                             long startTime = System.nanoTime();
                             byte[] encryptResult = tripleDES.encrypt(text2.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
-                            long duration = (endTime - startTime) / 1000000;
+                            long timeLength = (endTime - startTime) / 1000000;
                             String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
                             byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
                             String data = (LABEL + "3DES: " + new String(decryptResult));
                             txt1.setText(encrypted);
-                            txt2.setText((int) duration + " milliseconds");
+                            txt2.setText((int) timeLength + " milliseconds");
                         } catch (Exception e) {
                             Log.e(TAG, "3DES: " + e.getMessage());
+                        }
+                    }
+                    else if (alg.equals("BLOWFISH")){
+                        try {
+                            blowfish.generate_symetric_key();
+                            byte[] text2Bytes = text2.getBytes();
+                            long startTime = System.nanoTime();
+                            byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
+                            long endTime = System.nanoTime();
+                            long timeLength = (endTime - startTime) / 1000000;
+                            String encryptedData = new String(encryptedBytes);
+                            txt1.setText(encryptedData);
+                            byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
+                            String decryptedData = new String(decryptedBytes );
+                            txt2.setText((int) timeLength + " milliseconds");
+                        }
+                        catch(Exception e) {
+                            System.out.println(e);
                         }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
                 String test123 = ReadFile.readFile("_100KBfile.txt",selectFileSize.this);
             }
         });
@@ -250,26 +335,43 @@ public class selectFileSize extends AppCompatActivity {
                         //String text4 = AES.decrypt(text3);
                         long endTime = System.nanoTime();
                         //time of the execution in nanoseconds/1000000 = time in milliseconds
-                        long duration = (endTime - startTime) / 1000000;
+                        long timeLength = (endTime - startTime) / 1000000;
                         txt1.setText(text3);
-                        txt2.setText((int) duration + " milliseconds");
+                        txt2.setText((int) timeLength + " milliseconds");
                     }
                     else if (alg.equals("3DES")){
-                        txt1.setText("je;;s");
                         try {
                             byte[] tripleKey = tripleDES.initKey();
                             String key = (LABEL + "3DES key: " + tripleDES.byte_to_string(tripleKey));
                             long startTime = System.nanoTime();
                             byte[] encryptResult = tripleDES.encrypt(text2.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
-                            long duration = (endTime - startTime) / 1000000;
+                            long timeLength = (endTime - startTime) / 1000000;
                             String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
                             byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
                             String data = (LABEL + "3DES: " + new String(decryptResult));
                             txt1.setText(encrypted);
-                            txt2.setText((int) duration + " milliseconds");
+                            txt2.setText((int) timeLength + " milliseconds");
                         } catch (Exception e) {
                             Log.e(TAG, "3DES: " + e.getMessage());
+                        }
+                    }
+                    else if (alg.equals("BLOWFISH")){
+                        try {
+                            blowfish.generate_symetric_key();
+                            byte[] text2Bytes = text2.getBytes();
+                            long startTime = System.nanoTime();
+                            byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
+                            long endTime = System.nanoTime();
+                            long timeLength = (endTime - startTime) / 1000000;
+                            String encryptedData = new String(encryptedBytes);
+                            txt1.setText(encryptedData);
+                            byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
+                            String decryptedData = new String(decryptedBytes );
+                            txt2.setText((int) timeLength + " milliseconds");
+                        }
+                        catch(Exception e) {
+                            System.out.println(e);
                         }
                     }
                 } catch (Exception e) {
@@ -307,9 +409,9 @@ public class selectFileSize extends AppCompatActivity {
         long endTime = System.nanoTime();
 
         //time of the execution in nanoseconds/1000000 = time in milliseconds
-        long duration = (endTime - startTime)/1000000;
+        long timeLength = (endTime - startTime)/1000000;
 
-            return duration;
+            return timeLength;
             }
 
 
