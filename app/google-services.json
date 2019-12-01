@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1004287888820",
+    "firebase_url": "https://encryptionperformance.firebaseio.com",
+    "project_id": "encryptionperformance",
+    "storage_bucket": "encryptionperformance.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004287888820:android:f8319b8dee4976b44836e1",
+        "android_client_info": {
+          "package_name": "com.trying.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1004287888820-r9gnasc3qmi5iqs1ci1cmp5cs1nptvdr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.trying.myapplication",
+            "certificate_hash": "3a44598d1f19fef36dca6beea0ddda2f6980debd"
+          }
+        },
+        {
+          "client_id": "1004287888820-oo9isjs54rs74p7kpm06oojjva5pil8n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbcVGsUgo-c6qG_QfL5oGrqXTuQQIYApE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1004287888820-oo9isjs54rs74p7kpm06oojjva5pil8n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

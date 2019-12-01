@@ -1,11 +1,24 @@
 package com.trying.myapplication;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "Gresa";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +33,26 @@ public class MainActivity extends AppCompatActivity {
         _3desButton.setOnClickListener(onClickListener);
         blowfishButton.setOnClickListener(onClickListener);
 
+
+
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        Map<String, Object> myPhone = new HashMap<>();
+        myPhone.put("AES_1KB",5);
+        myPhone.put("3DES_1KB", 6);
+        myPhone.put("BLOWFISH_1KB", 7);
+        database.collection("myPhone").document("_1KB").set(myPhone)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
 
 
     }
