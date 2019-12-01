@@ -64,8 +64,6 @@ public class selectFileSize extends AppCompatActivity {
             public void onClick(View view) {
 
                 try {
-
-
                     if(alg .equals("AES")) {
                         long startTime = System.nanoTime();
                         String text3 = AES.encrypt(_1KBfile);
@@ -118,7 +116,7 @@ public class selectFileSize extends AppCompatActivity {
                     int timeLength2 = (int)timeLength3DES[0];
                     int timeLength3 = (int)timeLengthBfish[0];
                     Map<String, Object> myPhone = new HashMap<>();
-                    if(timeLength1!=0)
+                    if(timeLength1!=0) // qe mos me u bo update 0 te dhanat qe jon ne databaze kur klikohet najnjo prej tjerave algoritme
                     myPhone.put("AES_1KB",timeLength1);
                     if(timeLength2!=0)
                     myPhone.put("3DES_1KB", timeLength2);
@@ -126,8 +124,6 @@ public class selectFileSize extends AppCompatActivity {
                     myPhone.put("BLOWFISH_1KB", timeLength3);
                     DocumentReference _1kbRef = database.collection("myPhone").document("_1KB");
                     _1kbRef.update(myPhone);
-
-
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -145,9 +141,9 @@ public class selectFileSize extends AppCompatActivity {
                         //String text4 = AES.decrypt(text3);
                         long endTime = System.nanoTime();
                         //time of the execution in nanoseconds/1000000 = time in milliseconds
-                        long timeLength = (endTime - startTime) / 1000000;
+                        timeLengthAES[0] = (endTime - startTime) / 1000000;
                         txt1.setText(text3);
-                        txt2.setText((int) timeLength + " milliseconds");
+                        txt2.setText((int) timeLengthAES[0] + " milliseconds");
                     }
                     else if (alg.equals("3DES")){
                         try {
@@ -156,12 +152,12 @@ public class selectFileSize extends AppCompatActivity {
                             long startTime = System.nanoTime();
                             byte[] encryptResult = tripleDES.encrypt(_5KBfile.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
-                            long timeLength = (endTime - startTime) / 1000000;
+                            timeLength3DES[0] = (endTime - startTime) / 1000000;
                             String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
                             byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
                             String data = (LABEL + "3DES: " + new String(decryptResult));
                             txt1.setText(encrypted);
-                            txt2.setText((int) timeLength + " milliseconds");
+                            txt2.setText((int) timeLength3DES[0] + " milliseconds");
 
 
                         } catch (Exception e) {
@@ -175,16 +171,30 @@ public class selectFileSize extends AppCompatActivity {
                             long startTime = System.nanoTime();
                             byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
                             long endTime = System.nanoTime();
-                            long timeLength = (endTime - startTime) / 1000000;
+                            timeLengthBfish[0] = (endTime - startTime) / 1000000;
                             String encryptedData = new String(encryptedBytes);
                             txt1.setText(encryptedData);
                             byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
                             String decryptedData = new String(decryptedBytes );
-                            txt2.setText((int) timeLength + " milliseconds");
+                            txt2.setText((int) timeLengthBfish[0] + " milliseconds");
                         } catch (Exception e) {
                             System.out.println(e);
                         }
                     }
+
+
+                    int timeLength1 = (int)timeLengthAES[0];
+                    int timeLength2 = (int)timeLength3DES[0];
+                    int timeLength3 = (int)timeLengthBfish[0];
+                    Map<String, Object> myPhone = new HashMap<>();
+                    if(timeLength1!=0) // qe mos me u bo update 0 te dhanat qe jon ne databaze kur klikohet najnjo prej tjerave algoritme
+                        myPhone.put("AES",timeLength1);
+                    if(timeLength2!=0)
+                        myPhone.put("3DES", timeLength2);
+                    if(timeLength3!=0)
+                        myPhone.put("BLOWFISH", timeLength3);
+                    DocumentReference _5kbRef = database.collection("myPhone").document("_5KB");
+                    _5kbRef.update(myPhone);  //update TODO: handle the failing case
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -201,9 +211,9 @@ public class selectFileSize extends AppCompatActivity {
                         //String text4 = AES.decrypt(text3);
                         long endTime = System.nanoTime();
                         //time of the execution in nanoseconds/1000000 = time in milliseconds
-                        long timeLength = (endTime - startTime) / 1000000;
+                        timeLengthAES[0] = (endTime - startTime) / 1000000;
                         txt1.setText(text3);
-                        txt2.setText((int) timeLength + " milliseconds");
+                        txt2.setText((int) timeLengthAES[0] + " milliseconds");
                     }
                     else if (alg.equals("3DES")){
                         try {
@@ -212,12 +222,12 @@ public class selectFileSize extends AppCompatActivity {
                             long startTime = System.nanoTime();
                             byte[] encryptResult = tripleDES.encrypt(_10KBfile.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
-                            long timeLength = (endTime - startTime) / 1000000;
+                            timeLength3DES[0] = (endTime - startTime) / 1000000;
                             String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
                             byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
                             String data = (LABEL + "3DES: " + new String(decryptResult));
                             txt1.setText(encrypted);
-                            txt2.setText((int) timeLength + " milliseconds");
+                            txt2.setText((int) timeLength3DES[0] + " milliseconds");
                         } catch (Exception e) {
                             Log.e(TAG, "3DES: " + e.getMessage());
                         }
@@ -230,17 +240,30 @@ public class selectFileSize extends AppCompatActivity {
                             long startTime = System.nanoTime();
                             byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
                             long endTime = System.nanoTime();
-                            long timeLength = (endTime - startTime) / 1000000;
+                            timeLengthBfish[0] = (endTime - startTime) / 1000000;
                             String encryptedData = new String(encryptedBytes);
                             txt1.setText(encryptedData);
                             byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
                             String decryptedData = new String(decryptedBytes );
-                            txt2.setText((int) timeLength + " milliseconds");
+                            txt2.setText((int) timeLengthBfish[0] + " milliseconds");
                         }
                         catch(Exception e) {
                             System.out.println(e);
                         }
                     }
+
+                    int timeLength1 = (int)timeLengthAES[0];
+                    int timeLength2 = (int)timeLength3DES[0];
+                    int timeLength3 = (int)timeLengthBfish[0];
+                    Map<String, Object> myPhone = new HashMap<>();
+                    if(timeLength1!=0) // qe mos me u bo update 0 te dhanat qe jon ne databaze kur klikohet najnjo prej tjerave algoritme
+                        myPhone.put("AES",timeLength1);
+                    if(timeLength2!=0)
+                        myPhone.put("3DES", timeLength2);
+                    if(timeLength3!=0)
+                        myPhone.put("BLOWFISH", timeLength3);
+                    DocumentReference _10kbRef = database.collection("myPhone").document("_10KB");
+                    _10kbRef.update(myPhone);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -258,9 +281,9 @@ public class selectFileSize extends AppCompatActivity {
                         //String text4 = AES.decrypt(text3);
                         long endTime = System.nanoTime();
                         //time of the execution in nanoseconds/1000000 = time in milliseconds
-                        long timeLength = (endTime - startTime) / 1000000;
+                        timeLengthAES[0] = (endTime - startTime) / 1000000;
                         txt1.setText(text3);
-                        txt2.setText((int) timeLength + " milliseconds");
+                        txt2.setText((int) timeLengthAES[0] + " milliseconds");
                     }
                     else if (alg.equals("3DES")){
                         try {
@@ -269,12 +292,12 @@ public class selectFileSize extends AppCompatActivity {
                             long startTime = System.nanoTime();
                             byte[] encryptResult = tripleDES.encrypt(_50KBfile.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
-                            long timeLength = (endTime - startTime) / 1000000;
+                            timeLength3DES[0] = (endTime - startTime) / 1000000;
                             String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
                             byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
                             String data = (LABEL + "3DES: " + new String(decryptResult));
                             txt1.setText(encrypted);
-                            txt2.setText((int) timeLength + " milliseconds");
+                            txt2.setText((int)timeLength3DES[0] + " milliseconds");
                         } catch (Exception e) {
                             Log.e(TAG, "3DES: " + e.getMessage());
                         }
@@ -286,17 +309,30 @@ public class selectFileSize extends AppCompatActivity {
                             long startTime = System.nanoTime();
                             byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
                             long endTime = System.nanoTime();
-                            long timeLength = (endTime - startTime) / 1000000;
+                            timeLengthBfish[0] = (endTime - startTime) / 1000000;
                             String encryptedData = new String(encryptedBytes);
                             txt1.setText(encryptedData);
                             byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
                             String decryptedData = new String(decryptedBytes );
-                            txt2.setText((int) timeLength + " milliseconds");
+                            txt2.setText((int) timeLengthBfish[0] + " milliseconds");
                         }
                         catch(Exception e) {
                             System.out.println(e);
                         }
                     }
+
+                    int timeLength1 = (int)timeLengthAES[0];
+                    int timeLength2 = (int)timeLength3DES[0];
+                    int timeLength3 = (int)timeLengthBfish[0];
+                    Map<String, Object> myPhone = new HashMap<>();
+                    if(timeLength1!=0) // qe mos me u bo update 0 te dhanat qe jon ne databaze kur klikohet najnjo prej tjerave algoritme
+                        myPhone.put("AES",timeLength1);
+                    if(timeLength2!=0)
+                        myPhone.put("3DES", timeLength2);
+                    if(timeLength3!=0)
+                        myPhone.put("BLOWFISH", timeLength3);
+                    DocumentReference _50kbRef = database.collection("myPhone").document("_50KB");
+                    _50kbRef.update(myPhone);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -315,9 +351,9 @@ public class selectFileSize extends AppCompatActivity {
                         //String text4 = AES.decrypt(text3);
                         long endTime = System.nanoTime();
                         //time of the execution in nanoseconds/1000000 = time in milliseconds
-                        long timeLength = (endTime - startTime) / 1000000;
+                        timeLengthAES[0] = (endTime - startTime) / 1000000;
                         txt1.setText(text3);
-                        txt2.setText((int) timeLength + " milliseconds");
+                        txt2.setText((int) timeLengthAES[0] + " milliseconds");
                     }
                     else if (alg.equals("3DES")){
                         try {
@@ -326,12 +362,12 @@ public class selectFileSize extends AppCompatActivity {
                             long startTime = System.nanoTime();
                             byte[] encryptResult = tripleDES.encrypt(_100KBfile.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
-                            long timeLength = (endTime - startTime) / 1000000;
+                            timeLength3DES[0] = (endTime - startTime) / 1000000;
                             String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
                             byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
                             String data = (LABEL + "3DES: " + new String(decryptResult));
                             txt1.setText(encrypted);
-                            txt2.setText((int) timeLength + " milliseconds");
+                            txt2.setText((int) timeLength3DES[0]+ " milliseconds");
                         } catch (Exception e) {
                             Log.e(TAG, "3DES: " + e.getMessage());
                         }
@@ -343,17 +379,30 @@ public class selectFileSize extends AppCompatActivity {
                             long startTime = System.nanoTime();
                             byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
                             long endTime = System.nanoTime();
-                            long timeLength = (endTime - startTime) / 1000000;
+                            timeLengthBfish[0] = (endTime - startTime) / 1000000;
                             String encryptedData = new String(encryptedBytes);
                             txt1.setText(encryptedData);
                             byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
                             String decryptedData = new String(decryptedBytes );
-                            txt2.setText((int) timeLength + " milliseconds");
+                            txt2.setText((int) timeLengthBfish[0] + " milliseconds");
                         }
                         catch(Exception e) {
                             System.out.println(e);
                         }
                     }
+
+                    int timeLength1 = (int)timeLengthAES[0];
+                    int timeLength2 = (int)timeLength3DES[0];
+                    int timeLength3 = (int)timeLengthBfish[0];
+                    Map<String, Object> myPhone = new HashMap<>();
+                    if(timeLength1!=0) // qe mos me u bo update 0 te dhanat qe jon ne databaze kur klikohet najnjo prej tjerave algoritme
+                        myPhone.put("AES",timeLength1);
+                    if(timeLength2!=0)
+                        myPhone.put("3DES", timeLength2);
+                    if(timeLength3!=0)
+                        myPhone.put("BLOWFISH", timeLength3);
+                    DocumentReference _100kbRef = database.collection("myPhone").document("_100KB");
+                    _100kbRef.update(myPhone);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -372,9 +421,9 @@ public class selectFileSize extends AppCompatActivity {
                         //String text4 = AES.decrypt(text3);
                         long endTime = System.nanoTime();
                         //time of the execution in nanoseconds/1000000 = time in milliseconds
-                        long timeLength = (endTime - startTime) / 1000000;
+                        timeLengthAES[0] = (endTime - startTime) / 1000000;
                         txt1.setText(text3);
-                        txt2.setText((int) timeLength + " milliseconds");
+                        txt2.setText((int)timeLengthAES[0] + " milliseconds");
                     }
                     else if (alg.equals("3DES")){
                         try {
@@ -383,12 +432,12 @@ public class selectFileSize extends AppCompatActivity {
                             long startTime = System.nanoTime();
                             byte[] encryptResult = tripleDES.encrypt(_1MBfile.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
-                            long timeLength = (endTime - startTime) / 1000000;
+                            timeLength3DES[0] = (endTime - startTime) / 1000000;
                             String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
                             byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
                             String data = (LABEL + "3DES: " + new String(decryptResult));
                             txt1.setText(encrypted);
-                            txt2.setText((int) timeLength + " milliseconds");
+                            txt2.setText((int)timeLength3DES[0]+ " milliseconds");
                         } catch (Exception e) {
                             Log.e(TAG, "3DES: " + e.getMessage());
                         }
@@ -400,17 +449,29 @@ public class selectFileSize extends AppCompatActivity {
                             long startTime = System.nanoTime();
                             byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
                             long endTime = System.nanoTime();
-                            long timeLength = (endTime - startTime) / 1000000;
+                            timeLengthBfish[0] = (endTime - startTime) / 1000000;
                             String encryptedData = new String(encryptedBytes);
                             txt1.setText(encryptedData);
                             byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
                             String decryptedData = new String(decryptedBytes );
-                            txt2.setText((int) timeLength + " milliseconds");
+                            txt2.setText((int) timeLengthBfish[0] + " milliseconds");
                         }
                         catch(Exception e) {
                             System.out.println(e);
                         }
                     }
+                    int timeLength1 = (int)timeLengthAES[0];
+                    int timeLength2 = (int)timeLength3DES[0];
+                    int timeLength3 = (int)timeLengthBfish[0];
+                    Map<String, Object> myPhone = new HashMap<>();
+                    if(timeLength1!=0) // qe mos me u bo update 0 te dhanat qe jon ne databaze kur klikohet najnjo prej tjerave algoritme
+                        myPhone.put("AES",timeLength1);
+                    if(timeLength2!=0)
+                        myPhone.put("3DES", timeLength2);
+                    if(timeLength3!=0)
+                        myPhone.put("BLOWFISH", timeLength3);
+                    DocumentReference _1mbRef = database.collection("myPhone").document("_1MB");
+                    _1mbRef.update(myPhone);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
