@@ -1,5 +1,6 @@
 package com.trying.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -9,6 +10,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.google.firebase.firestore.SetOptions.*;
 
 public class selectFileSize extends AppCompatActivity {
 
@@ -38,6 +50,12 @@ public class selectFileSize extends AppCompatActivity {
         final String _1MBfile = ReadFile.readFile("_1MBfile.txt", selectFileSize.this);
         Bundle var = getIntent().getExtras();
         final String alg = var.getString("ALG");
+        final long[] timeLength3DES = new long[1];
+        final long[] timeLengthBfish = new long[1];
+        final long[] timeLengthAES = new long[1];
+        final FirebaseFirestore database = FirebaseFirestore.getInstance();
+
+
        // file = new File(Environment.getExternalStorageDirectory(), "_1KBfile.txt");
         txt2.setMovementMethod(new ScrollingMovementMethod());
         btn1KB.setOnClickListener(new View.OnClickListener() {
@@ -46,15 +64,17 @@ public class selectFileSize extends AppCompatActivity {
             public void onClick(View view) {
 
                 try {
+
+
                     if(alg .equals("AES")) {
                         long startTime = System.nanoTime();
                         String text3 = AES.encrypt(_1KBfile);
                         //String text4 = AES.decrypt(text3);
                         long endTime = System.nanoTime();
                         //time of the execution in nanoseconds/1000000 = time in milliseconds
-                        long timeLength = (endTime - startTime) / 1000000;
+                         timeLengthAES[0] = (endTime - startTime) / 1000000;
                         txt1.setText(text3);
-                        txt2.setText((int) timeLength + " milliseconds");
+                        txt2.setText((int) timeLengthAES[0] + " milliseconds");
                     }
                     else if (alg.equals("3DES")){
                         try {
@@ -63,12 +83,13 @@ public class selectFileSize extends AppCompatActivity {
                             long startTime = System.nanoTime();
                             byte[] encryptResult = tripleDES.encrypt(_1KBfile.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
-                            long timeLength = (endTime - startTime) / 1000000;
+                            timeLength3DES[0] = (endTime - startTime) / 1000000;
                             String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
                             byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
                             String data = (LABEL + "3DES: " + new String(decryptResult));
                             txt1.setText(encrypted);
-                            txt2.setText((int) timeLength + " milliseconds");
+                            txt2.setText((int) timeLength3DES[0] + " milliseconds");
+
                         } catch (Exception e) {
                             Log.e(TAG, "3DES: " + e.getMessage());
                         }
@@ -80,17 +101,34 @@ public class selectFileSize extends AppCompatActivity {
                             long startTime = System.nanoTime();
                             byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
                             long endTime = System.nanoTime();
-                            long timeLength = (endTime - startTime) / 1000000;
+                            timeLengthBfish[0] = (endTime - startTime) / 1000000;
                             String encryptedData = new String(encryptedBytes);
                             txt1.setText(encryptedData);
                             byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
                             String decryptedData = new String(decryptedBytes );
-                            txt2.setText((int) timeLength + " milliseconds");
+                            txt2.setText((int) timeLengthBfish[0] + " milliseconds");
+
                         }
                         catch(Exception e) {
                             System.out.println(e);
                         }
                     }
+
+                    int timeLength1 = (int)timeLengthAES[0];
+                    int timeLength2 = (int)timeLength3DES[0];
+                    int timeLength3 = (int)timeLengthBfish[0];
+                    Map<String, Object> myPhone = new HashMap<>();
+                    if(timeLength1!=0)
+                    myPhone.put("AES_1KB",timeLength1);
+                    if(timeLength2!=0)
+                    myPhone.put("3DES_1KB", timeLength2);
+                    if(timeLength3!=0)
+                    myPhone.put("BLOWFISH_1KB", timeLength3);
+                    DocumentReference _1kbRef = database.collection("myPhone").document("_1KB");
+                    _1kbRef.update(myPhone);
+
+
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

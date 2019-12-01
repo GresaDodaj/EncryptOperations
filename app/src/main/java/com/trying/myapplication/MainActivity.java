@@ -35,26 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-        Map<String, Object> myPhone = new HashMap<>();
-        myPhone.put("AES_1KB",5);
-        myPhone.put("3DES_1KB", 6);
-        myPhone.put("BLOWFISH_1KB", 7);
-        database.collection("myPhone").document("_1KB").set(myPhone)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
-                    }
-                });
-
-
     }
     //e kom deklaru qe me thirr te njejten kalse prej krejt butonave.. ne vend se me shkru des.setOnClickListener(new View.OnClickListener() {
     //            @Override
