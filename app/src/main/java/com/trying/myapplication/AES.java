@@ -6,27 +6,25 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class AES
 {
-
     private static final byte[] keyValue =
             new byte[]{'c', 'o', 'd', 'i', 'n', 'g', 'a', 'f', 'f', 'a', 'i', 'r', 's', 'c', 'o', 'm'};
 
-
     public static String encrypt(String cleartext)
             throws Exception {
-        byte[] rawKey = getRawKey();
+        byte[] rawKey = get_raw_key();
         byte[] result = encrypt(rawKey, cleartext.getBytes());
-        return toHex(result);
+        return byte_to_hex(result);
     }
 
     public static String decrypt(String encrypted)
             throws Exception {
 
-        byte[] enc = toByte(encrypted);
-        byte[] result = decrypt(enc);
+        byte[] encryptedBytes = hex_to_byte(encrypted);
+        byte[] result = decrypt(encryptedBytes);
         return new String(result);
     }
 
-    private static byte[] getRawKey() throws Exception {
+    private static byte[] get_raw_key() throws Exception {
         SecretKey key = new SecretKeySpec(keyValue, "AES");
         byte[] raw = key.getEncoded();
         return raw;
@@ -36,8 +34,7 @@ public class AES
         SecretKey skeySpec = new SecretKeySpec(raw, "AES");
         Cipher cipher = Cipher.getInstance("AES");
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
-        byte[] encrypted = cipher.doFinal(clear);
-        return encrypted;
+        return cipher.doFinal(clear);   //return encrypted text
     }
 
     private static byte[] decrypt(byte[] encrypted)
@@ -45,11 +42,10 @@ public class AES
         SecretKey skeySpec = new SecretKeySpec(keyValue, "AES");
         Cipher cipher = Cipher.getInstance("AES");
         cipher.init(Cipher.DECRYPT_MODE, skeySpec);
-        byte[] decrypted = cipher.doFinal(encrypted);
-        return decrypted;
+        return cipher.doFinal(encrypted);   //return the decrypted text in bytes
     }
 
-    public static byte[] toByte(String hexString) {
+    public static byte[] hex_to_byte(String hexString) {
         int len = hexString.length() / 2;
         byte[] result = new byte[len];
         for (int i = 0; i < len; i++)
@@ -58,19 +54,19 @@ public class AES
         return result;
     }
 
-    public static String toHex(byte[] buf) {
+    public static String byte_to_hex(byte[] buf) {
         if (buf == null)
             return "";
         StringBuffer result = new StringBuffer(2 * buf.length);
         for (int i = 0; i < buf.length; i++) {
-            appendHex(result, buf[i]);
+            append_hex(result, buf[i]);
         }
         return result.toString();
     }
 
     private final static String HEX = "0123456789ABCDEF";
 
-    private static void appendHex(StringBuffer sb, byte b) {
+    private static void append_hex(StringBuffer sb, byte b) {
         sb.append(HEX.charAt((b >> 4) & 0x0f)).append(HEX.charAt(b & 0x0f));
     }
 }

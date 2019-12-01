@@ -15,11 +15,12 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout desButton = findViewById(R.id.btnDES);
         LinearLayout _3desButton = findViewById(R.id.btn3DES);
         LinearLayout blowfishButton = findViewById(R.id.btnBlowfish);
-
         aesButton.setOnClickListener(onClickListener);
         desButton.setOnClickListener(onClickListener);
         _3desButton.setOnClickListener(onClickListener);
         blowfishButton.setOnClickListener(onClickListener);
+
+
 
     }
     //e kom deklaru qe me thirr te njejten kalse prej krejt butonave.. ne vend se me shkru des.setOnClickListener(new View.OnClickListener() {
