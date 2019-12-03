@@ -112,20 +112,20 @@ public class selectFileSize extends AppCompatActivity {
                         }
                     }
 
-                    int timeLength1 = (int)timeLengthAES[0];
+
+                } catch (Exception e) { int timeLength1 = (int)timeLengthAES[0];
                     int timeLength2 = (int)timeLength3DES[0];
                     int timeLength3 = (int)timeLengthBfish[0];
                     Map<String, Object> myPhone = new HashMap<>();
                     if(timeLength1!=0) // qe mos me u bo update 0 te dhanat qe jon ne databaze kur klikohet najnjo prej tjerave algoritme
-                    myPhone.put("AES_1KB",timeLength1);
+                        myPhone.put("AES",timeLength1);
                     if(timeLength2!=0)
-                    myPhone.put("3DES_1KB", timeLength2);
+                        myPhone.put("3DES", timeLength2);
                     if(timeLength3!=0)
-                    myPhone.put("BLOWFISH_1KB", timeLength3);
+                        myPhone.put("BLOWFISH", timeLength3);
                     DocumentReference _1kbRef = database.collection("myPhone").document("_1KB");
                     _1kbRef.update(myPhone);
 
-                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

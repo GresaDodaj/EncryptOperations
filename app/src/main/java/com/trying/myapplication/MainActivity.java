@@ -33,8 +33,9 @@ public class MainActivity extends AppCompatActivity {
         _3desButton.setOnClickListener(onClickListener);
         blowfishButton.setOnClickListener(onClickListener);
 
-
-
+        Intent intent = new Intent(MainActivity.this, Charts.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
     //e kom deklaru qe me thirr te njejten kalse prej krejt butonave.. ne vend se me shkru des.setOnClickListener(new View.OnClickListener() {
     //            @Override
