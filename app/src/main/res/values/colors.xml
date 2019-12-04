@@ -12,7 +12,7 @@
     <color name="testcolorblue">#152b38</color>
     <color name="pink">#fe104d</color>
     <color name="blue">#456CD6</color>
-    <color name="firstBar">#278ECF</color>
-    <color name="secondBar">#FFC266</color>
-    <color name="thirdBar">#FF7B65</color>
+    <color name="firstBar">#accbfc</color>
+    <color name="secondBar">#5691f0</color>
+    <color name="thirdBar">#3272d9</color>
 </resources>
