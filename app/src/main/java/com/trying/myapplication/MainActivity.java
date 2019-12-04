@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         _3desButton.setOnClickListener(onClickListener);
         blowfishButton.setOnClickListener(onClickListener);
 
-        Intent intent = new Intent(MainActivity.this, Charts.class);
+       Intent intent = new Intent(MainActivity.this, Charts.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
