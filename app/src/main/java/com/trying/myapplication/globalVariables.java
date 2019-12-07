@@ -7,7 +7,7 @@ public class globalVariables {
     private int data;
 
     // Restrict the constructor from being instantiated
-    private globalVariables(){}
+    globalVariables(){}
 
     public void setData(int d){
         this.data=d;
