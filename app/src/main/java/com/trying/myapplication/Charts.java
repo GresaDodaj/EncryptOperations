@@ -1,29 +1,25 @@
 package com.trying.myapplication;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
-
 
 public class Charts extends AppCompatActivity {
 
@@ -36,33 +32,30 @@ public class Charts extends AppCompatActivity {
     DocumentReference docref100KB  = database.collection("myPhone").document("_10KB");
     DocumentReference docref1MB  = database.collection("myPhone").document("_1MB");
 
+   
+    String strAES1kb;
+    String strAES5kb;
+    String strAES10kb;
+    String strAES50kb;
+    String strAES100kb;
+    String strAES1mb;
+    
+    String str3DES1kb;
+    String str3DES5kb;
+    String str3DES10kb;
+    String str3DES50kb;
+    String str3DES100kb;
+    String str3DES1mb;
 
-    int aes5kb=0;
-    int aes10kb=0;
-    int aes50kb=0;
-    int aes100kb=0;
-    String _aes1mb;
-    String _aes1kb;
-
-    String _3des1kb;
-    int _3des5kb=0;
-    int _3des10kb=0;
-    int _3des50kb=0;
-    int _3des100kb=0;
-    String _3des1mb;
-
-    int blowfish1kb=0;
-    int blowfish5kb=0;
-    int blowfish10kb=0;
-    int blowfish50kb=0;
-    int blowfish100kb=0;
-    String blowfish1mb;
+    String strBLOWFISH1kb;
+    String strBLOWFISH5kb;
+    String strBLOWFISH10kb;
+    String strBLOWFISH50kb;
+    String strBLOWFISH100kb;
+    String strBLOWFISH1mb;
 
     BarChart chart;
-    globalVariables go = new globalVariables();
-    BarDataSet barDataSet1;
 
-    String aes="500";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,15 +74,15 @@ public class Charts extends AppCompatActivity {
         final int[] aes10kb = {2};
         final int[] aes50kb = {2};
         final int[] aes100kb = {2};
-        final int[] aes1MB = {2};
+        final int[] aes1mb = {2};
 
 
-        final int[] __3des1kb = {2};
+        final int[] _3des1kb = {2};
         final int[] _3des5kb = {2};
         final int[] _3des10kb = {2};
         final int[] _3des50kb = {2};
         final int[] _3des100kb = {2};
-        final int[] _3des1MB = {2};
+        final int[] _3des1mb = {2};
 
 
         final int[] blowfish1kb = {2};
@@ -97,11 +90,11 @@ public class Charts extends AppCompatActivity {
         final int[] blowfish10kb = {2};
         final int[] blowfish50kb = {2};
         final int[] blowfish100kb = {2};
-        final int[] blowfish1MB = {2};
+        final int[] blowfish1mb = {2};
 
 
         final Description description = new Description();
-        description.setText("");
+        description.setText("Encryption");
         description.setTextColor(getColor(R.color.firstBar));
         description.setTextSize(10);
         chart.setDescription(description);
@@ -125,13 +118,10 @@ public class Charts extends AppCompatActivity {
                 chart.setDescription(description);
             }
         });*/
+       
 
-
-        chart.setNoDataText("NO DATA AVAILABLE");
-        chart.setNoDataTextColor(Color.BLUE);
         final String[] files = new String[]{"1KB", "5KB", "10KB", "50KB", "100KB", "1MB"};
-
-
+        
 
         docref1KB.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -141,10 +131,11 @@ public class Charts extends AppCompatActivity {
                     Log.w(TAG, "Listen failed.", e);
                     return;
                 }
+                chart.setNoDataText("NO DATA AVAILABLE");
+                chart.setNoDataTextColor(Color.BLUE);
 
                 if (snapshot != null && snapshot.exists()) {
                     Log.d(TAG, "Current data: " + snapshot.getData());
-
                     XAxis xAxis = chart.getXAxis();
                     xAxis.setValueFormatter(new IndexAxisValueFormatter(files));
                     xAxis.setCenterAxisLabels(true);//me i vendos labels poshte ne center
@@ -152,24 +143,25 @@ public class Charts extends AppCompatActivity {
                     xAxis.setGranularity(1);
                     xAxis.setGranularityEnabled(true);
 
-                    _aes1kb = snapshot.get("AES").toString();
-                    int aes1kb1 = Integer.parseInt(_aes1kb);
-
+                    
+                    strAES1kb = snapshot.get("AES").toString();
+                    int aes1kb1 = Integer.parseInt(strAES1kb);
                     aes1kb[0] = aes1kb1;
 
-                    _3des1kb = snapshot.get("3DES").toString();
-                    int _3des1mb1 = Integer.parseInt(_3des1kb);
+                    str3DES1kb = snapshot.get("3DES").toString();
+                    _3des1kb[0] = Integer.parseInt(str3DES1kb);
+                    
 
-                    blowfish1mb = snapshot.get("BLOWFISH").toString();
-                    int blowfish1mb1 = Integer.parseInt(blowfish1mb);
+                    strBLOWFISH1kb = snapshot.get("BLOWFISH").toString();
+                    blowfish1kb[0] = Integer.parseInt(strBLOWFISH1kb);
 
 
 
-                    barDataSet1[0] = new BarDataSet(barEntries1(aes1kb[0], aes1kb1,aes1kb1,aes1kb1,aes1kb1,aes1kb1), "AES");
+                    barDataSet1[0] = new BarDataSet(barEntries1(aes1kb[0], 0,0,0,0,0), "AES");
                     barDataSet1[0].setColor(getColor(R.color.firstBar));
-                    barDataSet2[0] = new BarDataSet(barEntries2(_3des1mb1,_3des1mb1,_3des1mb1,_3des1mb1,_3des1mb1,_3des1mb1), "3DES");
+                    barDataSet2[0] = new BarDataSet(barEntries2(_3des1kb[0],0,0,0,0,0), "3DES");
                     barDataSet2[0].setColor(getColor(R.color.secondBar));
-                    barDataSet3[0] = new BarDataSet(barEntries1(blowfish1mb1,blowfish1mb1,blowfish1mb1,blowfish1mb1,blowfish1mb1,blowfish1mb1), "BLOWFISH");
+                    barDataSet3[0] = new BarDataSet(barEntries1( blowfish1kb[0],0,0,0,0,0), "BLOWFISH");
                     barDataSet3[0].setColor(getColor(R.color.thirdBar));
 
                     BarData data = new BarData(barDataSet1[0], barDataSet2[0], barDataSet3[0]);
@@ -209,22 +201,20 @@ public class Charts extends AppCompatActivity {
                     xAxis.setGranularity(1);
                     xAxis.setGranularityEnabled(true);
 
-                    _aes1mb = snapshot.get("AES").toString();
-                    int aes1mb1 = Integer.parseInt(_aes1mb);
+                    strAES5kb = snapshot.get("AES").toString();
+                    aes5kb[0] = Integer.parseInt(strAES5kb);
 
-                    _3des1mb = snapshot.get("3DES").toString();
-                    int _3des1mb1 = Integer.parseInt(_3des1mb);
+                    str3DES5kb = snapshot.get("3DES").toString();
+                    _3des5kb[0] = Integer.parseInt(str3DES5kb);
 
-                    blowfish1mb = snapshot.get("BLOWFISH").toString();
-                    int blowfish1mb1 = Integer.parseInt(blowfish1mb);
+                    strBLOWFISH5kb = snapshot.get("BLOWFISH").toString();
+                    blowfish5kb[0] = Integer.parseInt(strBLOWFISH5kb);
 
-                    //gresa[0] = aes1mb1+5;
-
-                    barDataSet1[0] = new BarDataSet(barEntries1(aes1kb[0], 2,aes1mb1,aes1mb1,aes1mb1,aes1mb1), "AES");
+                    barDataSet1[0] = new BarDataSet(barEntries1(aes1kb[0], aes5kb[0],0,0,0,0), "AES");
                     barDataSet1[0].setColor(getColor(R.color.firstBar));
-                    barDataSet2[0] = new BarDataSet(barEntries2(_3des1mb1,_3des1mb1,_3des1mb1,_3des1mb1,_3des1mb1,_3des1mb1), "3DES");
+                    barDataSet2[0] = new BarDataSet(barEntries2(_3des1kb[0],_3des5kb[0],0,0,0,0), "3DES");
                     barDataSet2[0].setColor(getColor(R.color.secondBar));
-                    barDataSet3[0] = new BarDataSet(barEntries1(blowfish1mb1,blowfish1mb1,blowfish1mb1,blowfish1mb1,blowfish1mb1,blowfish1mb1), "BLOWFISH");
+                    barDataSet3[0] = new BarDataSet(barEntries1( blowfish1kb[0], blowfish5kb[0],0,0,0,0), "BLOWFISH");
                     barDataSet3[0].setColor(getColor(R.color.thirdBar));
 
                     BarData data = new BarData(barDataSet1[0], barDataSet2[0], barDataSet3[0]);
@@ -264,24 +254,21 @@ public class Charts extends AppCompatActivity {
                     xAxis.setGranularity(1);
                     xAxis.setGranularityEnabled(true);
 
-                    _aes1mb = snapshot.get("AES").toString();
-                    int aes1mb1 = Integer.parseInt(_aes1mb);
+                    strAES10kb = snapshot.get("AES").toString();
+                    aes10kb[0] = Integer.parseInt(strAES10kb);
 
-                    _3des1mb = snapshot.get("3DES").toString();
-                    int _3des1mb1 = Integer.parseInt(_3des1mb);
+                    str3DES10kb = snapshot.get("3DES").toString();
+                    _3des10kb[0] = Integer.parseInt(str3DES10kb);
 
-                    blowfish1mb = snapshot.get("BLOWFISH").toString();
-                    int blowfish1mb1 = Integer.parseInt(blowfish1mb);
+                    strBLOWFISH10kb = snapshot.get("BLOWFISH").toString();
+                    blowfish10kb[0] = Integer.parseInt(strBLOWFISH10kb);
 
-                    //gresa[0] = aes1mb1+5;
-
-                    barDataSet1[0] = new BarDataSet(barEntries1(aes1kb[0], 3,aes1mb1,aes1mb1,aes1mb1,aes1mb1), "AES");
+                    barDataSet1[0] = new BarDataSet(barEntries1(aes1kb[0], aes5kb[0],  aes10kb[0],0,0,0), "AES");
                     barDataSet1[0].setColor(getColor(R.color.firstBar));
-                    barDataSet2[0] = new BarDataSet(barEntries2(_3des1mb1,_3des1mb1,_3des1mb1,_3des1mb1,_3des1mb1,_3des1mb1), "3DES");
+                    barDataSet2[0] = new BarDataSet(barEntries2(_3des1kb[0],_3des5kb[0],_3des10kb[0],0,0,0), "3DES");
                     barDataSet2[0].setColor(getColor(R.color.secondBar));
-                    barDataSet3[0] = new BarDataSet(barEntries1(blowfish1mb1,blowfish1mb1,blowfish1mb1,blowfish1mb1,blowfish1mb1,blowfish1mb1), "BLOWFISH");
+                    barDataSet3[0] = new BarDataSet(barEntries1( blowfish1kb[0], blowfish5kb[0], blowfish10kb[0],0,0,0), "BLOWFISH");
                     barDataSet3[0].setColor(getColor(R.color.thirdBar));
-
                     BarData data = new BarData(barDataSet1[0], barDataSet2[0], barDataSet3[0]);
                     chart.setData(data);
                     float barSpace = 0.08f;
@@ -320,23 +307,22 @@ public class Charts extends AppCompatActivity {
                     xAxis.setGranularity(1);
                     xAxis.setGranularityEnabled(true);
 
-                    _aes1mb = snapshot.get("AES").toString();
-                    int aes1mb1 = Integer.parseInt(_aes1mb);
+                    strAES50kb = snapshot.get("AES").toString();
+                    aes10kb[0] = Integer.parseInt(strAES50kb);
 
-                    _3des1mb = snapshot.get("3DES").toString();
-                    int _3des1mb1 = Integer.parseInt(_3des1mb);
+                    str3DES50kb = snapshot.get("3DES").toString();
+                    _3des50kb[0] = Integer.parseInt(str3DES50kb);
 
-                    blowfish1mb = snapshot.get("BLOWFISH").toString();
-                    int blowfish1mb1 = Integer.parseInt(blowfish1mb);
+                    strBLOWFISH50kb = snapshot.get("BLOWFISH").toString();
+                    blowfish50kb[0] = Integer.parseInt(strBLOWFISH50kb);
 
-                    //gresa[0] = aes1mb1+5;
-
-                    barDataSet1[0] = new BarDataSet(barEntries1(aes1kb[0], 4,aes1mb1,aes1mb1,aes1mb1,aes1mb1), "AES");
+                    barDataSet1[0] = new BarDataSet(barEntries1(aes1kb[0], aes5kb[0],  aes10kb[0],aes50kb[0],0,0), "AES");
                     barDataSet1[0].setColor(getColor(R.color.firstBar));
-                    barDataSet2[0] = new BarDataSet(barEntries2(_3des1mb1,_3des1mb1,_3des1mb1,_3des1mb1,_3des1mb1,_3des1mb1), "3DES");
+                    barDataSet2[0] = new BarDataSet(barEntries2(_3des1kb[0],_3des5kb[0],_3des10kb[0],_3des50kb[0],0,0), "3DES");
                     barDataSet2[0].setColor(getColor(R.color.secondBar));
-                    barDataSet3[0] = new BarDataSet(barEntries1(blowfish1mb1,blowfish1mb1,blowfish1mb1,blowfish1mb1,blowfish1mb1,blowfish1mb1), "BLOWFISH");
+                    barDataSet3[0] = new BarDataSet(barEntries1( blowfish1kb[0], blowfish5kb[0], blowfish10kb[0],blowfish50kb[0],0,0), "BLOWFISH");
                     barDataSet3[0].setColor(getColor(R.color.thirdBar));
+
 
                     BarData data = new BarData(barDataSet1[0], barDataSet2[0], barDataSet3[0]);
                     chart.setData(data);
@@ -375,22 +361,20 @@ public class Charts extends AppCompatActivity {
                     xAxis.setGranularity(1);
                     xAxis.setGranularityEnabled(true);
 
-                    _aes1mb = snapshot.get("AES").toString();
-                    int aes1mb1 = Integer.parseInt(_aes1mb);
+                    strAES100kb = snapshot.get("AES").toString();
+                    aes100kb[0] = Integer.parseInt(strAES100kb);
 
-                    _3des1mb = snapshot.get("3DES").toString();
-                    int _3des1mb1 = Integer.parseInt(_3des1mb);
+                     str3DES100kb = snapshot.get("3DES").toString();
+                    _3des100kb[0] = Integer.parseInt(str3DES100kb);
 
-                    blowfish1mb = snapshot.get("BLOWFISH").toString();
-                    int blowfish1mb1 = Integer.parseInt(blowfish1mb);
+                    strBLOWFISH100kb = snapshot.get("BLOWFISH").toString();
+                    blowfish100kb[0] = Integer.parseInt(strBLOWFISH100kb);
 
-                    //gresa[0] = aes1mb1+5;
-
-                    barDataSet1[0] = new BarDataSet(barEntries1(aes1kb[0], 2,aes1mb1,aes1mb1,aes1mb1,aes1mb1), "AES");
+                    barDataSet1[0] = new BarDataSet(barEntries1(aes1kb[0], aes5kb[0],  aes10kb[0],aes50kb[0],aes100kb[0],0), "AES");
                     barDataSet1[0].setColor(getColor(R.color.firstBar));
-                    barDataSet2[0] = new BarDataSet(barEntries2(_3des1mb1,_3des1mb1,_3des1mb1,_3des1mb1,_3des1mb1,_3des1mb1), "3DES");
+                    barDataSet2[0] = new BarDataSet(barEntries2(_3des1kb[0],_3des5kb[0],_3des10kb[0],_3des50kb[0],_3des100kb[0],0), "3DES");
                     barDataSet2[0].setColor(getColor(R.color.secondBar));
-                    barDataSet3[0] = new BarDataSet(barEntries1(blowfish1mb1,blowfish1mb1,blowfish1mb1,blowfish1mb1,blowfish1mb1,blowfish1mb1), "BLOWFISH");
+                    barDataSet3[0] = new BarDataSet(barEntries1( blowfish1kb[0], blowfish5kb[0], blowfish10kb[0],blowfish50kb[0], blowfish100kb[0],0), "BLOWFISH");
                     barDataSet3[0].setColor(getColor(R.color.thirdBar));
 
                     BarData data = new BarData(barDataSet1[0], barDataSet2[0], barDataSet3[0]);
@@ -431,22 +415,20 @@ public class Charts extends AppCompatActivity {
                     xAxis.setGranularity(1);
                     xAxis.setGranularityEnabled(true);
 
-                    _aes1mb = snapshot.get("AES").toString();
-                    int aes1mb1 = Integer.parseInt(_aes1mb);
+                    strAES1mb = snapshot.get("AES").toString();
+                    aes1mb[0] = Integer.parseInt(strAES1mb);
 
-                    _3des1mb = snapshot.get("3DES").toString();
-                    int _3des1mb1 = Integer.parseInt(_3des1mb);
+                    str3DES1mb = snapshot.get("3DES").toString();
+                    _3des1mb[0] = Integer.parseInt(str3DES1mb);
 
-                    blowfish1mb = snapshot.get("BLOWFISH").toString();
-                    int blowfish1mb1 = Integer.parseInt(blowfish1mb);
+                    strBLOWFISH1mb = snapshot.get("BLOWFISH").toString();
+                    blowfish1mb[0] = Integer.parseInt(strBLOWFISH1mb);
 
-                    //gresa[0] = aes1mb1+5;
-
-                    barDataSet1[0] = new BarDataSet(barEntries1(aes1kb[0],3,aes1mb1,aes1mb1,aes1mb1,aes1mb1), "AES");
+                    barDataSet1[0] = new BarDataSet(barEntries1(aes1kb[0], aes5kb[0],  aes10kb[0],aes50kb[0],aes100kb[0],aes1mb[0]), "AES");
                     barDataSet1[0].setColor(getColor(R.color.firstBar));
-                    barDataSet2[0] = new BarDataSet(barEntries2(_3des1mb1,_3des1mb1,_3des1mb1,_3des1mb1,_3des1mb1,_3des1mb1), "3DES");
+                    barDataSet2[0] = new BarDataSet(barEntries2(_3des1kb[0],_3des5kb[0],_3des10kb[0],_3des50kb[0],_3des100kb[0], _3des1mb[0]), "3DES");
                     barDataSet2[0].setColor(getColor(R.color.secondBar));
-                    barDataSet3[0] = new BarDataSet(barEntries1(blowfish1mb1,blowfish1mb1,blowfish1mb1,blowfish1mb1,blowfish1mb1,blowfish1mb1), "BLOWFISH");
+                    barDataSet3[0] = new BarDataSet(barEntries1( blowfish1kb[0], blowfish5kb[0], blowfish10kb[0],blowfish50kb[0], blowfish100kb[0],blowfish1mb[0]), "BLOWFISH");
                     barDataSet3[0].setColor(getColor(R.color.thirdBar));
 
                     BarData data = new BarData(barDataSet1[0], barDataSet2[0], barDataSet3[0]);
@@ -458,8 +440,6 @@ public class Charts extends AppCompatActivity {
                     chart.getXAxis().setAxisMaximum(0 + chart.getBarData().getGroupWidth(groupSpace, barSpace) * 6); //minimum+ chart data *number of bars
                     //chart.getAxisLeft().setAxisMinimum(0);
                     chart.groupBars(0, groupSpace, barSpace); // me i grupu
-
-
 
                 } else {
                     Log.d(TAG, "Current data: null");
@@ -481,28 +461,33 @@ public class Charts extends AppCompatActivity {
         description.setTextColor(getColor(R.color.firstBar));
         description.setTextSize(10);
         chart.setDescription(description);*/
-
+        chart.setVisibleXRange(10,10);
 
         chart.setDrawGridBackground(false); ///nuk po heket gridi
         chart.setDrawBorders(true);
+
+     /* YAxis leftAxis = chart.getAxisLeft();
+        leftAxis.setLabelCount(8, true);
+        leftAxis.setGranularityEnabled(true);
+        leftAxis.setGranularity(100);
         //chart.setBorderWidth(2);
-        //chart.setBorderColor(Color.BLUE);
+        //chart.setBorderColor(Color.BLUE);*/
+
 
         chart.setDragEnabled(false);
         chart.setVisibleXRangeMaximum(6);
-
+        chart.setDoubleTapToZoomEnabled(false);
+        //chart.setScaleXEnabled(false);
+        chart.setScaleEnabled(false);
 
 
         Legend legend = chart.getLegend();
-
         //legend.setTextColor(getColor(R.color.colorPrimaryDark));
         //legend.setTextSize(15);
        // legend.setForm(Legend.LegendForm.CIRCLE); munesh edhe square --by default
         //legend.setFormSize(2);
         legend.setXEntrySpace(15);
         legend.setFormToTextSpace(10);
-
-
 
 
 
