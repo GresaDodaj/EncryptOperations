@@ -1,5 +1,4 @@
 package com.trying.myapplication;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
@@ -14,23 +13,14 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 
 public class Charts extends AppCompatActivity {
@@ -43,14 +33,15 @@ public class Charts extends AppCompatActivity {
     DocumentReference docref50KB  = database.collection("myPhone").document("_50KB");
     DocumentReference docref100KB  = database.collection("myPhone").document("_10KB");
     DocumentReference docref1MB  = database.collection("myPhone").document("_1MB");
-
+    String arr="";
+    BarEntry  hello;
 
     int aes5kb=0;
     int aes10kb=0;
     int aes50kb=0;
     int aes100kb=0;
     int aes1mb=0;
-     Long aes1kb= Long.valueOf(1);
+    int aes1kb=1;
 
     int _3des1kb=0;
     int _3des5kb=0;
@@ -66,8 +57,8 @@ public class Charts extends AppCompatActivity {
     int blowfish100kb=0;
     int blowfish1mb=0;
 
-
     BarChart chart;
+
 
     String aes="500";
     @Override
@@ -133,15 +124,17 @@ public class Charts extends AppCompatActivity {
                     Log.d(TAG, "Current data: " + snapshot.getData());
 
                     //aes1kb = snapshot.getLong("AES");
-                    String arr = snapshot.get("3DES").toString();
-                    aes1kb = Long.valueOf(arr);
+                     arr = snapshot.get("3DES").toString();
+                    int a = Integer.parseInt(arr);
+                    aes1kb = a;
+
+
+
                 } else {
                     Log.d(TAG, "Current data: null");
                 }
             }
         });
-
-
 
 
 
@@ -203,7 +196,7 @@ public class Charts extends AppCompatActivity {
     private ArrayList<BarEntry> barEntries1() {
 
         ArrayList<BarEntry> barEntries = new ArrayList<>();
-        barEntries.add(new BarEntry(0,aes1kb));
+        barEntries.add(new BarEntry(0,5));
         barEntries.add(new BarEntry(1, 200));
         barEntries.add(new BarEntry(2, 300));
         barEntries.add(new BarEntry(3, 1000));
