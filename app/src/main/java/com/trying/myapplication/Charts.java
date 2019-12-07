@@ -29,7 +29,7 @@ public class Charts extends AppCompatActivity {
     DocumentReference docref5KB  = database.collection("myPhone").document("_5KB");
     DocumentReference docref10KB  = database.collection("myPhone").document("_10KB");
     DocumentReference docref50KB  = database.collection("myPhone").document("_50KB");
-    DocumentReference docref100KB  = database.collection("myPhone").document("_10KB");
+    DocumentReference docref100KB  = database.collection("myPhone").document("_100KB");
     DocumentReference docref1MB  = database.collection("myPhone").document("_1MB");
 
    

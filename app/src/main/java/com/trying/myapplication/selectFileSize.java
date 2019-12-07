@@ -416,8 +416,12 @@ public class selectFileSize extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     if(alg .equals("AES")) {
+                        String text3 = "";
                         long startTime = System.nanoTime();
-                        String text3 = AES.encrypt(_1MBfile);
+
+                        for (int i = 0; i < 10; i++) {
+                             text3 += AES.encrypt(_10KBfile);
+                        }
                         //String text4 = AES.decrypt(text3);
                         long endTime = System.nanoTime();
                         //time of the execution in nanoseconds/1000000 = time in milliseconds
@@ -429,8 +433,14 @@ public class selectFileSize extends AppCompatActivity {
                         try {
                             byte[] tripleKey = tripleDES.initKey();
                             String key = (LABEL + "3DES key: " + tripleDES.byte_to_string(tripleKey));
+                            byte[] encryptResult = new byte[0];
+                            String enc ="";
                             long startTime = System.nanoTime();
-                            byte[] encryptResult = tripleDES.encrypt(_1MBfile.getBytes(), tripleKey);
+
+                            for(int i = 0; i < 10 ; i++) {
+                                 encryptResult = tripleDES.encrypt(_10KBfile.getBytes(), tripleKey);
+                                 enc += encryptResult.toString();
+                            }
                             long endTime = System.nanoTime();
                             timeLength3DES[0] = (endTime - startTime) / 1000000;
                             String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
@@ -445,12 +455,18 @@ public class selectFileSize extends AppCompatActivity {
                     else if (alg.equals("BLOWFISH")){
                         try {
                             blowfish.generate_symetric_key();
-                            byte[] text2Bytes = _1MBfile.getBytes();
+                            byte[] text2Bytes = _10KBfile.getBytes();
+                            byte[] encryptedBytes= new byte[0];
+                            String encryptedData = "";
+
                             long startTime = System.nanoTime();
-                            byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
+                            for(int i = 0; i < 10 ; i++) {
+                               encryptedBytes =  blowfish.encrypt(text2Bytes);
+                               encryptedData += encryptedBytes ;
+                            }
                             long endTime = System.nanoTime();
                             timeLengthBfish[0] = (endTime - startTime) / 1000000;
-                            String encryptedData = new String(encryptedBytes);
+                             encryptedData = new String(encryptedBytes);
                             txt1.setText(encryptedData);
                             byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
                             String decryptedData = new String(decryptedBytes );
