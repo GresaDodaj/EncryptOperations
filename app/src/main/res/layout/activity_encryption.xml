@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    package="com.trying.myapplication"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.demotxt.droidsrce.homedashboard.Home"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="#fcfcfc"
+        android:gravity="center"
+        android:id="@+id/ll">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00070707"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="160dp"
+                android:layout_height="190dp"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="1">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            tools:text="FileSize" />
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="Encryption Time"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="@string/_1kb"
+                            android:textAllCaps="true" />
+
+                        <TextView
+
+                            android:id="@+id/timeAES1kb"
+                            android:gravity="right"
+                            android:padding="3dip" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="@string/_10kb"
+                            android:textAllCaps="true" />
+
+                        <TextView
+
+                            android:id="@+id/timeAES100kb"
+                            android:gravity="right"
+                            android:padding="3dip" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="@string/_100kb"
+                            android:textAllCaps="true" />
+
+                        <TextView
+
+                            android:id="@+id/timeAES100kb"
+                            android:gravity="right"
+                            android:padding="3dip" />
+                    </TableRow>
+
+                    <TableRow android:layout_height="wrap_content">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="@string/_1mb"
+                            android:textAllCaps="true" />
+
+                        <TextView
+
+                            android:id="@+id/timeAES1mb"
+                            android:gravity="right"
+                            android:padding="3dip" />
+                    </TableRow>
+                </TableLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnAES"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_gravity="bottom"
+                    android:background="#F8F9FA"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/andada"
+                        android:shadowColor="#5BFFFFFF"
+                        android:text="@string/aes"
+                        android:textColor="#030303"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgray" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:shadowColor="#5BFFFFFF"
+                        android:text="average per bytes"
+                        android:textAllCaps="true"
+                        android:textColor="#030303"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="160dp"
+                android:layout_height="190dp"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground">
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="1">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            tools:text="FileSize" />
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="Encryption Time"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="@string/_1kb"
+                            android:textAllCaps="true" />
+
+                        <TextView
+
+                            android:id="@+id/timeDES1kb"
+                            android:gravity="right"
+                            android:padding="3dip" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="@string/_10kb"
+                            android:textAllCaps="true" />
+
+                        <TextView
+
+                            android:id="@+id/timeDES10kb"
+                            android:gravity="right"
+                            android:padding="3dip" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="@string/_100kb"
+                            android:textAllCaps="true" />
+
+                        <TextView
+
+                            android:id="@+id/timeDES100kb"
+                            android:gravity="right"
+                            android:padding="3dip" />
+                    </TableRow>
+
+                    <TableRow android:layout_height="wrap_content">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="@string/_1mb"
+                            android:textAllCaps="true" />
+
+                        <TextView
+
+                            android:id="@+id/ES1mb"
+                            android:gravity="right"
+                            android:padding="3dip" />
+                    </TableRow>
+                </TableLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnDES"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_gravity="bottom"
+                    android:background="#F8F9FA"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/andada"
+                        android:shadowColor="#5BFFFFFF"
+                        android:text="@string/des"
+                        android:textColor="#030303"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgray" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:shadowColor="#5BFFFFFF"
+                        android:text="@string/test"
+                        android:textColor="#030303" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00070707"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="160dp"
+                android:layout_height="190dp"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="1">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            tools:text="FileSize" />
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="Encryption Time"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="@string/_1kb"
+                            android:textAllCaps="true" />
+
+                        <TextView
+
+                            android:id="@+id/time3DES1kb"
+                            android:gravity="right"
+                            android:padding="3dip" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="@string/_10kb"
+                            android:textAllCaps="true" />
+
+                        <TextView
+
+                            android:id="@+id/time3DES10kb"
+                            android:gravity="right"
+                            android:padding="3dip" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="@string/_100kb"
+                            android:textAllCaps="true" />
+
+                        <TextView
+
+                            android:id="@+id/time3DES100kb"
+                            android:gravity="right"
+                            android:padding="3dip" />
+                    </TableRow>
+
+                    <TableRow android:layout_height="wrap_content">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="@string/_1mb"
+                            android:textAllCaps="true" />
+
+                        <TextView
+
+                            android:id="@+id/time3DES1mb"
+                            android:gravity="right"
+                            android:padding="3dip" />
+                    </TableRow>
+                </TableLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn3DES"
+                    android:layout_width="match_parent"
+                    android:layout_height="69dp"
+                    android:layout_gravity="bottom"
+                    android:background="#F8F9FA"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:shadowColor="#5BFFFFFF"
+                        android:text="@string/_3des"
+                        android:textColor="#030303"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgray" />
+
+                    <TextView
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:shadowColor="#5BFFFFFF"
+                        android:text="average per bytes"
+                        android:textAllCaps="true"
+                        android:textColor="#030303"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="160dp"
+                android:layout_height="190dp"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="1">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            tools:text="FileSize" />
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="Encryption Time"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="@string/_1kb"
+                            android:textAllCaps="true" />
+
+                        <TextView
+
+                            android:id="@+id/timeBLOWFISH1kb"
+                            android:gravity="right"
+                            android:padding="3dip" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="@string/_10kb"
+                            android:textAllCaps="true" />
+
+                        <TextView
+
+                            android:id="@+id/timeBLOWFISH10kb"
+                            android:gravity="right"
+                            android:padding="3dip" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="@string/_100kb"
+                            android:textAllCaps="true" />
+
+                        <TextView
+
+                            android:id="@+id/timeBLOWFISH100kb"
+                            android:gravity="right"
+                            android:padding="3dip" />
+                    </TableRow>
+
+                    <TableRow android:layout_height="wrap_content">
+
+                        <TextView
+
+                            android:padding="3dip"
+                            android:text="@string/_1mb"
+                            android:textAllCaps="true" />
+
+                        <TextView
+
+                            android:id="@+id/timeBLOWFISH1mb"
+                            android:gravity="right"
+                            android:padding="3dip" />
+                    </TableRow>
+                </TableLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnBlowfish"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_gravity="bottom"
+                    android:background="#F8F9FA"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/andada"
+                        android:shadowColor="#5BFFFFFF"
+                        android:text="@string/blowfish"
+                        android:textColor="#030303"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgray" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:shadowColor="#5BFFFFFF"
+                        android:text="average per bytes"
+                        android:textAllCaps="true"
+                        android:textColor="#030303"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="141dp"
+            android:background="#00070707"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="340dp"
+                android:layout_height="150dp"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:background="@drawable/circlebackgroundpurple"
+                        android:contentDescription="@string/todo"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_attach_money_black_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:shadowColor="#00FFFDFD"
+                        android:text="@string/todo"
+                        android:textColor="#000000"
+                        android:textColorHint="#050505"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_margin="10dp"
+                        android:background="@color/lightgray" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="@string/todooo"
+                        android:textColor="@android:color/darker_gray" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

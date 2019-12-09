@@ -48,23 +48,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold" /><!--changed the color of the radio button click.. defined "blue" in values->colors with buttonTint -->
 
-            <RadioButton
-                android:id="@+id/btn5KB"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="15dp"
-                android:height="60dip"
-                android:buttonTint="@color/blue"
-                android:fontFamily="@font/andada"
-                android:gravity="center_horizontal"
-                android:text="@string/_5kb"
-                android:textAllCaps="true"
-                android:textColor="#BF000000"
-                android:textColorHighlight="#003B85C2"
-                android:textColorLink="#456CD6"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+
             <RadioButton
                 android:id="@+id/btn10KB"
                 android:layout_width="120dp"
@@ -84,7 +68,7 @@
                 android:textStyle="bold" />
 
             <RadioButton
-                android:id="@+id/btn50KB"
+                android:id="@+id/btn500KB"
                 style="@style/Widget.AppCompat.CompoundButton.RadioButton"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"

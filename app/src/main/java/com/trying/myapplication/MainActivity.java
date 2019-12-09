@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
         _3desButton.setOnClickListener(onClickListener);
         blowfishButton.setOnClickListener(onClickListener);
 
-       Intent intent = new Intent(MainActivity.this, Charts.class);
+     /*  Intent intent = new Intent(MainActivity.this, EncryptionAlgorithm.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        startActivity(intent);*/
     }
     //e kom deklaru qe me thirr te njejten kalse prej krejt butonave.. ne vend se me shkru des.setOnClickListener(new View.OnClickListener() {
     //            @Override
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
      private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(MainActivity.this, selectFileSize.class);
+            Intent intent = new Intent(MainActivity.this, EncryptionAlgorithm.class);
 
             switch(v.getId()){
                 case R.id.btnAES:

@@ -18,4 +18,6 @@
     <string name="_5kb">5KB</string>
     <string name="_50kb">50KB</string>
     <string name="encrypt">ENCRYPT</string>
+    <string name="encryption_time">Encryption Time</string>
+    <string name="_500kb">500kb</string>
 </resources>
