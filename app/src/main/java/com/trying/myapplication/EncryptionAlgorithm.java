@@ -24,6 +24,14 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
     static long timeAverage = 0;
 
+    static long timeAverageAESPRE = 0;
+    static long timeAverage3DESPRE = 0;
+    static long timeAverageBLOWFISHPRE = 0;
+
+    static long timeAverageAESPOST = 0;
+    static long timeAverage3DESPOST = 0;
+    static long timeAverageBLOWFISHPOST = 0;
+
     static long timeAES1kb = 0;
     static long timeAES100kb = 0;
     static long timeAES500kb = 0;
@@ -377,7 +385,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
                 if(timeAverage!=0){
                     if(counter3DES[0] == 1 || counterAES[0] == 1 || counterBLOWFISH[0] == 1)
-                    { avgPreCache.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n"); }
+                    { avgPreCache.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n"); } //todo: check something wrong with pre and post
                     else
                     { avgResult.setText("POST-CACHE AVERAGE: " + (int) timeAverage + " milliseconds"); }
                 }
@@ -504,9 +512,10 @@ public class EncryptionAlgorithm extends AppCompatActivity {
         if(!txt1kb.equals("") && !txt100kb.equals("")&& !txt500kb.equals("") && !txt1mb.equals("")){    //TODO: pse equals e jo !=
 
 
-            if(alg.equals("AES")){ counterAES[0] = counterAES[0] +1; }
+            if(alg.equals("AES")){ counterAES[0] = counterAES[0] +1;  }
             else if(alg.equals("3DES")){ counter3DES[0] = counter3DES[0] +1; }
-            else{ if(alg.equals("BLOWFISH")){ counterBLOWFISH[0] = counterBLOWFISH[0] +1; }}
+            else{ if(alg.equals("BLOWFISH")){ counterBLOWFISH[0] = counterBLOWFISH[0] +1;}}
+
             long  average ;
             String time1kb = txt1kb;
             int end1 = time1kb.indexOf(" ");
@@ -529,6 +538,8 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     + Integer.parseInt(time500kb)+ Integer.parseInt(time1mb);
 
             average = average/4;
+
+
 
             return average;
         }

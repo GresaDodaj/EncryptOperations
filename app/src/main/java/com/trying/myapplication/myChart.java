@@ -34,6 +34,12 @@ public class myChart extends AppCompatActivity {
     static long j;
     static long k;
     static long l;
+    static long m;
+    static long n;
+    static long o;
+    static long p;
+    static long q;
+    static long r;
 
     myChart(long a , long b, long c, long d,long e, long f, long g, long h,long i ,long j, long k, long l){
 
@@ -60,12 +66,11 @@ public class myChart extends AppCompatActivity {
 
         BarChart chart = findViewById(R.id.groupBarChart);
 
-        Encryption en = new Encryption();
+
 
         final BarDataSet[] barDataSet1 = {new BarDataSet(barEntries1((int)a,(int)b,(int)c,(int)d), "AES")};
         final BarDataSet[] barDataSet2 = {new BarDataSet(barEntries2((int)e,(int)f,(int)g,(int)h), "3DES")};
         final BarDataSet[] barDataSet3 = {new BarDataSet(barEntries3((int)i,(int)j,(int)k,(int)l), "BLOWFISH")};
-
 
 
         final Description description = new Description();
@@ -131,6 +136,66 @@ public class myChart extends AppCompatActivity {
 
 
         chart.invalidate();
+
+
+
+        BarChart secondChart = findViewById(R.id.groupBarChartPREPOST);
+
+        final BarDataSet[] secondBarDataSet1 = {new BarDataSet(barEntries1((int)a,(int)b,(int)c,(int)d), "PRE-CACHE")};
+        final BarDataSet[] secondBarDataSet2 = {new BarDataSet(barEntries2((int)e,(int)f,(int)g,(int)h), "POST-CACHE")};
+
+
+        final Description description2 = new Description();
+        description2.setText("Encryption");
+        description2.setTextColor(getColor(R.color.firstBar));
+        description2.setTextSize(10);
+        secondChart.setDescription(description2);
+
+        secondBarDataSet1[0] = new BarDataSet(barEntries1((int)a,(int)b,(int)c,(int)d), "PRE-CACHE");
+        secondBarDataSet1[0].setColor(getColor(R.color.firstBar));
+        secondBarDataSet2[0] = new BarDataSet(barEntries2((int)e,(int)f,(int)g,(int)h), "POST-CACHE");
+        secondBarDataSet2[0].setColor(getColor(R.color.secondBar));
+        
+        BarData data2 = new BarData(secondBarDataSet1[0], secondBarDataSet2[0]);
+        secondChart.setData(data2);
+        float barSpace2 = 0.07f;
+        float groupSpace2 = 0.31f;
+        data2.setBarWidth(0.27f);
+        secondChart.getXAxis().setAxisMinimum(0);
+        secondChart.getXAxis().setAxisMaximum(0 + secondChart.getBarData().getGroupWidth(groupSpace2, barSpace2) * 3); //minimum+ secondChart data2 *number of bars
+        //secondChart.getAxisLeft().setAxisMinimum(0);
+        secondChart.groupBars(0, groupSpace2, barSpace2); // me i grupu
+
+
+
+
+        final String[] files2 = new String[]{"AES", "3DES", "BLOWFISH"};
+        XAxis xAxis2 = secondChart.getXAxis();
+        xAxis2.setValueFormatter(new IndexAxisValueFormatter(files2));
+        xAxis2.setCenterAxisLabels(true);//me i vendos labels poshte ne center
+        xAxis2.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis2.setGranularity(1);
+        xAxis2.setGranularityEnabled(true);
+        secondChart.setDrawGridBackground(false); ///nuk po heket gridi
+        secondChart.setDrawBorders(true);
+
+
+        secondChart.setDragEnabled(false);
+        secondChart.setVisibleXRangeMaximum(3);
+        secondChart.setDoubleTapToZoomEnabled(false);
+        //secondChart.setScaleXEnabled(false);
+        secondChart.setScaleEnabled(false);
+
+
+        Legend legend1 = secondChart.getLegend();
+        //legend.setTextColor(getColor(R.color.colorPrimaryDark));
+        //legend.setTextSize(15);
+        // legend.setForm(Legend.LegendForm.CIRCLE); munesh edhe square --by default
+        //legend.setFormSize(2);
+        legend1.setXEntrySpace(15);
+        legend1.setFormToTextSpace(10);
+
+        secondChart.invalidate();
     }
 
     private ArrayList<BarEntry> barEntries1(int y1, int y2, int y3, int y4) {
