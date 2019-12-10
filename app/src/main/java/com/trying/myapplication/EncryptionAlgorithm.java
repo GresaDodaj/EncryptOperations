@@ -59,10 +59,17 @@ public class EncryptionAlgorithm extends AppCompatActivity {
         setContentView(R.layout.activity_encryption_algorithm);
 
         final FirebaseFirestore database = FirebaseFirestore.getInstance();
-        DocumentReference _1kbRef = database.collection("myPhone").document("_1KB");
+        //DocumentReference _1kbRef = database.collection("myPhone").document("_1KB");
         final CollectionReference dbAES = database.collection("overallAverage").document("avg").collection("AES");
         final CollectionReference db3DES = database.collection("overallAverage").document("avg").collection("3DES");
         final CollectionReference dbBLOWFISH = database.collection("overallAverage").document("avg").collection("BLOWFISH");
+        final CollectionReference db_1KB_AES = database.collection("myPhone").document("_1KB").collection("AES");
+        final CollectionReference db_1KB_3DES = database.collection("myPhone").document("_1KB").collection("3DES");
+        final CollectionReference db_1KB_BLOWFISH = database.collection("myPhone").document("_1KB").collection("BLOWFISH");
+        final DocumentReference db_average_aes = database.collection("Average_Collection").document("AES");
+        final DocumentReference db_average_3des = database.collection("Average_Collection").document("3DES");
+        final DocumentReference db_average_blowfish = database.collection("Average_Collection").document("BLOWFISH");
+
 
         Button btn1KB = findViewById(R.id.btn1kb);
         Button btn100KB = findViewById(R.id.btn100kb);
@@ -93,22 +100,18 @@ public class EncryptionAlgorithm extends AppCompatActivity {
         final long[] timeLengthAES = new long[1];
 
 
-
-
         btn1KB.setOnClickListener(new View.OnClickListener() {
             private static final String TAG = "--";
-            private static final String LABEL = "Algoritmi: " ;
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
                 try {
                     if(alg .equals("AES")) {
                         long startTime = System.nanoTime();
-                        String text3 = AES.encrypt(_1KBfile);
+                        //String text3 = AES.encrypt(_1KBfile);
                         long endTime = System.nanoTime();
                         //time of the execution in nanoseconds/1000000 = time in milliseconds
                         timeLengthAES[0] = (endTime - startTime) / 1000000;
-                        //txt1.setText(text3);
                         time1KB.setText((int) timeLengthAES[0] + " milliseconds");
                         timeAES1kb = timeLengthAES[0];
 
@@ -156,18 +159,15 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     if(timeLength1!=0) // qe mos me u bo update 0 te dhanat qe jon ne databaze kur klikohet najnjo prej tjerave algoritme
                     {
                         myPhone.put("AES", timeLength1);
-                        CollectionReference _1kbRef = database.collection("myPhone").document("_1KB").collection("AES");
-                        _1kbRef.add(myPhone);
+                        db_1KB_AES.add(myPhone);
                     }
                     if(timeLength2!=0) {
                         myPhone.put("3DES", timeLength2);
-                        CollectionReference _1kbRef = database.collection("myPhone").document("_1KB").collection("3DES");
-                        _1kbRef.add(myPhone);
+                        db_1KB_3DES.add(myPhone);
                     }
                     if(timeLength3!=0){
                         myPhone.put("BLOWFISH", timeLength3);
-                        CollectionReference _1kbRef = database.collection("myPhone").document("_1KB").collection("BLOWFISH");
-                        _1kbRef.add(myPhone);
+                        db_1KB_BLOWFISH.add(myPhone);
                     }
 
                     timeAverage = average(time1KB.getText().toString(),time100KB.getText().toString(),
@@ -175,8 +175,14 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
                     if(timeAverage!=0){
 
+                        if(counter3DES[0] == 1 || counterAES[0] == 1 || counterBLOWFISH[0] == 1)
+                        { avgPreCache.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n"); }
+                        else
+                        { avgResult.setText("POST-CACHE AVERAGE: " + (int) timeAverage + " milliseconds"); }
+
                         Map<String, Object> averageDB = new HashMap<>();
-                        if(algorithmTxt.getText().toString().equals("AES"))
+                        final Map<String, Object> average_collection = new HashMap<>();
+                        if(alg.equals("AES"))
                         {
                             averageDB.put("AES",timeAverage);
                             dbAES.add(averageDB);
@@ -194,28 +200,68 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                             sum_aes += Integer.parseInt(a);
                                         }
                                         int avg_aes_db = sum_aes / num_of_docs_aes;
+                                        average_collection.put("AES",avg_aes_db);
+                                        db_average_aes.set(average_collection);
 
-
-                                    } else {
-                                        Log.d(TAG, "Error getting documents: ", task.getException());
-                                    }
+                                    } else { Log.d(TAG, "Error getting documents: ", task.getException()); }
                                 }
                             });
                         }
-                        else if(algorithmTxt.getText().toString().equals("3DES")){
+                        else if(alg.equals("3DES")){
                             averageDB.put("3DES",timeAverage);
                             db3DES.add(averageDB);
+
+                            db3DES.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("TAG", task.getResult().size() + "");
+
+                                        int sum_3des = 0;
+                                        int  num_of_docs_3des = task.getResult().size();
+
+                                        for(int i = 0; i < num_of_docs_3des; i++){
+                                            String a = String.valueOf(task.getResult().getDocuments().get(i).get("3DES"));
+                                            sum_3des += Integer.parseInt(a);
+                                        }
+                                        int avg_3des_db = sum_3des / num_of_docs_3des;
+
+                                        average_collection.put("3DES",avg_3des_db);
+                                        db_average_3des.set(average_collection);
+
+                                    } else { Log.d(TAG, "Error getting documents: ", task.getException()); }
+                                }
+                            });
                         }
-                        else if(algorithmTxt.getText().toString().equals("BLOWFISH")){
+                        else if(alg.equals("BLOWFISH")){
                             averageDB.put("BLOWFISH",timeAverage);
                             dbBLOWFISH.add(averageDB);
+
+                            dbBLOWFISH.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("TAG", task.getResult().size() + "");
+
+                                        int sum_blowfish = 0;
+                                        int  num_of_docs_blowfish = task.getResult().size();
+
+                                        for(int i = 0; i < num_of_docs_blowfish; i++){
+                                            String a = String.valueOf(task.getResult().getDocuments().get(i).get("BLOWFISH"));
+                                            sum_blowfish += Integer.parseInt(a);
+                                        }
+                                        int avg_blowfish_db = sum_blowfish / num_of_docs_blowfish;
+
+                                        average_collection.put("BLOWFISH",avg_blowfish_db);
+                                        db_average_blowfish.set(average_collection);
+
+                                    } else { Log.d(TAG, "Error getting documents: ", task.getException()); }
+                                }
+                            });
                         }
 
 
-                        if(counter3DES[0] == 1 || counterAES[0] == 1 || counterBLOWFISH[0] == 1)
-                            { avgPreCache.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n"); }
-                        else
-                            { avgResult.setText("POST-CACHE AVERAGE: " + (int) timeAverage + " milliseconds"); }
+
                     }
 
                 } catch (Exception e) {
@@ -316,10 +362,94 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
 
                     if(timeAverage!=0){
-                        if(counterBLOWFISH[0] == 1)
+
+                        if(counter3DES[0] == 1 || counterAES[0] == 1 || counterBLOWFISH[0] == 1)
                         { avgPreCache.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n"); }
                         else
                         { avgResult.setText("POST-CACHE AVERAGE: " + (int) timeAverage + " milliseconds"); }
+
+                        Map<String, Object> averageDB = new HashMap<>();
+                        final Map<String, Object> average_collection = new HashMap<>();
+                        if(alg.equals("AES"))
+                        {
+                            averageDB.put("AES",timeAverage);
+                            dbAES.add(averageDB);
+                            dbAES.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("TAG", task.getResult().size() + "");
+
+                                        int sum_aes = 0;
+                                        int  num_of_docs_aes = task.getResult().size();
+
+                                        for(int i = 0; i < num_of_docs_aes; i++){
+                                            String a = String.valueOf(task.getResult().getDocuments().get(i).get("AES"));
+                                            sum_aes += Integer.parseInt(a);
+                                        }
+                                        int avg_aes_db = sum_aes / num_of_docs_aes;
+                                        average_collection.put("AES",avg_aes_db);
+                                        db_average_aes.set(average_collection);
+
+                                    } else { Log.d(TAG, "Error getting documents: ", task.getException()); }
+                                }
+                            });
+                        }
+                        else if(alg.equals("3DES")){
+                            averageDB.put("3DES",timeAverage);
+                            db3DES.add(averageDB);
+
+                            db3DES.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("TAG", task.getResult().size() + "");
+
+                                        int sum_3des = 0;
+                                        int  num_of_docs_3des = task.getResult().size();
+
+                                        for(int i = 0; i < num_of_docs_3des; i++){
+                                            String a = String.valueOf(task.getResult().getDocuments().get(i).get("3DES"));
+                                            sum_3des += Integer.parseInt(a);
+                                        }
+                                        int avg_3des_db = sum_3des / num_of_docs_3des;
+
+                                        average_collection.put("3DES",avg_3des_db);
+                                        db_average_3des.set(average_collection);
+
+                                    } else { Log.d(TAG, "Error getting documents: ", task.getException()); }
+                                }
+                            });
+                        }
+                        else if(alg.equals("BLOWFISH")){
+                            averageDB.put("BLOWFISH",timeAverage);
+                            dbBLOWFISH.add(averageDB);
+
+                            dbBLOWFISH.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("TAG", task.getResult().size() + "");
+
+                                        int sum_blowfish = 0;
+                                        int  num_of_docs_blowfish = task.getResult().size();
+
+                                        for(int i = 0; i < num_of_docs_blowfish; i++){
+                                            String a = String.valueOf(task.getResult().getDocuments().get(i).get("BLOWFISH"));
+                                            sum_blowfish += Integer.parseInt(a);
+                                        }
+                                        int avg_blowfish_db = sum_blowfish / num_of_docs_blowfish;
+
+                                        average_collection.put("BLOWFISH",avg_blowfish_db);
+                                        db_average_blowfish.set(average_collection);
+
+                                    } else { Log.d(TAG, "Error getting documents: ", task.getException()); }
+                                }
+                            });
+                        }
+
+
+
                     }
 
                 } catch (Exception e) {
@@ -421,11 +551,96 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                         time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
 
                 if(timeAverage!=0){
+
                     if(counter3DES[0] == 1 || counterAES[0] == 1 || counterBLOWFISH[0] == 1)
-                    { avgPreCache.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n"); } //todo: check something wrong with pre and post
+                    { avgPreCache.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n"); }
                     else
                     { avgResult.setText("POST-CACHE AVERAGE: " + (int) timeAverage + " milliseconds"); }
+
+                    Map<String, Object> averageDB = new HashMap<>();
+                    final Map<String, Object> average_collection = new HashMap<>();
+                    if(alg.equals("AES"))
+                    {
+                        averageDB.put("AES",timeAverage);
+                        dbAES.add(averageDB);
+                        dbAES.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    Log.d("TAG", task.getResult().size() + "");
+
+                                    int sum_aes = 0;
+                                    int  num_of_docs_aes = task.getResult().size();
+
+                                    for(int i = 0; i < num_of_docs_aes; i++){
+                                        String a = String.valueOf(task.getResult().getDocuments().get(i).get("AES"));
+                                        sum_aes += Integer.parseInt(a);
+                                    }
+                                    int avg_aes_db = sum_aes / num_of_docs_aes;
+                                    average_collection.put("AES",avg_aes_db);
+                                    db_average_aes.set(average_collection);
+
+                                } else { Log.d(TAG, "Error getting documents: ", task.getException()); }
+                            }
+                        });
+                    }
+                    else if(alg.equals("3DES")){
+                        averageDB.put("3DES",timeAverage);
+                        db3DES.add(averageDB);
+
+                        db3DES.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    Log.d("TAG", task.getResult().size() + "");
+
+                                    int sum_3des = 0;
+                                    int  num_of_docs_3des = task.getResult().size();
+
+                                    for(int i = 0; i < num_of_docs_3des; i++){
+                                        String a = String.valueOf(task.getResult().getDocuments().get(i).get("3DES"));
+                                        sum_3des += Integer.parseInt(a);
+                                    }
+                                    int avg_3des_db = sum_3des / num_of_docs_3des;
+
+                                    average_collection.put("3DES",avg_3des_db);
+                                    db_average_3des.set(average_collection);
+
+                                } else { Log.d(TAG, "Error getting documents: ", task.getException()); }
+                            }
+                        });
+                    }
+                    else if(alg.equals("BLOWFISH")){
+                        averageDB.put("BLOWFISH",timeAverage);
+                        dbBLOWFISH.add(averageDB);
+
+                        dbBLOWFISH.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    Log.d("TAG", task.getResult().size() + "");
+
+                                    int sum_blowfish = 0;
+                                    int  num_of_docs_blowfish = task.getResult().size();
+
+                                    for(int i = 0; i < num_of_docs_blowfish; i++){
+                                        String a = String.valueOf(task.getResult().getDocuments().get(i).get("BLOWFISH"));
+                                        sum_blowfish += Integer.parseInt(a);
+                                    }
+                                    int avg_blowfish_db = sum_blowfish / num_of_docs_blowfish;
+
+                                    average_collection.put("BLOWFISH",avg_blowfish_db);
+                                    db_average_blowfish.set(average_collection);
+
+                                } else { Log.d(TAG, "Error getting documents: ", task.getException()); }
+                            }
+                        });
+                    }
+
+
+
                 }
+
 
             }
         });
@@ -519,10 +734,91 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
 
                     if(timeAverage!=0){
+                        Map<String, Object> averageDB = new HashMap<>();
+                        final Map<String, Object> average_collection = new HashMap<>();
+                        if(alg.equals("AES"))
+                        {
+                            averageDB.put("AES",timeAverage);
+                            dbAES.add(averageDB);
+                            dbAES.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("TAG", task.getResult().size() + "");
+
+                                        int sum_aes = 0;
+                                        int  num_of_docs_aes = task.getResult().size();
+
+                                        for(int i = 0; i < num_of_docs_aes; i++){
+                                            String a = String.valueOf(task.getResult().getDocuments().get(i).get("AES"));
+                                            sum_aes += Integer.parseInt(a);
+                                        }
+                                        int avg_aes_db = sum_aes / num_of_docs_aes;
+                                        average_collection.put("AES",avg_aes_db);
+                                        db_average_aes.set(average_collection);
+
+                                    } else { Log.d(TAG, "Error getting documents: ", task.getException()); }
+                                }
+                            });
+                        }
+                        else if(alg.equals("3DES")){
+                            averageDB.put("3DES",timeAverage);
+                            db3DES.add(averageDB);
+
+                            db3DES.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("TAG", task.getResult().size() + "");
+
+                                        int sum_3des = 0;
+                                        int  num_of_docs_3des = task.getResult().size();
+
+                                        for(int i = 0; i < num_of_docs_3des; i++){
+                                            String a = String.valueOf(task.getResult().getDocuments().get(i).get("3DES"));
+                                            sum_3des += Integer.parseInt(a);
+                                        }
+                                        int avg_3des_db = sum_3des / num_of_docs_3des;
+
+                                        average_collection.put("3DES",avg_3des_db);
+                                        db_average_3des.set(average_collection);
+
+                                    } else { Log.d(TAG, "Error getting documents: ", task.getException()); }
+                                }
+                            });
+                        }
+                        else if(alg.equals("BLOWFISH")){
+                            averageDB.put("BLOWFISH",timeAverage);
+                            dbBLOWFISH.add(averageDB);
+
+                            dbBLOWFISH.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("TAG", task.getResult().size() + "");
+
+                                        int sum_blowfish = 0;
+                                        int  num_of_docs_blowfish = task.getResult().size();
+
+                                        for(int i = 0; i < num_of_docs_blowfish; i++){
+                                            String a = String.valueOf(task.getResult().getDocuments().get(i).get("BLOWFISH"));
+                                            sum_blowfish += Integer.parseInt(a);
+                                        }
+                                        int avg_blowfish_db = sum_blowfish / num_of_docs_blowfish;
+
+                                        average_collection.put("BLOWFISH",avg_blowfish_db);
+                                        db_average_blowfish.set(average_collection);
+
+                                    } else { Log.d(TAG, "Error getting documents: ", task.getException()); }
+                                }
+                            });
+                        }
+
+
                         if(counter3DES[0] == 1 || counterAES[0] == 1 || counterBLOWFISH[0] == 1)
                         { avgPreCache.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n"); }
                         else
-                        { avgResult.setText("POST-CACHE AVERAGE: " + (int) timeAverage + " milliseconds"); } //todo: nese duhet per me llogarit post cache me ekzekutu 2 her enkriptiomin
+                        { avgResult.setText("POST-CACHE AVERAGE: " + (int) timeAverage + " milliseconds"); }
                     }
 
                 } catch (Exception e) {
