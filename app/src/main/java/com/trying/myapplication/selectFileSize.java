@@ -51,10 +51,10 @@ public class selectFileSize extends AppCompatActivity {
         final long[] average3DES = new long[1];
         final long[] averageBLOWFISH= new long[1];
         final FirebaseFirestore database = FirebaseFirestore.getInstance();
-        DocumentReference ref = database.collection("overallAverage").document();
+        DocumentReference ref = database.collection("Averages").document();
         String myId = ref.getId();
-        final DocumentReference D = database.collection("overallAverage").document(myId);
-        final DocumentReference overallAvg = database.collection("overallAverage").document("avg");
+        final DocumentReference D = database.collection("Averages").document(myId);
+        final DocumentReference overallAvg = database.collection("Averages").document("avg");
 
        // file = new File(Environment.getExternalStorageDirectory(), "_1KBfile.txt");
         txt2.setMovementMethod(new ScrollingMovementMethod());
@@ -564,7 +564,7 @@ public class selectFileSize extends AppCompatActivity {
                     String id = null;
                     if (count == 0) {
 
-                        id = database.collection("overallAverage").document().getId();
+                        id = database.collection("Averages").document().getId();
                     }
                     if (averageAES[0] != 0)
                         data.put("AES", averageAES[0]);
@@ -573,7 +573,7 @@ public class selectFileSize extends AppCompatActivity {
                     if (averageBLOWFISH[0] != 0)
                         data.put("BLOWFISH", averageBLOWFISH[0]);
 
-                    database.collection("overallAverage").document(id).update(data);
+                    database.collection("Averages").document(id).update(data);
                     count += 1;*/
 
 

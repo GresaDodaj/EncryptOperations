@@ -28,6 +28,8 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
     static long timeAverage = 0;
 
+    static long timeAverageAES=0;
+
 /*    static long timeAverageAESPRE = 0;
     static long timeAverage3DESPRE = 0;
     static long timeAverageBLOWFISHPRE = 0;
@@ -60,9 +62,9 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
         final FirebaseFirestore database = FirebaseFirestore.getInstance();
         //DocumentReference _1kbRef = database.collection("myPhone").document("_1KB");
-        final CollectionReference dbAES = database.collection("overallAverage").document("avg").collection("AES");
-        final CollectionReference db3DES = database.collection("overallAverage").document("avg").collection("3DES");
-        final CollectionReference dbBLOWFISH = database.collection("overallAverage").document("avg").collection("BLOWFISH");
+        final CollectionReference dbAES = database.collection("Averages").document("avg").collection("AES");
+        final CollectionReference db3DES = database.collection("Averages").document("avg").collection("3DES");
+        final CollectionReference dbBLOWFISH = database.collection("Averages").document("avg").collection("BLOWFISH");
         final CollectionReference db_1KB_AES = database.collection("myPhone").document("_1KB").collection("AES");
         final CollectionReference db_1KB_3DES = database.collection("myPhone").document("_1KB").collection("3DES");
         final CollectionReference db_1KB_BLOWFISH = database.collection("myPhone").document("_1KB").collection("BLOWFISH");
@@ -176,7 +178,8 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     if(timeAverage!=0){
 
                         if(counter3DES[0] == 1 || counterAES[0] == 1 || counterBLOWFISH[0] == 1)
-                        { avgPreCache.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n"); }
+                        { avgPreCache.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n");
+                        }
                         else
                         { avgResult.setText("POST-CACHE AVERAGE: " + (int) timeAverage + " milliseconds"); }
 
@@ -184,6 +187,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                         final Map<String, Object> average_collection = new HashMap<>();
                         if(alg.equals("AES"))
                         {
+
                             averageDB.put("AES",timeAverage);
                             dbAES.add(averageDB);
                             dbAES.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -269,7 +273,6 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                 }
             }
         });
-
 
         btn100KB.setOnClickListener(new View.OnClickListener() {
             private static final String TAG = "--";
@@ -833,7 +836,14 @@ public class EncryptionAlgorithm extends AppCompatActivity {
             public void onClick(View v) {
                 myChart myChart = new myChart(timeAES1kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES1kb,time3DES100kb,time3DES500kb,
                         time3DES1mb,timeBLOWFISH1kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
-                Intent intent = new Intent(EncryptionAlgorithm.this, myChart.class);
+
+
+                long avgAes= avg(timeAES1kb,timeAES100kb,timeAES500kb,timeAES1mb);
+                long avg3DES= avg(time3DES1kb,time3DES100kb,time3DES500kb, time3DES1mb);
+                long avgBLOWFISH= avg(timeBLOWFISH1kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                Averages avgclass = new Averages(avgAes,avg3DES,avgBLOWFISH);
+
+                Intent intent = new Intent(EncryptionAlgorithm.this, Averages.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -881,4 +891,9 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
     }
 
+
+    private  long avg (long a, long b, long c, long d){
+
+        return (a+b+c+d)/4;
+    }
 }
