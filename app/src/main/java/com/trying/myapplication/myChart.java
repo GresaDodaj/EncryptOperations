@@ -26,12 +26,31 @@ public class myChart extends AppCompatActivity {
     static long b;
     static long c;
     static long d;
-    myChart(long a , long b, long c, long d){
+    static long e;
+    static long f;
+    static long g;
+    static long h;
+    static long i;
+    static long j;
+    static long k;
+    static long l;
+
+    myChart(long a , long b, long c, long d,long e, long f, long g, long h,long i ,long j, long k, long l){
 
         this.a = a;
         this.b = b;
         this.c = c;
         this.d = d;
+
+        this.e = e;
+        this.f = f;
+        this.g = g;
+        this.h = h;
+
+        this.i = i;
+        this.j = j;
+        this.k = k;
+        this.l = l;
 
     }
     @Override
@@ -44,8 +63,8 @@ public class myChart extends AppCompatActivity {
         Encryption en = new Encryption();
 
         final BarDataSet[] barDataSet1 = {new BarDataSet(barEntries1((int)a,(int)b,(int)c,(int)d), "AES")};
-        final BarDataSet[] barDataSet2 = {new BarDataSet(barEntries2((int)a,(int)b,(int)c,(int)d), "3DES")};
-        final BarDataSet[] barDataSet3 = {new BarDataSet(barEntries3((int)a,(int)b,(int)c,(int)d), "BLOWFISH")};
+        final BarDataSet[] barDataSet2 = {new BarDataSet(barEntries2((int)e,(int)f,(int)g,(int)h), "3DES")};
+        final BarDataSet[] barDataSet3 = {new BarDataSet(barEntries3((int)i,(int)j,(int)k,(int)l), "BLOWFISH")};
 
 
 
@@ -57,9 +76,9 @@ public class myChart extends AppCompatActivity {
 
         barDataSet1[0] = new BarDataSet(barEntries1((int)a,(int)b,(int)c,(int)d), "AES");
         barDataSet1[0].setColor(getColor(R.color.firstBar));
-        barDataSet2[0] = new BarDataSet(barEntries2((int)a,(int)b,(int)c,(int)d), "3DES");
+        barDataSet2[0] = new BarDataSet(barEntries2((int)e,(int)f,(int)g,(int)h), "3DES");
         barDataSet2[0].setColor(getColor(R.color.secondBar));
-        barDataSet3[0] = new BarDataSet(barEntries1((int)a,(int)b,(int)c,(int)d), "BLOWFISH");
+        barDataSet3[0] = new BarDataSet(barEntries1((int)i,(int)j,(int)k,(int)l), "BLOWFISH");
         barDataSet3[0].setColor(getColor(R.color.thirdBar));
 
         BarData data = new BarData(barDataSet1[0], barDataSet2[0], barDataSet3[0]);

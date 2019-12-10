@@ -18,13 +18,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EncryptionAlgorithm extends AppCompatActivity {
-    static int[] counter = {0};
+    static int[] counterAES = {0};
+    static int[] counter3DES = {0};
+    static int[] counterBLOWFISH = {0};
+
     static long timeAverage = 0;
 
-    public static long timeAES1kb = 0;
+    static long timeAES1kb = 0;
     static long timeAES100kb = 0;
     static long timeAES500kb = 0;
     static long timeAES1mb = 0;
+
+    static long time3DES1kb = 0;
+    static long time3DES100kb = 0;
+    static long time3DES500kb = 0;
+    static long time3DES1mb = 0;
+
+    static long timeBLOWFISH1kb = 0;
+    static long timeBLOWFISH100kb = 0;
+    static long timeBLOWFISH500kb = 0;
+    static long timeBLOWFISH1mb = 0;
 
 
 
@@ -42,7 +55,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
         Button btn1MB = findViewById(R.id.btn1mb);
         Button btnchart = findViewById(R.id.btnChart);
         final TextView avgResult = findViewById(R.id.avgResult);
-        final TextView avgPreChace = findViewById(R.id.avgPreChace);
+        final TextView avgPreCache = findViewById(R.id.avgPreCache);
 
         final TextView time1KB = findViewById(R.id.timeAES1kb); //TODO: boj pa algoritem varesisht cili caktohet me intent qata me qit te e njejta view time1kb
         final TextView time100KB = findViewById(R.id.timeAES100kb);
@@ -56,8 +69,8 @@ public class EncryptionAlgorithm extends AppCompatActivity {
         algorithmTxt.setText(alg);
 
         final String _1KBfile = ReadFile.readFile("_1KBfile.txt", EncryptionAlgorithm.this);
-        final String _500KBfile = ReadFile.readFile("_500KBfile.txt", EncryptionAlgorithm.this);
         final String _100KBfile = ReadFile.readFile("_100KBfile.txt", EncryptionAlgorithm.this);
+        final String _500KBfile = ReadFile.readFile("_500KBfile.txt", EncryptionAlgorithm.this);
         final String _1MBfile = ReadFile.readFile("_1MBfile.txt", EncryptionAlgorithm.this);
 
         final long[] timeLength3DES = new long[1];
@@ -99,6 +112,8 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                           //  txt1.setText(encrypted);
                             time1KB.setText((int) timeLength3DES[0] + " milliseconds");
 
+                            time3DES1kb = timeLength3DES[0];
+
 
                         } catch (Exception e) {
                             Log.e(TAG, "3DES: " + e.getMessage());
@@ -118,7 +133,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             String decryptedData = new String(decryptedBytes );
                             time1KB.setText((int) timeLengthBLOWFISH[0] + " milliseconds");
 
-
+                            timeBLOWFISH1kb = timeLengthBLOWFISH[0];
 
                         }
                         catch(Exception e) {
@@ -148,11 +163,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                         _1kbRef.add(myPhone);
                     }
 
-                    timeAverage = average(time1KB.getText().toString(),time100KB.getText().toString(),time500KB.getText().toString(),time1MB.getText().toString());
+                    timeAverage = average(time1KB.getText().toString(),time100KB.getText().toString(),
+                            time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
 
                     if(timeAverage!=0){
-                        if(counter[0] == 1)
-                            { avgPreChace.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n"); }
+                        if(counter3DES[0] == 1 || counterAES[0] == 1 || counterBLOWFISH[0] == 1)
+                            { avgPreCache.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n"); }
                         else
                             { avgResult.setText("POST-CACHE AVERAGE: " + (int) timeAverage + " milliseconds"); }
                     }
@@ -198,6 +214,8 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             //  txt1.setText(encrypted);
                             time100KB.setText((int) timeLength3DES[0] + " milliseconds");
 
+                            time3DES100kb = timeLength3DES[0];
+
 
                         } catch (Exception e) {
                             Log.e(TAG, "3DES: " + e.getMessage());
@@ -217,6 +235,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             String decryptedData = new String(decryptedBytes );
                             time100KB.setText((int) timeLengthBLOWFISH[0] + " milliseconds");
 
+                            timeBLOWFISH100kb = timeLengthBLOWFISH[0];
 
 
                         }
@@ -248,11 +267,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     }
 
 
-                    timeAverage = average(time1KB.getText().toString(),time100KB.getText().toString(),time500KB.getText().toString(),time1MB.getText().toString());
+                    timeAverage = average(time1KB.getText().toString(),time100KB.getText().toString(),
+                            time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
 
                     if(timeAverage!=0){
-                        if(counter[0] == 1)
-                        { avgPreChace.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n"); }
+                        if(counterBLOWFISH[0] == 1)
+                        { avgPreCache.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n"); }
                         else
                         { avgResult.setText("POST-CACHE AVERAGE: " + (int) timeAverage + " milliseconds"); }
                     }
@@ -299,7 +319,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             //  txt1.setText(encrypted);
                             time500KB.setText((int) timeLength3DES[0] + " milliseconds");
 
-
+                            time3DES500kb = timeLength3DES[0];
                         } catch (Exception e) {
                             Log.e(TAG, "3DES: " + e.getMessage());
                         }
@@ -318,7 +338,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             String decryptedData = new String(decryptedBytes );
                             time500KB.setText((int) timeLengthBLOWFISH[0] + " milliseconds");
 
-
+                            timeBLOWFISH500kb = timeLengthBLOWFISH[0];
 
                         }
                         catch(Exception e) {
@@ -352,11 +372,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                timeAverage = average(time1KB.getText().toString(),time100KB.getText().toString(),time500KB.getText().toString(),time1MB.getText().toString());
+                timeAverage = average(time1KB.getText().toString(),time100KB.getText().toString(),
+                        time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
 
                 if(timeAverage!=0){
-                    if(counter[0] == 1)
-                    { avgPreChace.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n"); }
+                    if(counter3DES[0] == 1 || counterAES[0] == 1 || counterBLOWFISH[0] == 1)
+                    { avgPreCache.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n"); }
                     else
                     { avgResult.setText("POST-CACHE AVERAGE: " + (int) timeAverage + " milliseconds"); }
                 }
@@ -399,7 +420,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             //  txt1.setText(encrypted);
                             time1MB.setText((int) timeLength3DES[0] + " milliseconds");
 
-
+                            time3DES1mb = timeLength3DES[0];
                         } catch (Exception e) {
                             Log.e(TAG, "3DES: " + e.getMessage());
                         }
@@ -419,7 +440,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             time1MB.setText((int) timeLengthBLOWFISH[0] + " milliseconds");
 
 
-
+                            timeBLOWFISH1mb = timeLengthBLOWFISH[0];
                         }
                         catch(Exception e) {
                             System.out.println(e);
@@ -449,11 +470,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     }
 
 
-                    timeAverage = average(time1KB.getText().toString(),time100KB.getText().toString(),time500KB.getText().toString(),time1MB.getText().toString());
+                    timeAverage = average(time1KB.getText().toString(),time100KB.getText().toString(),
+                            time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
 
                     if(timeAverage!=0){
-                        if(counter[0] == 1)
-                        { avgPreChace.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n"); }
+                        if(counter3DES[0] == 1 || counterAES[0] == 1 || counterBLOWFISH[0] == 1)
+                        { avgPreCache.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n"); }
                         else
                         { avgResult.setText("POST-CACHE AVERAGE: " + (int) timeAverage + " milliseconds"); } //todo: nese duhet per me llogarit post cache me ekzekutu 2 her enkriptiomin
                     }
@@ -468,19 +490,23 @@ public class EncryptionAlgorithm extends AppCompatActivity {
         btnchart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myChart myChart = new myChart(timeAES1kb,timeAES100kb,timeAES100kb,timeAES1mb);
+                myChart myChart = new myChart(timeAES1kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES1kb,time3DES100kb,time3DES500kb,
+                        time3DES1mb,timeBLOWFISH1kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
                 Intent intent = new Intent(EncryptionAlgorithm.this, myChart.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
     }
-    private   long  average(String txt1kb, String txt100kb, String txt500kb, String txt1mb){
+    private   long  average(String txt1kb, String txt100kb, String txt500kb, String txt1mb, String alg){
 
 
         if(!txt1kb.equals("") && !txt100kb.equals("")&& !txt500kb.equals("") && !txt1mb.equals("")){    //TODO: pse equals e jo !=
 
-            counter[0] = counter[0] +1;
+
+            if(alg.equals("AES")){ counterAES[0] = counterAES[0] +1; }
+            else if(alg.equals("3DES")){ counter3DES[0] = counter3DES[0] +1; }
+            else{ if(alg.equals("BLOWFISH")){ counterBLOWFISH[0] = counterBLOWFISH[0] +1; }}
             long  average ;
             String time1kb = txt1kb;
             int end1 = time1kb.indexOf(" ");
