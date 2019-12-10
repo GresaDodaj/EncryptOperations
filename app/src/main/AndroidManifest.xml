@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".myChart"></activity>
+        <activity android:name=".overallAverage"></activity>
+        <activity android:name=".myChart" />
         <activity android:name=".EncryptionAlgorithm" />
         <activity android:name=".Encryption" />
         <activity android:name=".Charts" />

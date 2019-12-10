@@ -1,5 +1,6 @@
 package com.trying.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -10,9 +11,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,13 +28,13 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
     static long timeAverage = 0;
 
-    static long timeAverageAESPRE = 0;
+/*    static long timeAverageAESPRE = 0;
     static long timeAverage3DESPRE = 0;
     static long timeAverageBLOWFISHPRE = 0;
 
     static long timeAverageAESPOST = 0;
     static long timeAverage3DESPOST = 0;
-    static long timeAverageBLOWFISHPOST = 0;
+    static long timeAverageBLOWFISHPOST = 0;*/
 
     static long timeAES1kb = 0;
     static long timeAES100kb = 0;
@@ -56,6 +60,9 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
         final FirebaseFirestore database = FirebaseFirestore.getInstance();
         DocumentReference _1kbRef = database.collection("myPhone").document("_1KB");
+        final CollectionReference dbAES = database.collection("overallAverage").document("avg").collection("AES");
+        final CollectionReference db3DES = database.collection("overallAverage").document("avg").collection("3DES");
+        final CollectionReference dbBLOWFISH = database.collection("overallAverage").document("avg").collection("BLOWFISH");
 
         Button btn1KB = findViewById(R.id.btn1kb);
         Button btn100KB = findViewById(R.id.btn100kb);
@@ -109,46 +116,38 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     else if (alg.equals("3DES")){
                         try {
                             byte[] tripleKey = tripleDES.initKey();
-                            String key = (LABEL + "3DES key: " + tripleDES.byte_to_string(tripleKey));
+                            //String key = (LABEL + "3DES key: " + tripleDES.byte_to_string(tripleKey));
                             long startTime = System.nanoTime();
                             byte[] encryptResult = tripleDES.encrypt(_1KBfile.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
                             timeLength3DES[0] = (endTime - startTime) / 1000000;
-                            String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
-                            byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
-                            String data = (LABEL + "3DES: " + new String(decryptResult));
-                          //  txt1.setText(encrypted);
+                           //String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
+                           //byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
+                           // String data = (LABEL + "3DES: " + new String(decryptResult));
+                           //txt1.setText(encrypted);
                             time1KB.setText((int) timeLength3DES[0] + " milliseconds");
-
                             time3DES1kb = timeLength3DES[0];
 
-
-                        } catch (Exception e) {
-                            Log.e(TAG, "3DES: " + e.getMessage());
-                        }
+                        } catch (Exception e) { Log.e(TAG, "3DES: " + e.getMessage()); }
                     }
                     else if (alg.equals("BLOWFISH")){
                         try {
                             blowfish.generate_symetric_key();
                             byte[] text2Bytes = _1KBfile.getBytes();
                             long startTime = System.nanoTime();
-                            byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
+                            byte[] encryptedBytes = blowfish.encrypt(text2Bytes); //todo: mos e assign hiq direkt veq thirre funksionin/
                             long endTime = System.nanoTime();
                             timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
-                            String encryptedData = new String(encryptedBytes);
-                            time1KB.setText(encryptedData);
-                            byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
-                            String decryptedData = new String(decryptedBytes );
+                            //String encryptedData = new String(encryptedBytes);
+                            //time1KB.setText(encryptedData);
+                            //byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
+                            //String decryptedData = new String(decryptedBytes );
                             time1KB.setText((int) timeLengthBLOWFISH[0] + " milliseconds");
-
                             timeBLOWFISH1kb = timeLengthBLOWFISH[0];
 
                         }
-                        catch(Exception e) {
-                            System.out.println(e);
-                        }
+                        catch(Exception e) { System.out.println(e); } //todo: ma mire formulo errorin
                     }
-
 
                     int timeLength1 = (int)timeLengthAES[0];
                     int timeLength2 = (int)timeLength3DES[0];
@@ -175,6 +174,44 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
 
                     if(timeAverage!=0){
+
+                        Map<String, Object> averageDB = new HashMap<>();
+                        if(algorithmTxt.getText().toString().equals("AES"))
+                        {
+                            averageDB.put("AES",timeAverage);
+                            dbAES.add(averageDB);
+                            dbAES.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("TAG", task.getResult().size() + "");
+
+                                        int sum_aes = 0;
+                                        int  num_of_docs_aes = task.getResult().size();
+
+                                        for(int i = 0; i < num_of_docs_aes; i++){
+                                            String a = String.valueOf(task.getResult().getDocuments().get(i).get("AES"));
+                                            sum_aes += Integer.parseInt(a);
+                                        }
+                                        int avg_aes_db = sum_aes / num_of_docs_aes;
+
+
+                                    } else {
+                                        Log.d(TAG, "Error getting documents: ", task.getException());
+                                    }
+                                }
+                            });
+                        }
+                        else if(algorithmTxt.getText().toString().equals("3DES")){
+                            averageDB.put("3DES",timeAverage);
+                            db3DES.add(averageDB);
+                        }
+                        else if(algorithmTxt.getText().toString().equals("BLOWFISH")){
+                            averageDB.put("BLOWFISH",timeAverage);
+                            dbBLOWFISH.add(averageDB);
+                        }
+
+
                         if(counter3DES[0] == 1 || counterAES[0] == 1 || counterBLOWFISH[0] == 1)
                             { avgPreCache.setText("PRE-CACHE AVERAGE: "+ (int)timeAverage + " milliseconds\n"); }
                         else
@@ -547,6 +584,5 @@ public class EncryptionAlgorithm extends AppCompatActivity {
             return 0;
 
     }
-
 
 }
