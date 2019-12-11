@@ -1,24 +1,13 @@
 package com.trying.myapplication;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "Gresa";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
      /*  Intent intent = new Intent(MainActivity.this, EncryptionAlgorithm.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);*/
-
 
         showChart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,15 +68,8 @@ public class MainActivity extends AppCompatActivity {
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     break;
-                    //Intent intent = new Intent(MainActivity.this, selectFileSize.class);
-
             }
-
-
         }
     };
-
-
-
 
 }
