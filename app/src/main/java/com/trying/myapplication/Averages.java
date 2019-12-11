@@ -91,11 +91,10 @@ public class Averages extends AppCompatActivity {
 
 
                     final Description description = new Description();
-                    description.setText("Compared to overall average");
+                    description.setText("");
                     description.setTextColor(getColor(R.color.firstBar));
                     description.setTextSize(10);
                     chart.setDescription(description);
-
                    // barDataSet1[0] = new BarDataSet(barEntries1((int) db_aes,(int)db_3des,(int)db_blowfish), "Average");
                     barDataSet1[0].setColor(getColor(R.color.firstBar));
                   //  barDataSet2[0] = new BarDataSet(barEntries2((int)a,(int)b,(int)c), "My Phone");
@@ -105,14 +104,13 @@ public class Averages extends AppCompatActivity {
                     BarData data = new BarData(barDataSet1[0], barDataSet2[0]);
 
 
-
                     chart.setData(data);
                     float barSpace = 0.07f;
-                    float groupSpace = 0.31f;
+                    float groupSpace = 0.3f;
                     data.setBarWidth(0.27f);
                     chart.getXAxis().setAxisMinimum(0);
                     chart.getXAxis().setAxisMaximum(0 + chart.getBarData().getGroupWidth(groupSpace, barSpace) * 3); //minimum+ chart data *number of bars
-                    chart.getAxisLeft().setAxisMinimum(0);
+                    //chart.getAxisLeft().setAxisMinimum(0);
                     chart.groupBars(0, groupSpace, barSpace); // me i grupu
 
                     final String[] files = new String[]{"AES", "3DES", "BLOWFISH"};
@@ -126,7 +124,7 @@ public class Averages extends AppCompatActivity {
                     chart.setDrawBorders(true);
 
                     chart.setDragEnabled(false);
-                    chart.setVisibleXRangeMaximum(3);
+                    chart.setVisibleXRangeMaximum(3); //todo: lookup
                     chart.setDoubleTapToZoomEnabled(false);
                     //chart.setScaleXEnabled(false);
                     chart.setScaleEnabled(false);
@@ -135,6 +133,11 @@ public class Averages extends AppCompatActivity {
                     legend.setXEntrySpace(15);
                     legend.setFormToTextSpace(10);
 
+
+
+                    //chart.setDrawGridBackground(false);//If enabled, the background rectangle behind the chart drawing-area will be drawn.
+                    chart.setDrawValueAboveBar(true); //If set to true, all values are drawn above their bars, instead of below their top.
+                    chart.notifyDataSetChanged();
                     chart.invalidate();
 
 
