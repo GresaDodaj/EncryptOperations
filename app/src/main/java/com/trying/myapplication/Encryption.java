@@ -15,7 +15,6 @@ public class Encryption extends AppCompatActivity {
 
 
         LinearLayout btnAES = findViewById(R.id.btnAES);
-        final String _1KBfile = ReadFile.readFile("_1KBfile.txt", Encryption.this);
         final String _5KBfile = ReadFile.readFile("_5KBfile.txt", Encryption.this);
         final String _10KBfile = ReadFile.readFile("_10KBfile.txt", Encryption.this);
         final String _50KBfile = ReadFile.readFile("_500KBfile.txt", Encryption.this);
@@ -29,7 +28,7 @@ public class Encryption extends AppCompatActivity {
             /*    long startTime = System.nanoTime();
                 String text3 = null;
                 try {
-                    text3 = AES.encrypt(_1KBfile);
+                    text3 = AES.encrypt(_5KBfile);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
