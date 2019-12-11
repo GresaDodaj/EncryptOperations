@@ -16,8 +16,7 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         final ProgressBar progressBar = findViewById(R.id.progressBar);
-        /*progressBar.getProgressDrawable().setColorFilter(
-                Color.GRAY, android.graphics.PorterDuff.Mode.SRC_IN);*/
+
         progressBar.setBackgroundColor(Color.TRANSPARENT);
         new Handler().postDelayed(new Runnable() {
 

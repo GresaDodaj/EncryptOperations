@@ -45,7 +45,7 @@
                         android:id="@+id/btnAES1"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:background="@drawable/security1"
+                        android:background="@drawable/lock1"
                         android:contentDescription="@string/todo"
                         android:padding="10dp"
                         android:src="@drawable/ic_attach_money_black_24dp" />
@@ -157,7 +157,7 @@
                     <ImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:background="@drawable/lock2"
+                        android:background="@drawable/lock1"
                         android:contentDescription="@string/todo"
                         android:padding="10dp"
                         android:src="@drawable/ic_attach_money_black_24dp" />
@@ -207,7 +207,7 @@
                     <ImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:background="@drawable/lock3"
+                        android:background="@drawable/lock1"
                         android:contentDescription="@string/todo"
                         android:padding="10dp"
                         android:src="@drawable/ic_attach_money_black_24dp" />
