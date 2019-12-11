@@ -40,6 +40,7 @@
                 android:background="#F8F9FA"
                 android:clickable="true"
                 android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -55,8 +56,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:fontFamily="@font/abeezee"
                     android:shadowColor="#00FFFDFD"
-                    android:text="show my average"
+                    android:text="@string/showmyaverage"
                     android:textAllCaps="true"
                     android:textColor="#000000"
                     android:textColorHint="#050505"
@@ -71,6 +73,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/abeezee"
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="@string/todooo"

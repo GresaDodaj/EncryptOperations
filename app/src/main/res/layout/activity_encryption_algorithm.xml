@@ -38,7 +38,8 @@
                     <TextView
 
                         android:layout_width="60dp"
-                        android:background="#5B2979FF"
+                        android:background="#AB134561"
+                        android:fontFamily="@font/abeezee"
                         android:padding="3dip"
                         android:textColor="#000000"
                         android:textSize="12sp"
@@ -47,8 +48,9 @@
 
                     <TextView
 
-                        android:layout_width="200dp"
-                        android:background="#5B2979FF"
+                        android:width="100dp"
+                        android:background="#AB134561"
+                        android:fontFamily="@font/abeezee"
                         android:padding="3dip"
                         android:text="@string/encryption_time"
                         android:textColor="#000000"
@@ -57,7 +59,8 @@
 
                     <TextView
                         android:layout_width="120dp"
-                        android:background="#5B2979FF"
+                        android:width="90dip"
+                        android:background="#AB134561"
                         android:padding="3dip"
                         android:text=""
                         android:textColor="#000000"
@@ -73,6 +76,7 @@
                     <TextView
 
                         android:background="@drawable/cells"
+                        android:fontFamily="@font/abeezee"
                         android:padding="3dip"
                         android:text="@string/_10kb"
                         android:textAllCaps="true"
@@ -81,7 +85,9 @@
                     <TextView
 
                         android:id="@+id/timeAES10kb"
+                        android:width="100dp"
                         android:background="@drawable/cells"
+                        android:fontFamily="@font/abeezee"
                         android:padding="3dip" />
 
                     <Button
@@ -89,7 +95,11 @@
                         android:id="@+id/btn10kb"
                         android:layout_width="120dp"
                         android:layout_height="match_parent"
+                        android:width="90dip"
                         android:background="@drawable/cells"
+                        android:fontFamily="@font/abeezee"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:maxWidth="100dip"
                         android:padding="3dip"
                         android:text="@string/encrypt"
                         android:textAllCaps="false"
@@ -106,6 +116,7 @@
                     <TextView
 
                         android:background="@drawable/cells"
+                        android:fontFamily="@font/abeezee"
                         android:padding="3dip"
                         android:text="@string/_100kb"
                         android:textAllCaps="true"
@@ -114,7 +125,9 @@
                     <TextView
 
                         android:id="@+id/timeAES100kb"
+                        android:width="100dp"
                         android:background="@drawable/cells"
+                        android:fontFamily="@font/abeezee"
                         android:padding="3dip" />
 
 
@@ -123,7 +136,11 @@
                         android:id="@+id/btn100kb"
                         android:layout_width="103dp"
                         android:layout_height="match_parent"
+                        android:width="90dip"
                         android:background="@drawable/cells"
+                        android:fontFamily="@font/abeezee"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:maxWidth="100dip"
                         android:padding="3dip"
                         android:text="@string/encrypt"
                         android:textAllCaps="false"
@@ -138,6 +155,7 @@
                     <TextView
 
                         android:background="@drawable/cells"
+                        android:fontFamily="@font/abeezee"
                         android:padding="3dip"
                         android:text="@string/_500kb"
                         android:textAllCaps="true"
@@ -146,7 +164,9 @@
                     <TextView
 
                         android:id="@+id/timeAES500kb"
+                        android:width="100dp"
                         android:background="@drawable/cells"
+                        android:fontFamily="@font/abeezee"
                         android:padding="3dip" />
 
                     <Button
@@ -154,7 +174,11 @@
                         android:id="@+id/btn500kb"
                         android:layout_width="103dp"
                         android:layout_height="match_parent"
+                        android:width="90dip"
                         android:background="@drawable/cells"
+                        android:fontFamily="@font/abeezee"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:maxWidth="100dip"
                         android:padding="3dip"
                         android:text="@string/encrypt"
                         android:textAllCaps="false"
@@ -169,6 +193,7 @@
                     <TextView
 
                         android:background="@drawable/cells"
+                        android:fontFamily="@font/abeezee"
                         android:padding="3dip"
                         android:text="@string/_1mb"
                         android:textAllCaps="true"
@@ -177,7 +202,9 @@
                     <TextView
 
                         android:id="@+id/timeAES1mb"
+                        android:width="100dp"
                         android:background="@drawable/cells"
+                        android:fontFamily="@font/abeezee"
                         android:padding="3dip" />
 
                     <Button
@@ -185,7 +212,11 @@
                         android:id="@+id/btn1mb"
                         android:layout_width="103dp"
                         android:layout_height="match_parent"
+                        android:width="90dip"
                         android:background="@drawable/cells"
+                        android:fontFamily="@font/abeezee"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:maxWidth="100dip"
                         android:padding="3dip"
                         android:text="@string/encrypt"
                         android:textAllCaps="false"
@@ -198,7 +229,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="118dp"
                 android:layout_gravity="bottom"
-                android:background="#5B2979FF"
+                android:background="#AB134561"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
@@ -209,7 +240,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/andada"
+                    android:fontFamily="@font/abeezee"
                     android:shadowColor="#5BFFFFFF"
                     android:text="@string/aes"
                     android:textColor="#030303"
@@ -236,6 +267,7 @@
                     android:id="@+id/avgResult"
                     android:layout_width="310dp"
                     android:layout_height="26dp"
+                    android:fontFamily="@font/abeezee"
                     android:gravity="center"
                     android:padding="5dp"
                     android:shadowColor="#5BFFFFFF"
@@ -249,7 +281,12 @@
                     android:id="@+id/btnChart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#C6F8F9FA"
+                    android:background="#A1F8F9FA"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:fontFamily="@font/abeezee"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:text="@string/show_chart" />
 
             </LinearLayout>

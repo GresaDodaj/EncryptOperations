@@ -30,7 +30,6 @@
                 android:layout_height="190dp"
                 android:layout_margin="10dp"
                 android:clickable="true"
-                android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground">
 
                 <LinearLayout
@@ -38,6 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#F8F9FA"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -54,7 +54,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:fontFamily="@font/andada"
+                        android:fontFamily="@font/abeezee"
                         android:shadowColor="#5BFFFFFF"
                         android:text="@string/aes"
                         android:textColor="#030303"
@@ -68,6 +68,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/abeezee"
                         android:gravity="center"
                         android:padding="5dp"
                         android:shadowColor="#5BFFFFFF"
@@ -90,8 +91,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#F8F9FA"
+                    android:focusableInTouchMode="false"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:touchscreenBlocksFocus="false">
 
                     <ImageView
                         android:id="@+id/btnDES1"
@@ -106,7 +110,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:fontFamily="@font/andada"
+                        android:fontFamily="@font/abeezee"
                         android:shadowColor="#5BFFFFFF"
                         android:text="@string/des"
                         android:textColor="#030303"
@@ -120,6 +124,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/abeezee"
                         android:gravity="center"
                         android:padding="5dp"
                         android:shadowColor="#5BFFFFFF"
@@ -151,6 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#F8F9FA"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -166,6 +172,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:fontFamily="@font/abeezee"
                         android:shadowColor="#5BFFFFFF"
                         android:text="@string/_3des"
                         android:textColor="#030303"
@@ -179,6 +186,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/abeezee"
                         android:gravity="center"
                         android:padding="5dp"
                         android:shadowColor="#5BFFFFFF"
@@ -193,7 +201,6 @@
                 android:layout_height="190dp"
                 android:layout_margin="10dp"
                 android:clickable="true"
-                android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground">
 
                 <LinearLayout
@@ -201,6 +208,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#F8F9FA"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -216,7 +224,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:fontFamily="@font/andada"
+                        android:fontFamily="@font/abeezee"
                         android:shadowColor="#5BFFFFFF"
                         android:text="@string/blowfish"
                         android:textColor="#030303"
@@ -231,6 +239,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/abeezee"
                         android:gravity="center"
                         android:padding="5dp"
                         android:shadowColor="#5BFFFFFF"
@@ -255,7 +264,6 @@
                 android:layout_height="150dp"
                 android:layout_margin="10dp"
                 android:clickable="true"
-                android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground">
 
                 <LinearLayout
@@ -265,9 +273,9 @@
                     android:layout_height="match_parent"
                     android:background="#F8F9FA"
                     android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:focusable="true">
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="64dp"
@@ -281,6 +289,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:fontFamily="@font/abeezee"
                         android:shadowColor="#00FFFDFD"
                         android:text="@string/show_averages"
                         android:textAllCaps="true"
@@ -297,6 +306,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/abeezee"
                         android:gravity="center"
                         android:padding="5dp"
                         android:text="@string/todooo"
