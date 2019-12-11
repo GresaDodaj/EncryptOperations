@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
@@ -44,15 +47,10 @@ public class Averages extends AppCompatActivity {
         this.a = a;
         this.b = b;
         this.c = c;
-
-
     }
-
 
     private static final String TAG = "TAG" ;
 
-
-    static String aes ;
     static int db_aes;
     static int db_3des;
     static int db_blowfish;
@@ -64,6 +62,8 @@ public class Averages extends AppCompatActivity {
         setContentView(R.layout.activity_overall_average);
 
         final BarChart chart = findViewById(R.id.groupBarChart);
+        LinearLayout showMyChart = findViewById(R.id.showMyChart);
+
 
         final FirebaseFirestore database = FirebaseFirestore.getInstance();
 
@@ -91,14 +91,14 @@ public class Averages extends AppCompatActivity {
 
 
                     final Description description = new Description();
-                    description.setText("Encryption");
+                    description.setText("Compared to overall average");
                     description.setTextColor(getColor(R.color.firstBar));
                     description.setTextSize(10);
                     chart.setDescription(description);
 
-                    barDataSet1[0] = new BarDataSet(barEntries1((int) db_aes,(int)db_3des,(int)db_blowfish), "Average");
+                   // barDataSet1[0] = new BarDataSet(barEntries1((int) db_aes,(int)db_3des,(int)db_blowfish), "Average");
                     barDataSet1[0].setColor(getColor(R.color.firstBar));
-                    barDataSet2[0] = new BarDataSet(barEntries2((int)a,(int)b,(int)c), "My Phone");
+                  //  barDataSet2[0] = new BarDataSet(barEntries2((int)a,(int)b,(int)c), "My Phone");
                     barDataSet2[0].setColor(getColor(R.color.secondBar));
 
 
@@ -112,7 +112,7 @@ public class Averages extends AppCompatActivity {
                     data.setBarWidth(0.27f);
                     chart.getXAxis().setAxisMinimum(0);
                     chart.getXAxis().setAxisMaximum(0 + chart.getBarData().getGroupWidth(groupSpace, barSpace) * 3); //minimum+ chart data *number of bars
-                    //chart.getAxisLeft().setAxisMinimum(0);
+                    chart.getAxisLeft().setAxisMinimum(0);
                     chart.groupBars(0, groupSpace, barSpace); // me i grupu
 
                     final String[] files = new String[]{"AES", "3DES", "BLOWFISH"};
@@ -143,6 +143,15 @@ public class Averages extends AppCompatActivity {
         });
 
 
+        showMyChart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Averages.this, myChart.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
 
 
 

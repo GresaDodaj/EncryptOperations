@@ -45,7 +45,7 @@
                         android:id="@+id/btnAES1"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:background="@drawable/cipher_encryption"
+                        android:background="@drawable/security1"
                         android:contentDescription="@string/todo"
                         android:padding="10dp"
                         android:src="@drawable/ic_attach_money_black_24dp" />
@@ -97,7 +97,7 @@
                         android:id="@+id/btnDES1"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:background="@drawable/cipher_encryption"
+                        android:background="@drawable/lock1"
                         android:contentDescription="@string/todo"
                         android:padding="10dp"
                         android:src="@drawable/ic_attach_money_black_24dp" />
@@ -157,7 +157,7 @@
                     <ImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:background="@drawable/cipher_encryption"
+                        android:background="@drawable/lock2"
                         android:contentDescription="@string/todo"
                         android:padding="10dp"
                         android:src="@drawable/ic_attach_money_black_24dp" />
@@ -174,7 +174,6 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_margin="10dp"
                         android:background="@color/lightgray" />
 
                     <TextView
@@ -208,7 +207,7 @@
                     <ImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:background="@drawable/cipher_encryption"
+                        android:background="@drawable/lock3"
                         android:contentDescription="@string/todo"
                         android:padding="10dp"
                         android:src="@drawable/ic_attach_money_black_24dp" />
@@ -261,15 +260,19 @@
 
                 <LinearLayout
 
+                    android:id="@+id/showChart"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="#F8F9FA"
+                    android:clickable="true"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:focusable="true">
 
                     <ImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:background="@drawable/circlebackgroundpurple"
+                        android:background="@drawable/chart_icon"
                         android:contentDescription="@string/todo"
                         android:padding="10dp"
                         android:src="@drawable/ic_attach_money_black_24dp" />
@@ -279,7 +282,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:shadowColor="#00FFFDFD"
-                        android:text="@string/todo"
+                        android:text="@string/show_averages"
+                        android:textAllCaps="true"
                         android:textColor="#000000"
                         android:textColorHint="#050505"
                         android:textStyle="bold" />

@@ -1,3 +1,4 @@
+/*
 package com.trying.myapplication;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -383,22 +384,26 @@ public class Charts extends AppCompatActivity {
         });
 
 
-     /*   Description description = new Description();
+     */
+/*   Description description = new Description();
         description.setText(aes);
         description.setTextColor(getColor(R.color.firstBar));
         description.setTextSize(10);
-        chart.setDescription(description);*/
+        chart.setDescription(description);*//*
+
         chart.setVisibleXRange(10,10);
 
         chart.setDrawGridBackground(false); ///nuk po heket gridi
         chart.setDrawBorders(true);
 
-     /* YAxis leftAxis = chart.getAxisLeft();
+     */
+/* YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setLabelCount(8, true);
         leftAxis.setGranularityEnabled(true);
         leftAxis.setGranularity(100);
         //chart.setBorderWidth(2);
-        //chart.setBorderColor(Color.BLUE);*/
+        //chart.setBorderColor(Color.BLUE);*//*
+
 
 
         chart.setDragEnabled(false);
@@ -472,3 +477,4 @@ public class Charts extends AppCompatActivity {
     }
 }
 
+*/

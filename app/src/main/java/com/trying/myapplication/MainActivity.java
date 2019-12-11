@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout desButton = findViewById(R.id.btnDES);
         LinearLayout _3desButton = findViewById(R.id.btn3DES);
         LinearLayout blowfishButton = findViewById(R.id.btnBlowfish);
+        LinearLayout showChart = findViewById(R.id.showChart);
+
         aesButton.setOnClickListener(onClickListener);
         desButton.setOnClickListener(onClickListener);
         _3desButton.setOnClickListener(onClickListener);
@@ -36,6 +38,18 @@ public class MainActivity extends AppCompatActivity {
      /*  Intent intent = new Intent(MainActivity.this, EncryptionAlgorithm.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);*/
+
+
+        showChart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this, Averages.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+
     }
     //e kom deklaru qe me thirr te njejten kalse prej krejt butonave.. ne vend se me shkru des.setOnClickListener(new View.OnClickListener() {
     //            @Override
@@ -70,8 +84,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
+
         }
     };
+
+
 
 
 }

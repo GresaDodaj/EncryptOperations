@@ -21,19 +21,7 @@ public class myChart extends AppCompatActivity {
     public  myChart(){
 
     }
-
-    static long a;
-    static long b;
-    static long c;
-    static long d;
-    static long e;
-    static long f;
-    static long g;
-    static long h;
-    static long i;
-    static long j;
-    static long k;
-    static long l;
+    static long a,b,c,d,e,f,g,h,i,j,k,l;
     static long m;
     static long n;
     static long o;
@@ -65,7 +53,6 @@ public class myChart extends AppCompatActivity {
         setContentView(R.layout.activity_my_chart);
 
         BarChart chart = findViewById(R.id.groupBarChart);
-
 
 
         final BarDataSet[] barDataSet1 = {new BarDataSet(barEntries1((int)a,(int)b,(int)c,(int)d), "AES")};

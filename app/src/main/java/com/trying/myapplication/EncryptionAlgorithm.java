@@ -62,9 +62,9 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
         final FirebaseFirestore database = FirebaseFirestore.getInstance();
         //DocumentReference _1kbRef = database.collection("myPhone").document("_1KB");
-        final CollectionReference dbAES = database.collection("Averages").document("avg").collection("AES");
-        final CollectionReference db3DES = database.collection("Averages").document("avg").collection("3DES");
-        final CollectionReference dbBLOWFISH = database.collection("Averages").document("avg").collection("BLOWFISH");
+        final CollectionReference dbAES = database.collection("overallAverage").document("avg").collection("AES");
+        final CollectionReference db3DES = database.collection("overallAverage").document("avg").collection("3DES");
+        final CollectionReference dbBLOWFISH = database.collection("overallAverage").document("avg").collection("BLOWFISH");
         final CollectionReference db_1KB_AES = database.collection("myPhone").document("_1KB").collection("AES");
         final CollectionReference db_1KB_3DES = database.collection("myPhone").document("_1KB").collection("3DES");
         final CollectionReference db_1KB_BLOWFISH = database.collection("myPhone").document("_1KB").collection("BLOWFISH");

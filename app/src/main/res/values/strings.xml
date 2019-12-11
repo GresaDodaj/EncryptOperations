@@ -20,4 +20,8 @@
     <string name="encrypt">ENCRYPT</string>
     <string name="encryption_time">Encryption Time</string>
     <string name="_500kb">500kb</string>
+    <string name="show_averages">show averages</string>
+    <string name="average">AVERAGE</string>
+    <string name="show_chart">show chart</string>
+    <string name="show_my_average">show_my_average</string>
 </resources>

@@ -239,7 +239,7 @@
                     android:gravity="center"
                     android:padding="5dp"
                     android:shadowColor="#5BFFFFFF"
-                    android:text="AVERAGE"
+                    android:text="@string/average"
                     android:textAllCaps="false"
                     android:textColor="#030303"
                     android:textSize="12sp"
@@ -249,7 +249,8 @@
                     android:id="@+id/btnChart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Button" />
+                    android:background="#C6F8F9FA"
+                    android:text="@string/show_chart" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
