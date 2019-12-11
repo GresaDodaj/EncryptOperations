@@ -1,3 +1,4 @@
+/*
 package com.trying.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +30,6 @@ public class selectFileSize extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_file_size);
-        Button btn5KB = findViewById(R.id.btn5KB);
         Button btn10KB = findViewById(R.id.btn10KB);
         Button btn500KB = findViewById(R.id.btn500KB);
         Button btn100KB = findViewById(R.id.btn100KB);
@@ -37,7 +37,6 @@ public class selectFileSize extends AppCompatActivity {
         Button btnEncrypt = findViewById(R.id.btnEncrypt);
         final TextView txt2 = findViewById(R.id.txt2);
         final TextView txt1 = findViewById(R.id.txtView);
-        final String _5KBfile = ReadFile.readFile("_5KBfile.txt", selectFileSize.this);
         final String _10KBfile = ReadFile.readFile("_10KBfile.txt", selectFileSize.this);
         final String _500KBfile = ReadFile.readFile("_500KBfile.txt", selectFileSize.this);
         final String _100KBfile = ReadFile.readFile("_100KBfile.txt", selectFileSize.this);
@@ -56,13 +55,13 @@ public class selectFileSize extends AppCompatActivity {
         final DocumentReference D = database.collection("Averages").document(myId);
         final DocumentReference overallAvg = database.collection("Averages").document("avg");
 
-       // file = new File(Environment.getExternalStorageDirectory(), "_5KBfile.txt");
+       // file = new File(Environment.getExternalStorageDirectory(), "_10KBfile.txt");
         txt2.setMovementMethod(new ScrollingMovementMethod());
         final Map<String, Object> data = new HashMap<>();
 
 
 
-        btn5KB.setOnClickListener(new View.OnClickListener() {
+        btn10KB.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
@@ -70,7 +69,7 @@ public class selectFileSize extends AppCompatActivity {
                 try {
                     if(alg .equals("AES")) {
                         long startTime = System.nanoTime();
-                        String text3 = AES.encrypt(_5KBfile);
+                        String text3 = AES.encrypt(_10KBfile);
                         //String text4 = AES.decrypt(text3);
                         long endTime = System.nanoTime();
                         //time of the execution in nanoseconds/1000000 = time in milliseconds
@@ -87,7 +86,7 @@ public class selectFileSize extends AppCompatActivity {
                             byte[] tripleKey = tripleDES.initKey();
                             String key = (LABEL + "3DES key: " + tripleDES.byte_to_string(tripleKey));
                             long startTime = System.nanoTime();
-                            byte[] encryptResult = tripleDES.encrypt(_5KBfile.getBytes(), tripleKey);
+                            byte[] encryptResult = tripleDES.encrypt(_10KBfile.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
                             timeLength3DES[0] = (endTime - startTime) / 1000000;
                             String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
@@ -105,7 +104,7 @@ public class selectFileSize extends AppCompatActivity {
                     else if (alg.equals("BLOWFISH")){
                         try {
                             blowfish.generate_symetric_key();
-                            byte[] text2Bytes = _5KBfile.getBytes();
+                            byte[] text2Bytes = _10KBfile.getBytes();
                             long startTime = System.nanoTime();
                             byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
                             long endTime = System.nanoTime();
@@ -136,8 +135,8 @@ public class selectFileSize extends AppCompatActivity {
                         myPhone.put("3DES", timeLength2);
                     if(timeLength3!=0)
                         myPhone.put("BLOWFISH", timeLength3);
-                    DocumentReference _5kbRef = database.collection("myPhone").document("_5KB");
-                    _5kbRef.update(myPhone);
+                    DocumentReference _10kbRef = database.collection("myPhone").document("_10KB");
+                    _10kbRef.update(myPhone);
 
                     int average_AES = (int) averageAES[0]/2;
                     int average_3DES = (int)average3DES[0]/2;
@@ -558,7 +557,8 @@ public class selectFileSize extends AppCompatActivity {
 
                 try {
 
-                    /*int count = 0;
+                    */
+/*int count = 0;
 
 
                     String id = null;
@@ -574,7 +574,8 @@ public class selectFileSize extends AppCompatActivity {
                         data.put("BLOWFISH", averageBLOWFISH[0]);
 
                     database.collection("Averages").document(id).update(data);
-                    count += 1;*/
+                    count += 1;*//*
+
 
 
 
@@ -615,3 +616,4 @@ public class selectFileSize extends AppCompatActivity {
 
 
 
+*/

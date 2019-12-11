@@ -86,7 +86,7 @@ public class myChart extends AppCompatActivity {
 
 
 
-        final String[] files = new String[]{"5KB", "100KB", "500kb", "1MB"};
+        final String[] files = new String[]{"10KB", "100KB", "500kb", "1MB"};
         XAxis xAxis = chart.getXAxis();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(files));
         xAxis.setCenterAxisLabels(true);//me i vendos labels poshte ne center

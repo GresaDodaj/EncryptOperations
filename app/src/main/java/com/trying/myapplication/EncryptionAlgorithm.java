@@ -38,17 +38,17 @@ public class EncryptionAlgorithm extends AppCompatActivity {
     static long timeAverage3DESPOST = 0;
     static long timeAverageBLOWFISHPOST = 0;*/
 
-    static long timeAES5kb = 0;
+    static long timeAES10kb = 0;
     static long timeAES100kb = 0;
     static long timeAES500kb = 0;
     static long timeAES1mb = 0;
 
-    static long time3DES5kb = 0;
+    static long time3DES10kb = 0;
     static long time3DES100kb = 0;
     static long time3DES500kb = 0;
     static long time3DES1mb = 0;
 
-    static long timeBLOWFISH5kb = 0;
+    static long timeBLOWFISH10kb = 0;
     static long timeBLOWFISH100kb = 0;
     static long timeBLOWFISH500kb = 0;
     static long timeBLOWFISH1mb = 0;
@@ -62,19 +62,19 @@ public class EncryptionAlgorithm extends AppCompatActivity {
         setContentView(R.layout.activity_encryption_algorithm);
 
         final FirebaseFirestore database = FirebaseFirestore.getInstance();
-        //DocumentReference _5kbRef = database.collection("myPhone").document("_5KB");
+        //DocumentReference _10kbRef = database.collection("myPhone").document("_10KB");
         final CollectionReference dbAES = database.collection("overallAverage").document("avg").collection("AES");
         final CollectionReference db3DES = database.collection("overallAverage").document("avg").collection("3DES");
         final CollectionReference dbBLOWFISH = database.collection("overallAverage").document("avg").collection("BLOWFISH");
-        final CollectionReference db_5KB_AES = database.collection("myPhone").document("_5KB").collection("AES");
-        final CollectionReference db_5KB_3DES = database.collection("myPhone").document("_5KB").collection("3DES");
-        final CollectionReference db_5KB_BLOWFISH = database.collection("myPhone").document("_5KB").collection("BLOWFISH");
+        final CollectionReference db_10KB_AES = database.collection("myPhone").document("_10KB").collection("AES");
+        final CollectionReference db_10KB_3DES = database.collection("myPhone").document("_10KB").collection("3DES");
+        final CollectionReference db_10KB_BLOWFISH = database.collection("myPhone").document("_10KB").collection("BLOWFISH");
         final DocumentReference db_average_aes = database.collection("Average_Collection").document("AES");
         final DocumentReference db_average_3des = database.collection("Average_Collection").document("3DES");
         final DocumentReference db_average_blowfish = database.collection("Average_Collection").document("BLOWFISH");
 
 
-        Button btn5KB = findViewById(R.id.btn5kb);
+        Button btn10KB = findViewById(R.id.btn10kb);
         Button btn100KB = findViewById(R.id.btn100kb);
         Button btn500KB = findViewById(R.id.btn500kb);
         Button btn1MB = findViewById(R.id.btn1mb);
@@ -82,7 +82,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
         final TextView avgResult = findViewById(R.id.avgResult);
         final TextView avgPreCache = findViewById(R.id.avgPreCache);
 
-        final TextView time5KB = findViewById(R.id.timeAES5kb); //TODO: boj pa algoritem varesisht cili caktohet me intent qata me qit te e njejta view time5kb
+        final TextView time10KB = findViewById(R.id.timeAES10kb); //TODO: boj pa algoritem varesisht cili caktohet me intent qata me qit te e njejta view time10kb
         final TextView time100KB = findViewById(R.id.timeAES100kb);
         final TextView time500KB = findViewById(R.id.timeAES500kb);
         final TextView time1MB = findViewById(R.id.timeAES1mb);
@@ -93,7 +93,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
         final TextView algorithmTxt = findViewById(R.id.algorithmTxt);
         algorithmTxt.setText(alg);
 
-        final String _5KBfile = ReadFile.readFile("_5KBfile.txt", EncryptionAlgorithm.this);
+        final String _10KBfile = ReadFile.readFile("_10KBfile.txt", EncryptionAlgorithm.this);
         final String _100KBfile = ReadFile.readFile("_100KBfile.txt", EncryptionAlgorithm.this);
         final String _500KBfile = ReadFile.readFile("_500KBfile.txt", EncryptionAlgorithm.this);
         final String _1MBfile = ReadFile.readFile("_1MBfile.txt", EncryptionAlgorithm.this);
@@ -105,7 +105,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
 
 
-        btn5KB.setOnClickListener(new View.OnClickListener() {
+        btn10KB.setOnClickListener(new View.OnClickListener() {
             private static final String TAG = "--";
             @SuppressLint("SetTextI18n")
             @Override
@@ -113,14 +113,14 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                 try {
                     if(alg .equals("AES")) {
                         long startTime = System.nanoTime();
-                        //String text3 = AES.encrypt(_5KBfile);
+                        String text3 = AES.encrypt(_10KBfile);
                         long endTime = System.nanoTime();
                         //time of the execution in nanoseconds/1000000 = time in milliseconds
                         timeLengthAES[0] = (endTime - startTime) / 1000000;
-                        time5KB.setText((int) timeLengthAES[0] + " milliseconds");
-                        timeAES5kb = timeLengthAES[0];
-                        myChart myChart = new myChart(timeAES5kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES5kb,time3DES100kb,time3DES500kb,
-                                time3DES1mb,timeBLOWFISH5kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                        time10KB.setText((int) timeLengthAES[0] + " milliseconds");
+                        timeAES10kb = timeLengthAES[0];
+                        myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                                time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
 
                     }
                     else if (alg.equals("3DES")){
@@ -128,36 +128,36 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             byte[] tripleKey = tripleDES.initKey();
                             //String key = (LABEL + "3DES key: " + tripleDES.byte_to_string(tripleKey));
                             long startTime = System.nanoTime();
-                            byte[] encryptResult = tripleDES.encrypt(_5KBfile.getBytes(), tripleKey);
+                            byte[] encryptResult = tripleDES.encrypt(_10KBfile.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
                             timeLength3DES[0] = (endTime - startTime) / 1000000;
                            //String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
                            //byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
                            // String data = (LABEL + "3DES: " + new String(decryptResult));
                            //txt1.setText(encrypted);
-                            time5KB.setText((int) timeLength3DES[0] + " milliseconds");
-                            time3DES5kb = timeLength3DES[0];
-                            myChart myChart = new myChart(timeAES5kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES5kb,time3DES100kb,time3DES500kb,
-                                    time3DES1mb,timeBLOWFISH5kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                            time10KB.setText((int) timeLength3DES[0] + " milliseconds");
+                            time3DES10kb = timeLength3DES[0];
+                            myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                                    time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
 
                         } catch (Exception e) { Log.e(TAG, "3DES: " + e.getMessage()); }
                     }
                     else if (alg.equals("BLOWFISH")){
                         try {
                             blowfish.generate_symetric_key();
-                            byte[] text2Bytes = _5KBfile.getBytes();
+                            byte[] text2Bytes = _10KBfile.getBytes();
                             long startTime = System.nanoTime();
                             byte[] encryptedBytes = blowfish.encrypt(text2Bytes); //todo: mos e assign hiq direkt veq thirre funksionin/
                             long endTime = System.nanoTime();
                             timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
                             //String encryptedData = new String(encryptedBytes);
-                            //time5KB.setText(encryptedData);
+                            //time10KB.setText(encryptedData);
                             //byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
                             //String decryptedData = new String(decryptedBytes );
-                            time5KB.setText((int) timeLengthBLOWFISH[0] + " milliseconds");
-                            timeBLOWFISH5kb = timeLengthBLOWFISH[0];
-                            myChart myChart = new myChart(timeAES5kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES5kb,time3DES100kb,time3DES500kb,
-                                    time3DES1mb,timeBLOWFISH5kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                            time10KB.setText((int) timeLengthBLOWFISH[0] + " milliseconds");
+                            timeBLOWFISH10kb = timeLengthBLOWFISH[0];
+                            myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                                    time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
 
                         }
                         catch(Exception e) { System.out.println(e); } //todo: ma mire formulo errorin
@@ -170,18 +170,18 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     if(timeLength1!=0) // qe mos me u bo update 0 te dhanat qe jon ne databaze kur klikohet najnjo prej tjerave algoritme
                     {
                         myPhone.put("AES", timeLength1);
-                        db_5KB_AES.add(myPhone);
+                        db_10KB_AES.add(myPhone);
                     }
                     if(timeLength2!=0) {
                         myPhone.put("3DES", timeLength2);
-                        db_5KB_3DES.add(myPhone);
+                        db_10KB_3DES.add(myPhone);
                     }
                     if(timeLength3!=0){
                         myPhone.put("BLOWFISH", timeLength3);
-                        db_5KB_BLOWFISH.add(myPhone);
+                        db_10KB_BLOWFISH.add(myPhone);
                     }
 
-                    timeAverage = average(time5KB.getText().toString(),time100KB.getText().toString(),
+                    timeAverage = average(time10KB.getText().toString(),time100KB.getText().toString(),
                             time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
 
                     if(timeAverage!=0){
@@ -301,8 +301,8 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                         //txt1.setText(text3);
                         time100KB.setText((int) timeLengthAES[0] + " milliseconds");
                         timeAES100kb = timeLengthAES[0];
-                        myChart myChart = new myChart(timeAES5kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES5kb,time3DES100kb,time3DES500kb,
-                                time3DES1mb,timeBLOWFISH5kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                        myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                                time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
 
                     }
                     else if (alg.equals("3DES")){
@@ -313,15 +313,15 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             byte[] encryptResult = tripleDES.encrypt(_100KBfile.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
                             timeLength3DES[0] = (endTime - startTime) / 1000000;
-                            String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
-                            byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
-                            String data = (LABEL + "3DES: " + new String(decryptResult));
+                            //String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
+                           // byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
+                           // String data = (LABEL + "3DES: " + new String(decryptResult));
                             //  txt1.setText(encrypted);
                             time100KB.setText((int) timeLength3DES[0] + " milliseconds");
 
                             time3DES100kb = timeLength3DES[0];
-                            myChart myChart = new myChart(timeAES5kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES5kb,time3DES100kb,time3DES500kb,
-                                    time3DES1mb,timeBLOWFISH5kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                            myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                                    time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
 
                         } catch (Exception e) {
                             Log.e(TAG, "3DES: " + e.getMessage());
@@ -335,15 +335,15 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
                             long endTime = System.nanoTime();
                             timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
-                            String encryptedData = new String(encryptedBytes);
-                            time100KB.setText(encryptedData);
-                            byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
-                            String decryptedData = new String(decryptedBytes );
+                            //String encryptedData = new String(encryptedBytes);
+                            //time100KB.setText(encryptedData);
+                            //byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
+                            //String decryptedData = new String(decryptedBytes );
                             time100KB.setText((int) timeLengthBLOWFISH[0] + " milliseconds");
 
                             timeBLOWFISH100kb = timeLengthBLOWFISH[0];
-                            myChart myChart = new myChart(timeAES5kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES5kb,time3DES100kb,time3DES500kb,
-                                    time3DES1mb,timeBLOWFISH5kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                            myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                                    time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
 
 
                         }
@@ -375,7 +375,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     }
 
 
-                    timeAverage = average(time5KB.getText().toString(),time100KB.getText().toString(),
+                    timeAverage = average(time10KB.getText().toString(),time100KB.getText().toString(),
                             time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
 
                     if(timeAverage!=0){
@@ -497,8 +497,8 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
                         timeAES500kb = timeLengthAES[0];
 
-                        myChart myChart = new myChart(timeAES5kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES5kb,time3DES100kb,time3DES500kb,
-                                time3DES1mb,timeBLOWFISH5kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                        myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                                time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
                     }
                     else if (alg.equals("3DES")){
                         try {
@@ -508,15 +508,15 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             byte[] encryptResult = tripleDES.encrypt(_500KBfile.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
                             timeLength3DES[0] = (endTime - startTime) / 1000000;
-                            String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
-                            byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
-                            String data = (LABEL + "3DES: " + new String(decryptResult));
+                            //String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
+                           // byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
+                            //String data = (LABEL + "3DES: " + new String(decryptResult));
                             //  txt1.setText(encrypted);
                             time500KB.setText((int) timeLength3DES[0] + " milliseconds");
 
                             time3DES500kb = timeLength3DES[0];
-                            myChart myChart = new myChart(timeAES5kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES5kb,time3DES100kb,time3DES500kb,
-                                    time3DES1mb,timeBLOWFISH5kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                            myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                                    time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
                         } catch (Exception e) {
                             Log.e(TAG, "3DES: " + e.getMessage());
                         }
@@ -529,15 +529,15 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
                             long endTime = System.nanoTime();
                             timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
-                            String encryptedData = new String(encryptedBytes);
-                            time500KB.setText(encryptedData);
-                            byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
-                            String decryptedData = new String(decryptedBytes );
+                            //String encryptedData = new String(encryptedBytes);
+                            //time500KB.setText(encryptedData);
+                            //byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
+                            //String decryptedData = new String(decryptedBytes );
                             time500KB.setText((int) timeLengthBLOWFISH[0] + " milliseconds");
 
                             timeBLOWFISH500kb = timeLengthBLOWFISH[0];
-                            myChart myChart = new myChart(timeAES5kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES5kb,time3DES100kb,time3DES500kb,
-                                    time3DES1mb,timeBLOWFISH5kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                            myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                                    time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
 
                         }
                         catch(Exception e) {
@@ -571,7 +571,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                timeAverage = average(time5KB.getText().toString(),time100KB.getText().toString(),
+                timeAverage = average(time10KB.getText().toString(),time100KB.getText().toString(),
                         time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
 
                 if(timeAverage!=0){
@@ -688,8 +688,8 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                         time1MB.setText((int) timeLengthAES[0] + " milliseconds");
 
                         timeAES1mb = timeLengthAES[0];
-                        myChart myChart = new myChart(timeAES5kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES5kb,time3DES100kb,time3DES500kb,
-                                time3DES1mb,timeBLOWFISH5kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                        myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                                time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
 
                     }
                     else if (alg.equals("3DES")){
@@ -700,15 +700,15 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             byte[] encryptResult = tripleDES.encrypt(_1MBfile.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
                             timeLength3DES[0] = (endTime - startTime) / 1000000;
-                            String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
-                            byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
-                            String data = (LABEL + "3DES: " + new String(decryptResult));
+                            //String encrypted = (LABEL + "3DES: " + tripleDES.byte_to_string(encryptResult));
+                            //byte[] decryptResult = tripleDES.decrypt(encryptResult, tripleKey);
+                            //String data = (LABEL + "3DES: " + new String(decryptResult));
                             //  txt1.setText(encrypted);
                             time1MB.setText((int) timeLength3DES[0] + " milliseconds");
 
                             time3DES1mb = timeLength3DES[0];
-                            myChart myChart = new myChart(timeAES5kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES5kb,time3DES100kb,time3DES500kb,
-                                    time3DES1mb,timeBLOWFISH5kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                            myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                                    time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
                         } catch (Exception e) {
                             Log.e(TAG, "3DES: " + e.getMessage());
                         }
@@ -721,16 +721,16 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
                             long endTime = System.nanoTime();
                             timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
-                            String encryptedData = new String(encryptedBytes);
-                            time1MB.setText(encryptedData);
-                            byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
-                            String decryptedData = new String(decryptedBytes );
+                            //String encryptedData = new String(encryptedBytes);
+                            //time1MB.setText(encryptedData);
+                            //byte[] decryptedBytes = blowfish.decrypt(encryptedBytes);
+                            //String decryptedData = new String(decryptedBytes );
                             time1MB.setText((int) timeLengthBLOWFISH[0] + " milliseconds");
 
 
                             timeBLOWFISH1mb = timeLengthBLOWFISH[0];
-                            myChart myChart = new myChart(timeAES5kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES5kb,time3DES100kb,time3DES500kb,
-                                    time3DES1mb,timeBLOWFISH5kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                            myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                                    time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
                         }
                         catch(Exception e) {
                             System.out.println(e);
@@ -760,7 +760,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     }
 
 
-                    timeAverage = average(time5KB.getText().toString(),time100KB.getText().toString(),
+                    timeAverage = average(time10KB.getText().toString(),time100KB.getText().toString(),
                             time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
 
                     if(timeAverage!=0){
@@ -853,9 +853,9 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
 
                     //so that the the averages are shown even from the show averages button from main
-                    long avgAes= avg(timeAES5kb,timeAES100kb,timeAES500kb,timeAES1mb);
-                    long avg3DES= avg(time3DES5kb,time3DES100kb,time3DES500kb, time3DES1mb);
-                    long avgBLOWFISH= avg(timeBLOWFISH5kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                    long avgAes= avg(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb);
+                    long avg3DES= avg(time3DES10kb,time3DES100kb,time3DES500kb, time3DES1mb);
+                    long avgBLOWFISH= avg(timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
                     Averages avgclass = new Averages(avgAes,avg3DES,avgBLOWFISH);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -868,8 +868,8 @@ public class EncryptionAlgorithm extends AppCompatActivity {
         btnchart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myChart myChart = new myChart(timeAES5kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES5kb,time3DES100kb,time3DES500kb,
-                        time3DES1mb,timeBLOWFISH5kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                        time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
 
 
 
@@ -879,10 +879,10 @@ public class EncryptionAlgorithm extends AppCompatActivity {
             }
         });
     }
-    private   long  average(String txt5kb, String txt100kb, String txt500kb, String txt1mb, String alg){
+    private   long  average(String txt10kb, String txt100kb, String txt500kb, String txt1mb, String alg){
 
 
-        if(!txt5kb.equals("") && !txt100kb.equals("")&& !txt500kb.equals("") && !txt1mb.equals("")){    //TODO: pse equals e jo !=
+        if(!txt10kb.equals("") && !txt100kb.equals("")&& !txt500kb.equals("") && !txt1mb.equals("")){    //TODO: pse equals e jo !=
 
 
             if(alg.equals("AES")){ counterAES[0] = counterAES[0] +1;  }
@@ -890,9 +890,9 @@ public class EncryptionAlgorithm extends AppCompatActivity {
             else{ if(alg.equals("BLOWFISH")){ counterBLOWFISH[0] = counterBLOWFISH[0] +1;}}
 
             long  average ;
-            String time5kb = txt5kb;
-            int end1 = time5kb.indexOf(" ");
-            time5kb = time5kb.substring(0,end1);
+            String time10kb = txt10kb;
+            int end1 = time10kb.indexOf(" ");
+            time10kb = time10kb.substring(0,end1);
 
             String time100kb = txt100kb;
             int end100 = time100kb.indexOf(" ");
@@ -906,7 +906,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
             int end1m = time1mb.indexOf(" ");
             time1mb = time1mb.substring(0,end1m);
 
-            average = Integer.parseInt(time5kb)
+            average = Integer.parseInt(time10kb)
                     + Integer.parseInt(time100kb)
                     + Integer.parseInt(time500kb)+ Integer.parseInt(time1mb);
 

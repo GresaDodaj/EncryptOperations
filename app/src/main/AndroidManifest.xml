@@ -12,7 +12,6 @@
         <activity android:name=".Averages"></activity>
         <activity android:name=".myChart" />
         <activity android:name=".EncryptionAlgorithm" />
-        <activity android:name=".Encryption" />
         <activity android:name=".Charts" />
         <activity android:name=".SplashScreen">
             <intent-filter>

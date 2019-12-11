@@ -30,7 +30,7 @@
             android:background="#90B1B0B0">
 
             <RadioButton
-                android:id="@+id/btn5KB"
+                android:id="@+id/btn10KB"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -39,7 +39,7 @@
                 android:buttonTint="@color/blue"
                 android:fontFamily="@font/andada"
                 android:gravity="center_horizontal"
-                android:text="@string/_5kb"
+                android:text="@string/_10kb"
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="#BF000000"
