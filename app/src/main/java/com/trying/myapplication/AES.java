@@ -7,7 +7,8 @@ import javax.crypto.spec.SecretKeySpec;
 public class AES
 {
     private static final byte[] keyValue =
-            new byte[]{'c', 'o', 'd', 'i', 'n', 'g', 'a', 'n', 'd', 'r', 'o', 'i', 'd', 'c', 'o', 'm'};
+            new byte[]{'c', 'o', 'd', 'i', 'n', 'g', 'a', 'n', 'd', 'r', 'o', 'i', 'd', 'c', 'o', 'm',
+                    'c', 'r', 'y', 'p', 't', 'o', 'g', 'r', 'a', 'p', 'p', 'h', 'y', 'a', 'l', 'g'};
 
     public static String encrypt(String cleartext)
             throws Exception {
