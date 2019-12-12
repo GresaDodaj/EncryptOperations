@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout blowfishButton = findViewById(R.id.btnBlowfish);
         LinearLayout showChart = findViewById(R.id.showChart);
 
+
+
         aesButton.setOnClickListener(onClickListener);
         desButton.setOnClickListener(onClickListener);
         _3desButton.setOnClickListener(onClickListener);

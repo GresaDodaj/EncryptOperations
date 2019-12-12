@@ -7,12 +7,15 @@ import javax.crypto.spec.SecretKeySpec;
 public class AES
 {
     private static final byte[] keyValue =
-            new byte[]{'c', 'o', 'd', 'i', 'n', 'g', 'a', 'f', 'f', 'a', 'i', 'r', 's', 'c', 'o', 'm'};
+            new byte[]{'c', 'o', 'd', 'i', 'n', 'g', 'a', 'n', 'd', 'r', 'o', 'i', 'd', 'c', 'o', 'm'};
 
     public static String encrypt(String cleartext)
             throws Exception {
+        long startTime = System.nanoTime();
         byte[] rawKey = get_raw_key();
         byte[] result = encrypt(rawKey, cleartext.getBytes());
+        long endTime = System.nanoTime();
+        long distance = (endTime - startTime) / 1000000;
         return byte_to_hex(result);
     }
 
@@ -32,7 +35,7 @@ public class AES
 
     private static byte[] encrypt(byte[] raw, byte[] clear) throws Exception {
         SecretKey skeySpec = new SecretKeySpec(raw, "AES");
-        Cipher cipher = Cipher.getInstance("AES");
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
         return cipher.doFinal(clear);   //return encrypted text
     }

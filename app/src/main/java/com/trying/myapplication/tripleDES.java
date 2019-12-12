@@ -15,14 +15,14 @@ class tripleDES {
 
     static byte[] encrypt(byte[] input, byte[] key) throws Exception {
         SecretKey secretKey = new SecretKeySpec(key, "DESede");
-        Cipher cipher = Cipher.getInstance("DESede");
+        Cipher cipher = Cipher.getInstance("DESede/CBC/PKCS5Padding");
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
         return cipher.doFinal(input);
     }
 
     static byte[] decrypt(byte[] encryptedInput, byte[] key) throws Exception {
         SecretKey secretKey = new SecretKeySpec(key, "DESede");
-        Cipher cipher = Cipher.getInstance("DESede");
+        Cipher cipher = Cipher.getInstance("DESede/CBC/PKCS5Padding");  //modi cbc, padding:
         cipher.init(Cipher.DECRYPT_MODE, secretKey);
         return cipher.doFinal(encryptedInput);
     }

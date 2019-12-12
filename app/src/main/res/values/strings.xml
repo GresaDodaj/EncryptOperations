@@ -22,4 +22,5 @@
     <string name="show_chart">show chart</string>
     <string name="show_my_average">show_my_average</string>
     <string name="showmyaverage">show my average</string>
+    <string name="application_name">CryptoAlgorithms Performance</string>
 </resources>
