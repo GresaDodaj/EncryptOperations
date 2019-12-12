@@ -79,6 +79,8 @@ public class EncryptionAlgorithm extends AppCompatActivity {
         Button btn500KB = findViewById(R.id.btn500kb);
         Button btn1MB = findViewById(R.id.btn1mb);
         Button btnchart = findViewById(R.id.btnChart);
+        Button btnRunAll = findViewById(R.id.btnRunAll);
+
         final TextView avgResult = findViewById(R.id.avgResult);
         final TextView avgPreCache = findViewById(R.id.avgPreCache);
 
@@ -105,6 +107,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
 
 
+
         btn10KB.setOnClickListener(new View.OnClickListener() {
             private static final String TAG = "--";
             @SuppressLint("SetTextI18n")
@@ -125,9 +128,9 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     }
                     else if (alg.equals("3DES")){
                         try {
-                            byte[] tripleKey = tripleDES.initKey();
                             //String key = (LABEL + "3DES key: " + tripleDES.byte_to_string(tripleKey));
                             long startTime = System.nanoTime();
+                            byte[] tripleKey = tripleDES.initKey();
                             byte[] encryptResult = tripleDES.encrypt(_10KBfile.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
                             timeLength3DES[0] = (endTime - startTime) / 1000000;
@@ -144,9 +147,9 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     }
                     else if (alg.equals("BLOWFISH")){
                         try {
-                            blowfish.generate_symetric_key();
                             byte[] text2Bytes = _10KBfile.getBytes();
                             long startTime = System.nanoTime();
+                            blowfish.generate_symetric_key();
                             byte[] encryptedBytes = blowfish.encrypt(text2Bytes); //todo: mos e assign hiq direkt veq thirre funksionin/
                             long endTime = System.nanoTime();
                             timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
@@ -307,9 +310,9 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     }
                     else if (alg.equals("3DES")){
                         try {
-                            byte[] tripleKey = tripleDES.initKey();
-                            String key = (LABEL + "3DES key: " + tripleDES.byte_to_string(tripleKey));
+                            //String key = (LABEL + "3DES key: " + tripleDES.byte_to_string(tripleKey));
                             long startTime = System.nanoTime();
+                            byte[] tripleKey = tripleDES.initKey();
                             byte[] encryptResult = tripleDES.encrypt(_100KBfile.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
                             timeLength3DES[0] = (endTime - startTime) / 1000000;
@@ -502,9 +505,9 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     }
                     else if (alg.equals("3DES")){
                         try {
-                            byte[] tripleKey = tripleDES.initKey();
-                            String key = (LABEL + "3DES key: " + tripleDES.byte_to_string(tripleKey));
+                           // String key = (LABEL + "3DES key: " + tripleDES.byte_to_string(tripleKey));
                             long startTime = System.nanoTime();
+                            byte[] tripleKey = tripleDES.initKey();
                             byte[] encryptResult = tripleDES.encrypt(_500KBfile.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
                             timeLength3DES[0] = (endTime - startTime) / 1000000;
@@ -523,8 +526,8 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     }
                     else if (alg.equals("BLOWFISH")){
                         try {
-                            blowfish.generate_symetric_key();
                             byte[] text2Bytes = _500KBfile.getBytes();
+                            blowfish.generate_symetric_key();
                             long startTime = System.nanoTime();
                             byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
                             long endTime = System.nanoTime();
@@ -694,9 +697,9 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     }
                     else if (alg.equals("3DES")){
                         try {
-                            byte[] tripleKey = tripleDES.initKey();
-                            String key = (LABEL + "3DES key: " + tripleDES.byte_to_string(tripleKey));
+                            //String key = (LABEL + "3DES key: " + tripleDES.byte_to_string(tripleKey));
                             long startTime = System.nanoTime();
+                            byte[] tripleKey = tripleDES.initKey();
                             byte[] encryptResult = tripleDES.encrypt(_1MBfile.getBytes(), tripleKey);
                             long endTime = System.nanoTime();
                             timeLength3DES[0] = (endTime - startTime) / 1000000;
@@ -715,8 +718,9 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     }
                     else if (alg.equals("BLOWFISH")){
                         try {
-                            blowfish.generate_symetric_key();
+
                             byte[] text2Bytes = _1MBfile.getBytes();
+                            blowfish.generate_symetric_key();
                             long startTime = System.nanoTime();
                             byte[] encryptedBytes = blowfish.encrypt(text2Bytes);
                             long endTime = System.nanoTime();
@@ -863,6 +867,178 @@ public class EncryptionAlgorithm extends AppCompatActivity {
             }
 
         });
+
+        btnRunAll.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+
+
+                if(alg .equals("AES")) {
+
+                    try {
+                        long startTime = System.nanoTime();
+                        AES.encrypt(_10KBfile);
+                        long endTime = System.nanoTime();
+                        //time of the execution in nanoseconds/1000000 = time in milliseconds
+                        timeLengthAES[0] = (endTime - startTime) / 1000000;
+                        time10KB.setText((int) timeLengthAES[0] + " milliseconds");
+                        timeAES10kb = timeLengthAES[0];
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        long startTime2 =  System.nanoTime();
+                        AES.encrypt(_100KBfile);
+                        long endTime2 = System.nanoTime();
+                        timeLengthAES[0] = (endTime2 - startTime2) / 1000000;
+                        time100KB.setText((int) timeLengthAES[0] + " milliseconds");
+                        timeAES100kb = timeLengthAES[0];
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        long startTime2 =  System.nanoTime();
+                        AES.encrypt(_500KBfile);
+                        long endTime2 = System.nanoTime();
+                        timeLengthAES[0] = (endTime2 - startTime2) / 1000000;
+                        time500KB.setText((int) timeLengthAES[0] + " milliseconds");
+                        timeAES500kb = timeLengthAES[0];
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        long startTime2 =  System.nanoTime();
+                        AES.encrypt(_1MBfile);
+                        long endTime2 = System.nanoTime();
+                        timeLengthAES[0] = (endTime2 - startTime2) / 1000000;
+                        time1MB.setText((int) timeLengthAES[0] + " milliseconds");
+                        timeAES1mb = timeLengthAES[0];
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                            time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+
+                }
+                else if (alg.equals("3DES")){
+                    try {
+
+                        long startTime = System.nanoTime();
+                        byte[] tripleKey = tripleDES.initKey(); //todo: me llogarit ne kohe apo jo?
+                        tripleDES.encrypt(_10KBfile.getBytes(), tripleKey);
+                        long endTime = System.nanoTime();
+                        timeLength3DES[0] = (endTime - startTime) / 1000000;
+                        //time of the execution in nanoseconds/1000000 = time in milliseconds
+                        timeLength3DES[0] = (endTime - startTime) / 1000000;
+                        time10KB.setText((int) timeLength3DES[0] + " milliseconds");
+                        time3DES10kb = timeLength3DES[0];
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+
+                        long startTime2 =  System.nanoTime();
+                        byte[] tripleKey = tripleDES.initKey();
+                        tripleDES.encrypt(_100KBfile.getBytes(), tripleKey);
+                        long endTime2 = System.nanoTime();
+                        timeLength3DES[0] = (endTime2 - startTime2) / 1000000;
+                        time100KB.setText((int) timeLength3DES[0] + " milliseconds");
+                        time3DES100kb = timeLength3DES[0];
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        long startTime2 =  System.nanoTime();
+                        byte[] tripleKey = tripleDES.initKey();
+                        tripleDES.encrypt(_500KBfile.getBytes(), tripleKey);
+                        long endTime2 = System.nanoTime();
+                        timeLength3DES[0] = (endTime2 - startTime2) / 1000000;
+                        time500KB.setText((int) timeLength3DES[0] + " milliseconds");
+                        time3DES500kb = timeLength3DES[0];
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        long startTime2 =  System.nanoTime();
+                        byte[] tripleKey = tripleDES.initKey();
+                        tripleDES.encrypt(_1MBfile.getBytes(), tripleKey);
+                        long endTime2 = System.nanoTime();
+                        timeLength3DES[0] = (endTime2 - startTime2) / 1000000;
+                        time1MB.setText((int) timeLength3DES[0] + " milliseconds");
+                        time3DES1mb = timeLength3DES[0];
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                            time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                }
+                else{
+                    try {
+                        byte[] text2Bytes = _10KBfile.getBytes();
+                        long startTime = System.nanoTime();
+                        blowfish.generate_symetric_key();
+                        blowfish.encrypt(text2Bytes);
+                        long endTime = System.nanoTime();
+                        timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
+                        time10KB.setText((int) timeLengthBLOWFISH[0] + " milliseconds");
+                    } catch (Exception e) { e.printStackTrace(); }
+
+                    try {
+                        byte[] text2Bytes = _100KBfile.getBytes();
+                        long startTime = System.nanoTime();
+                        blowfish.generate_symetric_key();
+                        blowfish.encrypt(text2Bytes);
+                        long endTime = System.nanoTime();
+                        timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
+                        time100KB.setText((int) timeLengthBLOWFISH[0] + " milliseconds");
+                    } catch (Exception e) { e.printStackTrace(); }
+                    try {
+
+                        byte[] text2Bytes = _500KBfile.getBytes();
+                        long startTime = System.nanoTime();
+                        blowfish.generate_symetric_key();
+                        blowfish.encrypt(text2Bytes);
+                        long endTime = System.nanoTime();
+                        timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
+                        time500KB.setText((int) timeLengthBLOWFISH[0] + " milliseconds");
+                    } catch (Exception e) { e.printStackTrace(); }
+                    try {
+                        byte[] text2Bytes = _1MBfile.getBytes();
+                        long startTime = System.nanoTime();
+                        blowfish.generate_symetric_key();
+                        blowfish.encrypt(text2Bytes);
+                        long endTime = System.nanoTime();
+                        timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
+                        time1MB.setText((int) timeLengthBLOWFISH[0] + " milliseconds");
+                    } catch (Exception e) { e.printStackTrace(); }
+
+                    myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                            time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+
+                }
+
+
+
+            }
+        });
+
 
 
         btnchart.setOnClickListener(new View.OnClickListener() {
