@@ -6,7 +6,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 class DES {
 
-    static byte[] initKey() throws Exception {
+    private static byte[] initKey() throws Exception {
         KeyGenerator keyGenerator = KeyGenerator.getInstance("DESede");
         keyGenerator.init(168);//should be 16 or 24 bytes / 112 or 168 bits
         SecretKey secretKey = keyGenerator.generateKey();

@@ -12,8 +12,7 @@ public class  tripleDES{
 
     public static byte[] encrypt(String message) throws Exception {
         final MessageDigest md = MessageDigest.getInstance("md5");
-        final byte[] digestOfPassword = md.digest("HG58YZ3CR9"
-                .getBytes("utf-8"));
+        final byte[] digestOfPassword = md.digest("GD58IT3GT9" .getBytes("utf-8"));
         final byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
         for (int j = 0, k = 16; j < 8;) {
             keyBytes[k++] = keyBytes[j++];
