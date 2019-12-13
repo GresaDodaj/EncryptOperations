@@ -6,6 +6,9 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -1048,13 +1051,14 @@ public class EncryptionAlgorithm extends AppCompatActivity {
             public void onClick(View v) {
 
                 progressDialog = new ProgressDialog(EncryptionAlgorithm.this);
-                progressDialog.setMessage("Loading..."); // Setting Message
-                progressDialog.setTitle("ProgressDialog"); // Setting Title
-                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
-                progressDialog.show(); // Display Progress Dialog
+                progressDialog.setMessage("Encrypting...");
+                progressDialog.setTitle(alg);
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.show();
                 progressDialog.setCancelable(false);
                 new Thread(new Runnable() {
                     public void run() {
+                        Looper.prepare();
                         try {
                             if(alg .equals("AES")) {
 
@@ -1500,9 +1504,15 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        progressDialog.dismiss();
+                        if ((progressDialog != null) && progressDialog.isShowing()) {
+                            progressDialog.dismiss();
+                        }
+                        Looper.loop();
+
                     }
                 }).start();
+
+                
 
 
 
