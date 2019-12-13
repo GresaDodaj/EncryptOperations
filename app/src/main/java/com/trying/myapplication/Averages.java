@@ -1,15 +1,11 @@
 package com.trying.myapplication;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
@@ -21,17 +17,10 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 
-import static com.trying.myapplication.myChart.a;
-import static com.trying.myapplication.myChart.b;
 
 public class Averages extends AppCompatActivity {
 
@@ -42,32 +31,34 @@ public class Averages extends AppCompatActivity {
     static long a;
     static long b;
     static long c;
-    Averages(long a, long b, long c){
+    static long d;
+    Averages(long a, long b, long c,long d){
 
         this.a = a;
         this.b = b;
         this.c = c;
+        this.d = d;
     }
 
-    private static final String TAG = "TAG" ;
+    private static final String TAG = "Error: " ;
 
     static int db_aes;
-    static int db_3des;
+    static int db_des;
     static int db_blowfish;
+    static int db_3des;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overall_average);
+        final FirebaseFirestore database = FirebaseFirestore.getInstance();
+        final CollectionReference db_collection = database.collection("Average_Collection");
 
         final BarChart chart = findViewById(R.id.groupBarChart);
         LinearLayout showMyChart = findViewById(R.id.showMyChart);
 
 
-        final FirebaseFirestore database = FirebaseFirestore.getInstance();
-
-        final CollectionReference db_collection = database.collection("Average_Collection");
 
 
         db_collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -76,17 +67,19 @@ public class Averages extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Log.d("TAG", task.getResult().size() + "");
 
-
-                        String aes = String.valueOf(task.getResult().getDocuments().get(1).get("AES"));
                         String _3des = String.valueOf(task.getResult().getDocuments().get(0).get("3DES"));
+                        String aes = String.valueOf(task.getResult().getDocuments().get(1).get("AES"));
                         String blowfish = String.valueOf(task.getResult().getDocuments().get(2).get("BLOWFISH"));
-                        db_aes = Integer.parseInt(aes);
+                        String _des = String.valueOf(task.getResult().getDocuments().get(3).get("DES"));
+
                         db_3des = Integer.parseInt(_3des);
+                        db_aes = Integer.parseInt(aes);
+                        db_des = Integer.parseInt(_des);
                         db_blowfish = Integer.parseInt(blowfish);
 
 
-                    final BarDataSet[] barDataSet1 = {new BarDataSet(barEntries1((int) db_aes,(int)db_3des,(int)db_blowfish), "Average")};
-                    final BarDataSet[] barDataSet2 = {new BarDataSet(barEntries2((int)a,(int)b,(int)c), "My Phone")};
+                    final BarDataSet[] barDataSet1 = {new BarDataSet(barEntries1(db_aes,db_des,db_3des,db_blowfish), "Average")};
+                    final BarDataSet[] barDataSet2 = {new BarDataSet(barEntries2((int)a,(int)b,(int)c,(int)d), "My Phone")};
 
 
 
@@ -95,9 +88,7 @@ public class Averages extends AppCompatActivity {
                     description.setTextColor(getColor(R.color.firstBar));
                     description.setTextSize(10);
                     chart.setDescription(description);
-                   // barDataSet1[0] = new BarDataSet(barEntries1((int) db_aes,(int)db_3des,(int)db_blowfish), "Average");
                     barDataSet1[0].setColor(getColor(R.color.firstBar));
-                  //  barDataSet2[0] = new BarDataSet(barEntries2((int)a,(int)b,(int)c), "My Phone");
                     barDataSet2[0].setColor(getColor(R.color.secondBar));
 
 
@@ -109,31 +100,27 @@ public class Averages extends AppCompatActivity {
                     float groupSpace = 0.3f;
                     data.setBarWidth(0.27f);
                     chart.getXAxis().setAxisMinimum(0);
-                    chart.getXAxis().setAxisMaximum(0 + chart.getBarData().getGroupWidth(groupSpace, barSpace) * 3); //minimum+ chart data *number of bars
-                    //chart.getAxisLeft().setAxisMinimum(0);
-                    chart.groupBars(0, groupSpace, barSpace); // me i grupu
+                    chart.getXAxis().setAxisMaximum(0 + chart.getBarData().getGroupWidth(groupSpace, barSpace) * 4); //minimum+ chart data *number of bars
+                    chart.groupBars(0, groupSpace, barSpace); // to group the bars
 
-                    final String[] files = new String[]{"AES", "3DES", "BLOWFISH"};
+                    final String[] files = new String[]{"AES", "DES", "3DES","BLOWFISH"};
                     XAxis xAxis = chart.getXAxis();
                     xAxis.setValueFormatter(new IndexAxisValueFormatter(files));
-                    xAxis.setCenterAxisLabels(true);//me i vendos labels poshte ne center
+                    xAxis.setCenterAxisLabels(true);
                     xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
                     xAxis.setGranularity(1);
                     xAxis.setGranularityEnabled(true);
-                    chart.setDrawGridBackground(false); ///nuk po heket gridi
+                    chart.setDrawGridBackground(false);
                     chart.setDrawBorders(true);
 
                     chart.setDragEnabled(false);
-                    chart.setVisibleXRangeMaximum(3); //todo: lookup
+                    chart.setVisibleXRangeMaximum(4);
                     chart.setDoubleTapToZoomEnabled(false);
-                    //chart.setScaleXEnabled(false);
                     chart.setScaleEnabled(false);
 
                     Legend legend = chart.getLegend();
                     legend.setXEntrySpace(15);
                     legend.setFormToTextSpace(10);
-
-
 
                     //chart.setDrawGridBackground(false);//If enabled, the background rectangle behind the chart drawing-area will be drawn.
                     chart.setDrawValueAboveBar(true); //If set to true, all values are drawn above their bars, instead of below their top.
@@ -160,23 +147,25 @@ public class Averages extends AppCompatActivity {
 
     }
 
-    private ArrayList<BarEntry> barEntries1(int y1, int y2, int y3) {
+    private ArrayList<BarEntry> barEntries1(int y1, int y2, int y3, int y4) {
 
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         barEntries.add(new BarEntry(0, y1));
         barEntries.add(new BarEntry(1, y2));
         barEntries.add(new BarEntry(2, y3));
+        barEntries.add(new BarEntry(3, y4));
 
 
         return barEntries;
     }
 
-    private ArrayList<BarEntry> barEntries2(int y1, int y2, int y3) {
+    private ArrayList<BarEntry> barEntries2(int y1, int y2, int y3, int y4) {
 
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         barEntries.add(new BarEntry(0, y1));
         barEntries.add(new BarEntry(1, y2));
         barEntries.add(new BarEntry(2, y3));
+        barEntries.add(new BarEntry(3, y4));
 
         return barEntries;
     }

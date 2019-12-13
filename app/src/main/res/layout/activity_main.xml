@@ -8,14 +8,15 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.demotxt.droidsrce.homedashboard.Home"
-        android:orientation="vertical"
-        android:padding="10dip"
+        android:layout_height="560dp"
+        android:layout_gravity="bottom"
         android:background="#fcfcfc"
         android:gravity="center"
-        android:id="@+id/ll">
+        android:orientation="vertical"
+        android:padding="10dip"
+        tools:context="com.demotxt.droidsrce.homedashboard.Home">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,6 +31,7 @@
                 android:layout_height="190dip"
                 android:layout_margin="10dip"
                 android:clickable="true"
+                android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground">
 
                 <LinearLayout
@@ -136,20 +138,20 @@
         </LinearLayout>
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#00070707"
-                android:clipToPadding="false"
-                android:gravity="center"
-                android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00070707"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
-                        android:layout_width="160dip"
-                        android:layout_height="190dip"
-                        android:layout_margin="10dip"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackground">
+                android:layout_width="160dip"
+                android:layout_height="190dip"
+                android:layout_margin="10dip"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground">
 
                 <LinearLayout
                     android:id="@+id/btn3DES"
@@ -174,7 +176,7 @@
                         android:layout_marginTop="10dip"
                         android:fontFamily="@font/abeezee"
                         android:shadowColor="#5BFFFFFF"
-                        android:text="@string/_3des"
+                        android:text="@string/_des"
                         android:textColor="#030303"
                         android:textStyle="bold" />
 
@@ -194,13 +196,14 @@
                         android:textColor="#030303" />
 
                 </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="160dip"
                 android:layout_height="190dip"
                 android:layout_margin="10dip"
                 android:clickable="true"
+                android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground">
 
                 <LinearLayout
@@ -264,6 +267,7 @@
                 android:layout_height="150dip"
                 android:layout_margin="10dip"
                 android:clickable="true"
+                android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground">
 
                 <LinearLayout
@@ -273,6 +277,7 @@
                     android:layout_height="match_parent"
                     android:background="#F8F9FA"
                     android:clickable="true"
+                    android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -310,6 +315,15 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btnInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="41dp"
+        android:layout_gravity="right"
+        android:backgroundTint="#00070707"
+        android:contentDescription="TODO"
+        app:srcCompat="@android:drawable/ic_menu_info_details" />
 
 
 </androidx.cardview.widget.CardView>

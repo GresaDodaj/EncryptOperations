@@ -83,7 +83,7 @@
 
                     <TextView
 
-                        android:id="@+id/timeAES10kb"
+                        android:id="@+id/time10kb"
                         android:width="100dip"
                         android:background="@drawable/cells"
                         android:fontFamily="@font/abeezee"
@@ -123,7 +123,7 @@
 
                     <TextView
 
-                        android:id="@+id/timeAES100kb"
+                        android:id="@+id/time100kb"
                         android:width="100dip"
                         android:background="@drawable/cells"
                         android:fontFamily="@font/abeezee"
@@ -162,7 +162,7 @@
 
                     <TextView
 
-                        android:id="@+id/timeAES500kb"
+                        android:id="@+id/time500kb"
                         android:width="100dip"
                         android:background="@drawable/cells"
                         android:fontFamily="@font/abeezee"
@@ -200,7 +200,7 @@
 
                     <TextView
 
-                        android:id="@+id/timeAES1mb"
+                        android:id="@+id/time1mb"
                         android:width="100dip"
                         android:background="@drawable/cells"
                         android:fontFamily="@font/abeezee"
