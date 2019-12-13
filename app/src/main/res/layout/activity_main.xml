@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         tools:context="com.demotxt.droidsrce.homedashboard.Home"
         android:orientation="vertical"
-        android:padding="10dp"
+        android:padding="10dip"
         android:background="#fcfcfc"
         android:gravity="center"
         android:id="@+id/ll">
@@ -26,9 +26,9 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="160dp"
-                android:layout_height="190dp"
-                android:layout_margin="10dp"
+                android:layout_width="160dip"
+                android:layout_height="190dip"
+                android:layout_margin="10dip"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground">
 
@@ -43,17 +43,17 @@
 
                     <ImageView
                         android:id="@+id/btnAES1"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
+                        android:layout_width="64dip"
+                        android:layout_height="64dip"
                         android:background="@drawable/lock1"
                         android:contentDescription="@string/todo"
-                        android:padding="10dp"
+                        android:padding="10dip"
                         android:src="@drawable/ic_attach_money_black_24dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="10dip"
                         android:fontFamily="@font/abeezee"
                         android:shadowColor="#5BFFFFFF"
                         android:text="@string/aes"
@@ -62,7 +62,7 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="1dip"
                         android:background="@color/lightgray" />
 
                     <TextView
@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/abeezee"
                         android:gravity="center"
-                        android:padding="5dp"
+                        android:padding="5dip"
                         android:shadowColor="#5BFFFFFF"
                         android:text="@string/test"
                         android:textColor="#030303" />
@@ -79,9 +79,9 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="160dp"
-                android:layout_height="190dp"
-                android:layout_margin="10dp"
+                android:layout_width="160dip"
+                android:layout_height="190dip"
+                android:layout_margin="10dip"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground">
@@ -99,17 +99,17 @@
 
                     <ImageView
                         android:id="@+id/btnDES1"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
+                        android:layout_width="64dip"
+                        android:layout_height="64dip"
                         android:background="@drawable/lock1"
                         android:contentDescription="@string/todo"
-                        android:padding="10dp"
+                        android:padding="10dip"
                         android:src="@drawable/ic_attach_money_black_24dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="10dip"
                         android:fontFamily="@font/abeezee"
                         android:shadowColor="#5BFFFFFF"
                         android:text="@string/des"
@@ -118,7 +118,7 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="1dip"
                         android:background="@color/lightgray" />
 
                     <TextView
@@ -126,7 +126,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/abeezee"
                         android:gravity="center"
-                        android:padding="5dp"
+                        android:padding="5dip"
                         android:shadowColor="#5BFFFFFF"
                         android:text="@string/test"
                         android:textColor="#030303" />
@@ -144,9 +144,9 @@
                 android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
-                        android:layout_width="160dp"
-                        android:layout_height="190dp"
-                        android:layout_margin="10dp"
+                        android:layout_width="160dip"
+                        android:layout_height="190dip"
+                        android:layout_margin="10dip"
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?android:attr/selectableItemBackground">
@@ -161,17 +161,17 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
+                        android:layout_width="64dip"
+                        android:layout_height="64dip"
                         android:background="@drawable/lock1"
                         android:contentDescription="@string/todo"
-                        android:padding="10dp"
+                        android:padding="10dip"
                         android:src="@drawable/ic_attach_money_black_24dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="10dip"
                         android:fontFamily="@font/abeezee"
                         android:shadowColor="#5BFFFFFF"
                         android:text="@string/_3des"
@@ -180,7 +180,7 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="1dip"
                         android:background="@color/lightgray" />
 
                     <TextView
@@ -188,7 +188,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/abeezee"
                         android:gravity="center"
-                        android:padding="5dp"
+                        android:padding="5dip"
                         android:shadowColor="#5BFFFFFF"
                         android:text="@string/test"
                         android:textColor="#030303" />
@@ -197,9 +197,9 @@
                     </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="160dp"
-                android:layout_height="190dp"
-                android:layout_margin="10dp"
+                android:layout_width="160dip"
+                android:layout_height="190dip"
+                android:layout_margin="10dip"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground">
 
@@ -213,17 +213,17 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
+                        android:layout_width="64dip"
+                        android:layout_height="64dip"
                         android:background="@drawable/lock1"
                         android:contentDescription="@string/todo"
-                        android:padding="10dp"
+                        android:padding="10dip"
                         android:src="@drawable/ic_attach_money_black_24dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="10dip"
                         android:fontFamily="@font/abeezee"
                         android:shadowColor="#5BFFFFFF"
                         android:text="@string/blowfish"
@@ -232,8 +232,8 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_height="1dip"
+                        android:layout_marginTop="10dip"
                         android:background="@color/lightgray" />
 
                     <TextView
@@ -241,7 +241,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/abeezee"
                         android:gravity="center"
-                        android:padding="5dp"
+                        android:padding="5dip"
                         android:shadowColor="#5BFFFFFF"
                         android:text="@string/test"
                         android:textColor="#030303" />
@@ -260,9 +260,9 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="340dp"
-                android:layout_height="150dp"
-                android:layout_margin="10dp"
+                android:layout_width="340dip"
+                android:layout_height="150dip"
+                android:layout_margin="10dip"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground">
 
@@ -278,17 +278,17 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
+                        android:layout_width="64dip"
+                        android:layout_height="64dip"
                         android:background="@drawable/chart_icon"
                         android:contentDescription="@string/todo"
-                        android:padding="10dp"
+                        android:padding="10dip"
                         android:src="@drawable/ic_attach_money_black_24dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="10dip"
                         android:fontFamily="@font/abeezee"
                         android:shadowColor="#00FFFDFD"
                         android:text="@string/show_averages"
@@ -299,18 +299,9 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_margin="10dp"
+                        android:layout_height="1dip"
+                        android:layout_margin="10dip"
                         android:background="@color/lightgray" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/abeezee"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:text="@string/todooo"
-                        android:textColor="@android:color/darker_gray" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    package="com.trying.myapplication"
     xmlns:tools="http://schemas.android.com/tools"
+    package="com.trying.myapplication"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/encryption"
         android:clipToPadding="false"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="299dp"
-            android:layout_margin="10dp"
+            android:layout_height="289dp"
+            android:layout_margin="10dip"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
@@ -28,7 +27,8 @@
 
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="123dp"
+                android:layout_height="126dp"
+                android:orientation="vertical"
                 android:stretchColumns="1">
 
                 <TableRow
@@ -37,18 +37,18 @@
 
                     <TextView
 
-                        android:layout_width="60dp"
+                        android:width="68dp"
                         android:background="#AB134561"
                         android:fontFamily="@font/abeezee"
                         android:padding="3dip"
+                        android:text="@string/filesize"
                         android:textColor="#000000"
                         android:textSize="12sp"
-                        android:textStyle="bold"
-                        tools:text="FileSize" />
+                        android:textStyle="bold" />
 
                     <TextView
 
-                        android:width="100dp"
+                        android:width="100dip"
                         android:background="#AB134561"
                         android:fontFamily="@font/abeezee"
                         android:padding="3dip"
@@ -58,14 +58,13 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="120dp"
-                        android:width="90dip"
+                        android:width="120dip"
                         android:background="#AB134561"
+                        android:fontFamily="@font/abeezee"
                         android:padding="3dip"
                         android:text=""
                         android:textColor="#000000"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:textSize="12sp" />
                 </TableRow>
 
                 <TableRow
@@ -85,7 +84,7 @@
                     <TextView
 
                         android:id="@+id/timeAES10kb"
-                        android:width="100dp"
+                        android:width="100dip"
                         android:background="@drawable/cells"
                         android:fontFamily="@font/abeezee"
                         android:padding="3dip" />
@@ -93,7 +92,7 @@
                     <Button
 
                         android:id="@+id/btn10kb"
-                        android:layout_width="120dp"
+                        android:layout_width="120dip"
                         android:layout_height="match_parent"
                         android:width="90dip"
                         android:background="@drawable/cells"
@@ -125,7 +124,7 @@
                     <TextView
 
                         android:id="@+id/timeAES100kb"
-                        android:width="100dp"
+                        android:width="100dip"
                         android:background="@drawable/cells"
                         android:fontFamily="@font/abeezee"
                         android:padding="3dip" />
@@ -134,7 +133,7 @@
                     <Button
 
                         android:id="@+id/btn100kb"
-                        android:layout_width="103dp"
+                        android:layout_width="103dip"
                         android:layout_height="match_parent"
                         android:width="90dip"
                         android:background="@drawable/cells"
@@ -164,7 +163,7 @@
                     <TextView
 
                         android:id="@+id/timeAES500kb"
-                        android:width="100dp"
+                        android:width="100dip"
                         android:background="@drawable/cells"
                         android:fontFamily="@font/abeezee"
                         android:padding="3dip" />
@@ -172,7 +171,7 @@
                     <Button
 
                         android:id="@+id/btn500kb"
-                        android:layout_width="103dp"
+                        android:layout_width="103dip"
                         android:layout_height="match_parent"
                         android:width="90dip"
                         android:background="@drawable/cells"
@@ -202,7 +201,7 @@
                     <TextView
 
                         android:id="@+id/timeAES1mb"
-                        android:width="100dp"
+                        android:width="100dip"
                         android:background="@drawable/cells"
                         android:fontFamily="@font/abeezee"
                         android:padding="3dip" />
@@ -210,7 +209,7 @@
                     <Button
 
                         android:id="@+id/btn1mb"
-                        android:layout_width="103dp"
+                        android:layout_width="103dip"
                         android:layout_height="match_parent"
                         android:width="90dip"
                         android:background="@drawable/cells"
@@ -227,7 +226,7 @@
             <LinearLayout
                 android:id="@+id/btnAES"
                 android:layout_width="match_parent"
-                android:layout_height="177dp"
+                android:layout_height="168dp"
                 android:layout_gravity="bottom"
                 android:background="#AB134561"
                 android:clickable="true"
@@ -239,14 +238,18 @@
                     android:id="@+id/btnRunAll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="#A1F8F9FA"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:fontFamily="@font/abeezee"
-                    android:text="RUN ALL" />
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="@string/run_all" />
 
                 <TextView
                     android:id="@+id/algorithmTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="10dip"
                     android:fontFamily="@font/abeezee"
                     android:shadowColor="#5BFFFFFF"
                     android:text="@string/aes"
@@ -255,29 +258,16 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="1dip"
                     android:background="@color/lightgray" />
 
                 <TextView
-                    android:id="@+id/avgPreCache"
-                    android:layout_width="310dp"
-                    android:layout_height="26dp"
-                    android:fontFamily="@font/abeezee"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:shadowColor="#5BFFFFFF"
-                    android:textAllCaps="false"
-                    android:textColor="#030303"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
                     android:id="@+id/avgResult"
-                    android:layout_width="310dp"
-                    android:layout_height="26dp"
+                    android:layout_width="310dip"
+                    android:layout_height="26dip"
                     android:fontFamily="@font/abeezee"
                     android:gravity="center"
-                    android:padding="5dp"
+                    android:padding="5dip"
                     android:shadowColor="#5BFFFFFF"
                     android:text="@string/average"
                     android:textAllCaps="false"
@@ -285,19 +275,58 @@
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/btnChart"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:background="#A1F8F9FA"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:fontFamily="@font/abeezee"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:text="@string/show_chart" />
-
             </LinearLayout>
 
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnChart"
+            android:layout_width="match_parent"
+            android:layout_height="150dip"
+            android:layout_margin="10dip"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground">
+
+            <LinearLayout
+
+                android:id="@+id/showChart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F8F9FA"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="64dip"
+                    android:layout_height="64dip"
+                    android:background="@drawable/chart_icon"
+                    android:contentDescription="@string/todo"
+                    android:padding="10dip"
+                    android:src="@drawable/ic_attach_money_black_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dip"
+                    android:fontFamily="@font/abeezee"
+                    android:shadowColor="#00FFFDFD"
+                    android:text="@string/show_averages"
+                    android:textAllCaps="true"
+                    android:textColor="#000000"
+                    android:textColorHint="#050505"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_margin="10dip"
+                    android:background="@color/lightgray" />
+
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>

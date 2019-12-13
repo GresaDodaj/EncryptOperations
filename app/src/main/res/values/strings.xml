@@ -23,4 +23,6 @@
     <string name="show_my_average">show_my_average</string>
     <string name="showmyaverage">show my average</string>
     <string name="application_name">CryptoAlgorithms Performance</string>
+    <string name="run_all">RUN ALL</string>
+    <string name="filesize">FileSize</string>
 </resources>

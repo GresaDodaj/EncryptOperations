@@ -6,6 +6,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 class tripleDES {
 
+
+
     static byte[] initKey() throws Exception {
         KeyGenerator keyGenerator = KeyGenerator.getInstance("DESede");
         keyGenerator.init(168);//should be 16 or 24 bytes / 112 or 168 bits
@@ -13,7 +15,8 @@ class tripleDES {
         return secretKey.getEncoded();
     }
 
-    static byte[] encrypt(byte[] input, byte[] key) throws Exception {
+    static byte[] encrypt(byte[] input) throws Exception {
+        byte [] key = initKey();
         SecretKey secretKey = new SecretKeySpec(key, "DESede");
         Cipher cipher = Cipher.getInstance("DESede/CBC/PKCS5Padding");
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
@@ -38,4 +41,5 @@ class tripleDES {
         }
         return builder.toString();
     }
+
 }
