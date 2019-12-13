@@ -3,6 +3,7 @@ package com.trying.myapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,7 +50,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
     static long timeBLOWFISH1mb = 0;
 
 
-
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -1046,448 +1047,464 @@ public class EncryptionAlgorithm extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                progressDialog = new ProgressDialog(EncryptionAlgorithm.this);
+                progressDialog.setMessage("Loading..."); // Setting Message
+                progressDialog.setTitle("ProgressDialog"); // Setting Title
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+                progressDialog.show(); // Display Progress Dialog
+                progressDialog.setCancelable(false);
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            if(alg .equals("AES")) {
 
-
-                if(alg .equals("AES")) {
-
-                    try {
-                        long average=0;
-                        AES.encrypt(_10KBfile);
-                        for(int i = 0; i<50; i++) {
-                            long startTime  = System.nanoTime();
-                            AES.encrypt(_10KBfile);
-                            long endTime = System.nanoTime();
-                            timeLengthAES[0] = (endTime - startTime) / 1000000;
-                            if(i>3)
-                                average = average+timeLengthAES[0];
-                        }
-                        average=average/46;
-                        //time of the execution in nanoseconds/1000000 = time in milliseconds
-
-                        time10KB.setText(average + " milliseconds");
-                        timeAES10kb = average;
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        long average=0;
-                        AES.encrypt(_100KBfile);
-
-                        for(int i = 0; i<50; i++) {
-                            long startTime  = System.nanoTime();
-                            AES.encrypt(_100KBfile);
-                            long endTime = System.nanoTime();
-                            timeLengthAES[0] = (endTime - startTime) / 1000000;
-                            if(i>3)
-                                average = average+timeLengthAES[0];
-                        }
-                        average=average/46;
-                        time100KB.setText(average + " milliseconds");
-                        timeAES100kb = average;
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        long average=0;
-                        AES.encrypt(_500KBfile);
-                        for(int i = 0; i<50; i++) {
-                            long startTime  = System.nanoTime();
-                            AES.encrypt(_500KBfile);
-                            long endTime = System.nanoTime();
-                            timeLengthAES[0] = (endTime - startTime) / 1000000;
-                            if(i>3)
-                                average = average+timeLengthAES[0];
-                        }
-                        average=average/46;
-                        time500KB.setText(average + " milliseconds");
-                        timeAES500kb = average;
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        long average=0;
-                        AES.encrypt(_1MBfile);
-                        for(int i = 0; i<50; i++) {
-                            long startTime  = System.nanoTime();
-                            AES.encrypt(_1MBfile);
-                            long endTime = System.nanoTime();
-                            timeLengthAES[0] = (endTime - startTime) / 1000000;
-                            if(i>3)
-                                average = average+timeLengthAES[0];
-                        }
-                        average=average/46;
-                        time1MB.setText(average + " milliseconds");
-                        timeAES1mb = average;
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,timeDES10kb,timeDES100kb,timeDES500kb,
-                        timeDES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
-                        time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
-
-                }
-                else if (alg.equals("DES")){
-                    try {
-                        long average=0;
-                        DES.encrypt(_10KBfile.getBytes());
-                        for(int i = 0; i<50; i++) {
-                            long startTime  = System.nanoTime();
-                            DES.encrypt(_10KBfile.getBytes());
-                            long endTime = System.nanoTime();
-                            timeLengthDES[0] = (endTime - startTime) / 1000000;
-                            if(i>3)
-                                average = average+timeLengthDES[0];
-                        }
-                        average=average/46;
-                        time10KB.setText(average + " milliseconds");
-                        timeDES10kb = average;
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        long average=0;
-                        DES.encrypt(_100KBfile.getBytes());
-                        for(int i = 0; i<50; i++) {
-                            long startTime  = System.nanoTime();
-                            DES.encrypt(_100KBfile.getBytes());
-                            long endTime = System.nanoTime();
-                            timeLengthDES[0] = (endTime - startTime) / 1000000;
-                            if(i>3)
-                                average = average+timeLengthDES[0];
-                        }
-                        average=average/46;
-                        time100KB.setText(average + " milliseconds");
-                        timeDES100kb = average;
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        long average=0;
-                        DES.encrypt(_500KBfile.getBytes());
-                        for(int i = 0; i<50; i++) {
-                            long startTime  = System.nanoTime();
-                            DES.encrypt(_500KBfile.getBytes());
-                            long endTime = System.nanoTime();
-                            timeLengthDES[0] = (endTime - startTime) / 1000000;
-                            if(i>3)
-                                average = average+timeLengthDES[0];
-                        }
-                        average=average/46;
-                        time500KB.setText(average + " milliseconds");
-                        timeDES500kb =  average;
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        long average=0;
-                        DES.encrypt(_1MBfile.getBytes());
-                        for(int i = 0; i<50; i++) {
-                            long startTime  = System.nanoTime();
-                            DES.encrypt(_1MBfile.getBytes());
-                            long endTime = System.nanoTime();
-                            timeLengthDES[0] = (endTime - startTime) / 1000000;
-                            if(i>3)
-                                average = average+timeLengthDES[0];
-                        }
-                        average=average/46;
-                        time1MB.setText(average + " milliseconds");
-                        timeDES1mb =  average;
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,timeDES10kb,timeDES100kb,timeDES500kb,
-                        timeDES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
-                        time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
-                }else if (alg.equals("3DES")){
-                    try {
-                        long average=0;
-                        tripleDES.encrypt(_10KBfile);
-                        for(int i = 0; i<50; i++) {
-                            long startTime  = System.nanoTime();
-                            tripleDES.encrypt(_10KBfile);
-                            long endTime = System.nanoTime();
-                            timeLength3DES[0] = (endTime - startTime) / 1000000;
-                            if(i>3)
-                                average = average+timeLength3DES[0];
-                        }
-                        average=average/46;
-                        time10KB.setText(average + " milliseconds");
-                        time3DES10kb = average;
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        long average=0;
-                        tripleDES.encrypt(_100KBfile);
-                        for(int i = 0; i<50; i++) {
-                            long startTime  = System.nanoTime();
-                            tripleDES.encrypt(_100KBfile);
-                            long endTime = System.nanoTime();
-                            timeLength3DES[0] = (endTime - startTime) / 1000000;
-                            if(i>3)
-                                average = average+timeLength3DES[0];
-                        }
-                        average=average/46;
-                        time100KB.setText(average + " milliseconds");
-                        time3DES100kb = average;
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        long average=0;
-                        tripleDES.encrypt(_500KBfile);
-                        for(int i = 0; i<50; i++) {
-                            long startTime  = System.nanoTime();
-                            tripleDES.encrypt(_500KBfile);
-                            long endTime = System.nanoTime();
-                            timeLength3DES[0] = (endTime - startTime) / 1000000;
-                            if(i>3)
-                                average = average+timeLength3DES[0];
-                        }
-                        average=average/46;
-                        time500KB.setText(average + " milliseconds");
-                        time3DES500kb =  average;
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        long average=0;
-                        tripleDES.encrypt(_1MBfile);
-                        for(int i = 0; i<50; i++) {
-                            long startTime  = System.nanoTime();
-                            tripleDES.encrypt(_1MBfile);
-                            long endTime = System.nanoTime();
-                            timeLength3DES[0] = (endTime - startTime) / 1000000;
-                            if(i>3)
-                                average = average+timeLength3DES[0];
-                        }
-                        average=average/46;
-                        time1MB.setText(average + " milliseconds");
-                        time3DES1mb =  average;
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,timeDES10kb,timeDES100kb,timeDES500kb,
-                        timeDES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
-                        time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
-                }
-                else{
-                    try {
-                        long average = 0;
-                        for(int i = 0; i<50; i++) {
-                            long startTime = System.nanoTime();
-                            blowfish.generate_symetric_key();
-                            blowfish.encrypt(_10KBfile.getBytes());
-                            long endTime = System.nanoTime();
-                            timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
-
-                            if(i>3)
-                                average = average+ timeLengthBLOWFISH[0];
-                        }
-                        average = average/46;
-                        time10KB.setText(average + " milliseconds");
-                        timeBLOWFISH10kb =  average;
-                    } catch (Exception e) { e.printStackTrace(); }
-
-                    try {
-                        long average = 0;
-                        for(int i = 0; i<50; i++) {
-                            long startTime = System.nanoTime();
-                            blowfish.generate_symetric_key();
-                            blowfish.encrypt(_100KBfile.getBytes());
-                            long endTime = System.nanoTime();
-                            timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
-
-                            if(i>3)
-                                average = average+ timeLengthBLOWFISH[0];
-                        }
-                        average = average/46;
-                        time100KB.setText(average + " milliseconds");
-                        timeBLOWFISH100kb =  average;
-                    } catch (Exception e) { e.printStackTrace(); }
-                    try {
-                        long average = 0;
-                        for(int i = 0; i<50; i++) {
-                            long startTime = System.nanoTime();
-                            blowfish.generate_symetric_key();
-                            blowfish.encrypt(_500KBfile.getBytes());
-                            long endTime = System.nanoTime();
-                            timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
-
-                            if(i>3)
-                                average = average+ timeLengthBLOWFISH[0];
-                        }
-                        average = average/46;
-                        time500KB.setText(average + " milliseconds");
-                        timeBLOWFISH500kb =  average;
-                    } catch (Exception e) { e.printStackTrace(); }
-                    try {
-                        long average = 0;
-                        for(int i = 0; i<50; i++) {
-                            long startTime = System.nanoTime();
-                            blowfish.generate_symetric_key();
-                            blowfish.encrypt(_1MBfile.getBytes());
-                            long endTime = System.nanoTime();
-                            timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
-
-                            if(i>3)
-                                average = average+ timeLengthBLOWFISH[0];
-                        }
-                        average = average/46;
-                        time1MB.setText(average + " milliseconds");
-                        timeBLOWFISH1mb = average;
-                    } catch (Exception e) { e.printStackTrace(); }
-
-                    myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,timeDES10kb,timeDES100kb,timeDES500kb,
-                        timeDES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
-                        time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
-
-                }
-                timeAverage = average(time10KB.getText().toString(),time100KB.getText().toString(),
-                        time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
-
-                long avgAes= avg(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb);
-                long avgDES= avg(timeDES10kb,timeDES100kb,timeDES500kb, timeDES1mb);
-                long avg3DES= avg(time3DES10kb,time3DES100kb,time3DES500kb, time3DES1mb);
-                long avgBLOWFISH= avg(timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
-                Averages avgclass = new Averages(avgAes,avgDES,avg3DES,avgBLOWFISH);
-                if(timeAverage!=0){
-
-                     avgResult.setText("AVERAGE: " + (int) timeAverage + " milliseconds");
-
-                    Map<String, Object> averageDB = new HashMap<>();
-                    final Map<String, Object> average_collection = new HashMap<>();
-                    if(alg.equals("AES")) {
-
-                        averageDB.put("AES",timeAverage);
-                        dbAES.add(averageDB);
-                        dbAES.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    Log.d("TAG", task.getResult().size() + "");
-
-                                    int sum_aes = 0;
-                                    int  num_of_docs_aes = task.getResult().size();
-
-                                    for(int i = 0; i < num_of_docs_aes; i++){
-                                        String a = String.valueOf(task.getResult().getDocuments().get(i).get("AES"));
-                                        sum_aes += Integer.parseInt(a);
+                                try {
+                                    long average=0;
+                                    AES.encrypt(_10KBfile);
+                                    for(int i = 0; i<50; i++) {
+                                        long startTime  = System.nanoTime();
+                                        AES.encrypt(_10KBfile);
+                                        long endTime = System.nanoTime();
+                                        timeLengthAES[0] = (endTime - startTime) / 1000000;
+                                        if(i>3)
+                                            average = average+timeLengthAES[0];
                                     }
-                                    int avg_aes_db = sum_aes / num_of_docs_aes;
-                                    average_collection.put("AES",avg_aes_db);
-                                    db_average_aes.set(average_collection);
+                                    average=average/46;
+                                    //time of the execution in nanoseconds/1000000 = time in milliseconds
 
-                                } else { Log.d("TAG", "Error getting documents: ", task.getException()); }
-                            }
-                        });
-                    }
-                    else if(alg.equals("DES")){
-                        averageDB.put("DES",timeAverage);
-                        dbDES.add(averageDB);
+                                    time10KB.setText(average + " milliseconds");
+                                    timeAES10kb = average;
 
-                        dbDES.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    Log.d("TAG", task.getResult().size() + "");
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
 
-                                    int sum_des = 0;
-                                    int  num_of_docs_des = task.getResult().size();
+                                try {
+                                    long average=0;
+                                    AES.encrypt(_100KBfile);
 
-                                    for(int i = 0; i < num_of_docs_des; i++){
-                                        String a = String.valueOf(task.getResult().getDocuments().get(i).get("DES"));
-                                        sum_des += Integer.parseInt(a);
+                                    for(int i = 0; i<50; i++) {
+                                        long startTime  = System.nanoTime();
+                                        AES.encrypt(_100KBfile);
+                                        long endTime = System.nanoTime();
+                                        timeLengthAES[0] = (endTime - startTime) / 1000000;
+                                        if(i>3)
+                                            average = average+timeLengthAES[0];
                                     }
-                                    int avg_des_db = sum_des / num_of_docs_des;
+                                    average=average/46;
+                                    time100KB.setText(average + " milliseconds");
+                                    timeAES100kb = average;
 
-                                    average_collection.put("DES",avg_des_db);
-                                    db_average_des.set(average_collection);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
 
-                                } else { Log.d("TAG", "Error getting documents: ", task.getException()); }
-                            }
-                        });
-                    }
-                    else if(alg.equals("BLOWFISH")){
-                        averageDB.put("BLOWFISH",timeAverage);
-                        dbBLOWFISH.add(averageDB);
-
-                        dbBLOWFISH.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    Log.d("TAG", task.getResult().size() + "");
-
-                                    int sum_blowfish = 0;
-                                    int  num_of_docs_blowfish = task.getResult().size();
-
-                                    for(int i = 0; i < num_of_docs_blowfish; i++){
-                                        String a = String.valueOf(task.getResult().getDocuments().get(i).get("BLOWFISH"));
-                                        sum_blowfish += Integer.parseInt(a);
+                                try {
+                                    long average=0;
+                                    AES.encrypt(_500KBfile);
+                                    for(int i = 0; i<50; i++) {
+                                        long startTime  = System.nanoTime();
+                                        AES.encrypt(_500KBfile);
+                                        long endTime = System.nanoTime();
+                                        timeLengthAES[0] = (endTime - startTime) / 1000000;
+                                        if(i>3)
+                                            average = average+timeLengthAES[0];
                                     }
-                                    int avg_blowfish_db = sum_blowfish / num_of_docs_blowfish;
+                                    average=average/46;
+                                    time500KB.setText(average + " milliseconds");
+                                    timeAES500kb = average;
 
-                                    average_collection.put("BLOWFISH",avg_blowfish_db);
-                                    db_average_blowfish.set(average_collection);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
 
-                                } else { Log.d("TAG", "Error getting documents: ", task.getException()); }
-                            }
-                        });
-                    }
-                    else if(alg.equals("3DES")){
-                        averageDB.put("3DES",timeAverage);
-                        db3DES.add(averageDB);
-
-                        db3DES.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    Log.d("TAG", task.getResult().size() + "");
-
-                                    int sum_3des = 0;
-                                    int  num_of_docs_3des = task.getResult().size();
-
-                                    for(int i = 0; i < num_of_docs_3des; i++){
-                                        String a = String.valueOf(task.getResult().getDocuments().get(i).get("3DES"));
-                                        sum_3des += Integer.parseInt(a);
+                                try {
+                                    long average=0;
+                                    AES.encrypt(_1MBfile);
+                                    for(int i = 0; i<50; i++) {
+                                        long startTime  = System.nanoTime();
+                                        AES.encrypt(_1MBfile);
+                                        long endTime = System.nanoTime();
+                                        timeLengthAES[0] = (endTime - startTime) / 1000000;
+                                        if(i>3)
+                                            average = average+timeLengthAES[0];
                                     }
-                                    int avg_3des_db = sum_3des / num_of_docs_3des;
-                                    average_collection.put("3DES",avg_3des_db);
-                                    db_average_3des.set(average_collection);
+                                    average=average/46;
+                                    time1MB.setText(average + " milliseconds");
+                                    timeAES1mb = average;
 
-                                } else { Log.d("TAG", "Error getting documents: ", task.getException()); }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,timeDES10kb,timeDES100kb,timeDES500kb,
+                                        timeDES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                                        time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+
                             }
-                        });
+                            else if (alg.equals("DES")){
+                                try {
+                                    long average=0;
+                                    DES.encrypt(_10KBfile.getBytes());
+                                    for(int i = 0; i<50; i++) {
+                                        long startTime  = System.nanoTime();
+                                        DES.encrypt(_10KBfile.getBytes());
+                                        long endTime = System.nanoTime();
+                                        timeLengthDES[0] = (endTime - startTime) / 1000000;
+                                        if(i>3)
+                                            average = average+timeLengthDES[0];
+                                    }
+                                    average=average/46;
+                                    time10KB.setText(average + " milliseconds");
+                                    timeDES10kb = average;
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                try {
+                                    long average=0;
+                                    DES.encrypt(_100KBfile.getBytes());
+                                    for(int i = 0; i<50; i++) {
+                                        long startTime  = System.nanoTime();
+                                        DES.encrypt(_100KBfile.getBytes());
+                                        long endTime = System.nanoTime();
+                                        timeLengthDES[0] = (endTime - startTime) / 1000000;
+                                        if(i>3)
+                                            average = average+timeLengthDES[0];
+                                    }
+                                    average=average/46;
+                                    time100KB.setText(average + " milliseconds");
+                                    timeDES100kb = average;
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                try {
+                                    long average=0;
+                                    DES.encrypt(_500KBfile.getBytes());
+                                    for(int i = 0; i<50; i++) {
+                                        long startTime  = System.nanoTime();
+                                        DES.encrypt(_500KBfile.getBytes());
+                                        long endTime = System.nanoTime();
+                                        timeLengthDES[0] = (endTime - startTime) / 1000000;
+                                        if(i>3)
+                                            average = average+timeLengthDES[0];
+                                    }
+                                    average=average/46;
+                                    time500KB.setText(average + " milliseconds");
+                                    timeDES500kb =  average;
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                try {
+                                    long average=0;
+                                    DES.encrypt(_1MBfile.getBytes());
+                                    for(int i = 0; i<50; i++) {
+                                        long startTime  = System.nanoTime();
+                                        DES.encrypt(_1MBfile.getBytes());
+                                        long endTime = System.nanoTime();
+                                        timeLengthDES[0] = (endTime - startTime) / 1000000;
+                                        if(i>3)
+                                            average = average+timeLengthDES[0];
+                                    }
+                                    average=average/46;
+                                    time1MB.setText(average + " milliseconds");
+                                    timeDES1mb =  average;
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,timeDES10kb,timeDES100kb,timeDES500kb,
+                                        timeDES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                                        time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                            }
+                            else if (alg.equals("3DES")){
+                                try {
+                                    long average=0;
+                                    tripleDES.encrypt(_10KBfile);
+                                    for(int i = 0; i<50; i++) {
+                                        long startTime  = System.nanoTime();
+                                        tripleDES.encrypt(_10KBfile);
+                                        long endTime = System.nanoTime();
+                                        timeLength3DES[0] = (endTime - startTime) / 1000000;
+                                        if(i>3)
+                                            average = average+timeLength3DES[0];
+                                    }
+                                    average=average/46;
+                                    time10KB.setText(average + " milliseconds");
+                                    time3DES10kb = average;
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                try {
+                                    long average=0;
+                                    tripleDES.encrypt(_100KBfile);
+                                    for(int i = 0; i<50; i++) {
+                                        long startTime  = System.nanoTime();
+                                        tripleDES.encrypt(_100KBfile);
+                                        long endTime = System.nanoTime();
+                                        timeLength3DES[0] = (endTime - startTime) / 1000000;
+                                        if(i>3)
+                                            average = average+timeLength3DES[0];
+                                    }
+                                    average=average/46;
+                                    time100KB.setText(average + " milliseconds");
+                                    time3DES100kb = average;
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                try {
+                                    long average=0;
+                                    tripleDES.encrypt(_500KBfile);
+                                    for(int i = 0; i<50; i++) {
+                                        long startTime  = System.nanoTime();
+                                        tripleDES.encrypt(_500KBfile);
+                                        long endTime = System.nanoTime();
+                                        timeLength3DES[0] = (endTime - startTime) / 1000000;
+                                        if(i>3)
+                                            average = average+timeLength3DES[0];
+                                    }
+                                    average=average/46;
+                                    time500KB.setText(average + " milliseconds");
+                                    time3DES500kb =  average;
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                try {
+                                    long average=0;
+                                    tripleDES.encrypt(_1MBfile);
+                                    for(int i = 0; i<50; i++) {
+                                        long startTime  = System.nanoTime();
+                                        tripleDES.encrypt(_1MBfile);
+                                        long endTime = System.nanoTime();
+                                        timeLength3DES[0] = (endTime - startTime) / 1000000;
+                                        if(i>3)
+                                            average = average+timeLength3DES[0];
+                                    }
+                                    average=average/46;
+                                    time1MB.setText(average + " milliseconds");
+                                    time3DES1mb =  average;
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,timeDES10kb,timeDES100kb,timeDES500kb,
+                                        timeDES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                                        time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                            }
+                            else{
+                                try {
+                                    long average = 0;
+                                    for(int i = 0; i<50; i++) {
+                                        long startTime = System.nanoTime();
+                                        blowfish.generate_symetric_key();
+                                        blowfish.encrypt(_10KBfile.getBytes());
+                                        long endTime = System.nanoTime();
+                                        timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
+
+                                        if(i>3)
+                                            average = average+ timeLengthBLOWFISH[0];
+                                    }
+                                    average = average/46;
+                                    time10KB.setText(average + " milliseconds");
+                                    timeBLOWFISH10kb =  average;
+                                } catch (Exception e) { e.printStackTrace(); }
+
+                                try {
+                                    long average = 0;
+                                    for(int i = 0; i<50; i++) {
+                                        long startTime = System.nanoTime();
+                                        blowfish.generate_symetric_key();
+                                        blowfish.encrypt(_100KBfile.getBytes());
+                                        long endTime = System.nanoTime();
+                                        timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
+
+                                        if(i>3)
+                                            average = average+ timeLengthBLOWFISH[0];
+                                    }
+                                    average = average/46;
+                                    time100KB.setText(average + " milliseconds");
+                                    timeBLOWFISH100kb =  average;
+                                } catch (Exception e) { e.printStackTrace(); }
+                                try {
+                                    long average = 0;
+                                    for(int i = 0; i<50; i++) {
+                                        long startTime = System.nanoTime();
+                                        blowfish.generate_symetric_key();
+                                        blowfish.encrypt(_500KBfile.getBytes());
+                                        long endTime = System.nanoTime();
+                                        timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
+
+                                        if(i>3)
+                                            average = average+ timeLengthBLOWFISH[0];
+                                    }
+                                    average = average/46;
+                                    time500KB.setText(average + " milliseconds");
+                                    timeBLOWFISH500kb =  average;
+                                } catch (Exception e) { e.printStackTrace(); }
+                                try {
+                                    long average = 0;
+                                    for(int i = 0; i<50; i++) {
+                                        long startTime = System.nanoTime();
+                                        blowfish.generate_symetric_key();
+                                        blowfish.encrypt(_1MBfile.getBytes());
+                                        long endTime = System.nanoTime();
+                                        timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
+
+                                        if(i>3)
+                                            average = average+ timeLengthBLOWFISH[0];
+                                    }
+                                    average = average/46;
+                                    time1MB.setText(average + " milliseconds");
+                                    timeBLOWFISH1mb = average;
+                                } catch (Exception e) { e.printStackTrace(); }
+
+                                myChart myChart = new myChart(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb,timeDES10kb,timeDES100kb,timeDES500kb,
+                                        timeDES1mb,time3DES10kb,time3DES100kb,time3DES500kb,
+                                        time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+
+                            }
+                            timeAverage = average(time10KB.getText().toString(),time100KB.getText().toString(),
+                                    time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
+
+                            long avgAes= avg(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb);
+                            long avgDES= avg(timeDES10kb,timeDES100kb,timeDES500kb, timeDES1mb);
+                            long avg3DES= avg(time3DES10kb,time3DES100kb,time3DES500kb, time3DES1mb);
+                            long avgBLOWFISH= avg(timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
+                            Averages avgclass = new Averages(avgAes,avgDES,avg3DES,avgBLOWFISH);
+                            if(timeAverage!=0){
+
+                                avgResult.setText("AVERAGE: " + (int) timeAverage + " milliseconds");
+
+                                Map<String, Object> averageDB = new HashMap<>();
+                                final Map<String, Object> average_collection = new HashMap<>();
+                                if(alg.equals("AES")) {
+
+                                    averageDB.put("AES",timeAverage);
+                                    dbAES.add(averageDB);
+                                    dbAES.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d("TAG", task.getResult().size() + "");
+
+                                                int sum_aes = 0;
+                                                int  num_of_docs_aes = task.getResult().size();
+
+                                                for(int i = 0; i < num_of_docs_aes; i++){
+                                                    String a = String.valueOf(task.getResult().getDocuments().get(i).get("AES"));
+                                                    sum_aes += Integer.parseInt(a);
+                                                }
+                                                int avg_aes_db = sum_aes / num_of_docs_aes;
+                                                average_collection.put("AES",avg_aes_db);
+                                                db_average_aes.set(average_collection);
+
+                                            } else { Log.d("TAG", "Error getting documents: ", task.getException()); }
+                                        }
+                                    });
+                                }
+                                else if(alg.equals("DES")){
+                                    averageDB.put("DES",timeAverage);
+                                    dbDES.add(averageDB);
+
+                                    dbDES.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d("TAG", task.getResult().size() + "");
+
+                                                int sum_des = 0;
+                                                int  num_of_docs_des = task.getResult().size();
+
+                                                for(int i = 0; i < num_of_docs_des; i++){
+                                                    String a = String.valueOf(task.getResult().getDocuments().get(i).get("DES"));
+                                                    sum_des += Integer.parseInt(a);
+                                                }
+                                                int avg_des_db = sum_des / num_of_docs_des;
+
+                                                average_collection.put("DES",avg_des_db);
+                                                db_average_des.set(average_collection);
+
+                                            } else { Log.d("TAG", "Error getting documents: ", task.getException()); }
+                                        }
+                                    });
+                                }
+                                else if(alg.equals("BLOWFISH")){
+                                    averageDB.put("BLOWFISH",timeAverage);
+                                    dbBLOWFISH.add(averageDB);
+
+                                    dbBLOWFISH.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d("TAG", task.getResult().size() + "");
+
+                                                int sum_blowfish = 0;
+                                                int  num_of_docs_blowfish = task.getResult().size();
+
+                                                for(int i = 0; i < num_of_docs_blowfish; i++){
+                                                    String a = String.valueOf(task.getResult().getDocuments().get(i).get("BLOWFISH"));
+                                                    sum_blowfish += Integer.parseInt(a);
+                                                }
+                                                int avg_blowfish_db = sum_blowfish / num_of_docs_blowfish;
+
+                                                average_collection.put("BLOWFISH",avg_blowfish_db);
+                                                db_average_blowfish.set(average_collection);
+
+                                            } else { Log.d("TAG", "Error getting documents: ", task.getException()); }
+                                        }
+                                    });
+                                }
+                                else if(alg.equals("3DES")){
+                                    averageDB.put("3DES",timeAverage);
+                                    db3DES.add(averageDB);
+
+                                    db3DES.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d("TAG", task.getResult().size() + "");
+
+                                                int sum_3des = 0;
+                                                int  num_of_docs_3des = task.getResult().size();
+
+                                                for(int i = 0; i < num_of_docs_3des; i++){
+                                                    String a = String.valueOf(task.getResult().getDocuments().get(i).get("3DES"));
+                                                    sum_3des += Integer.parseInt(a);
+                                                }
+                                                int avg_3des_db = sum_3des / num_of_docs_3des;
+                                                average_collection.put("3DES",avg_3des_db);
+                                                db_average_3des.set(average_collection);
+
+                                            } else { Log.d("TAG", "Error getting documents: ", task.getException()); }
+                                        }
+                                    });
+                                }
+
+
+                                timeAverage = average(time10KB.getText().toString(),time100KB.getText().toString(),
+                                        time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        progressDialog.dismiss();
                     }
+                }).start();
 
 
-                    timeAverage = average(time10KB.getText().toString(),time100KB.getText().toString(),
-                            time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
-                }
 
 
             }
