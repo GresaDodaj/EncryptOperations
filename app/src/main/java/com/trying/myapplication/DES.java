@@ -13,22 +13,22 @@ class DES {
         return secretKey.getEncoded();
     }
 
-    static byte[] encrypt(byte[] input) throws Exception {
+    static void encrypt(byte[] input) throws Exception {
         byte [] key = initKey();
         SecretKey secretKey = new SecretKeySpec(key, "DESede");
         Cipher cipher = Cipher.getInstance("DESede/CBC/PKCS5Padding");
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-        return cipher.doFinal(input);
+        cipher.doFinal(input);
     }
 
-    static byte[] decrypt(byte[] encryptedInput, byte[] key) throws Exception {
+  /*  static byte[] decrypt(byte[] encryptedInput, byte[] key) throws Exception {
         SecretKey secretKey = new SecretKeySpec(key, "DESede");
         Cipher cipher = Cipher.getInstance("DESede/CBC/PKCS5Padding");  //modi cbc, padding:
         cipher.init(Cipher.DECRYPT_MODE, secretKey);
         return cipher.doFinal(encryptedInput);
-    }
+    }*/
     
-    static String byte_to_string(byte[] result_in_bytes) {
+    /*static String byte_to_string(byte[] result_in_bytes) {
         StringBuilder builder = new StringBuilder();
         for (byte resultByte : result_in_bytes) {
             if (Integer.toHexString(0xFF & resultByte).length() == 1) {
@@ -38,6 +38,6 @@ class DES {
             }
         }
         return builder.toString();
-    }
+    }*/
 
 }

@@ -18,7 +18,7 @@
         app:layout_constraintVertical_bias="0.387"
         app:srcCompat="@drawable/lock1"
         tools:srcCompat="@drawable/lock1"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/app_logo" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -35,7 +35,6 @@
         app:layout_constraintTop_toBottomOf="@id/imageView" /> <!--changed the color of the progress bar-->
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"

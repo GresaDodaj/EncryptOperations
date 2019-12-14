@@ -8,7 +8,6 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="560dp"
         android:layout_gravity="bottom"
@@ -44,7 +43,6 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/btnAES1"
                         android:layout_width="64dip"
                         android:layout_height="64dip"
                         android:background="@drawable/lock1"
@@ -65,7 +63,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
-                        android:background="@color/lightgray" />
+                        android:background="@color/lightGray" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -100,7 +98,6 @@
                     android:touchscreenBlocksFocus="false">
 
                     <ImageView
-                        android:id="@+id/btnDES1"
                         android:layout_width="64dip"
                         android:layout_height="64dip"
                         android:background="@drawable/lock1"
@@ -121,7 +118,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
-                        android:background="@color/lightgray" />
+                        android:background="@color/lightGray" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -183,7 +180,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
-                        android:background="@color/lightgray" />
+                        android:background="@color/lightGray" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -237,7 +234,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
                         android:layout_marginTop="10dip"
-                        android:background="@color/lightgray" />
+                        android:background="@color/lightGray" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -306,7 +303,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
                         android:layout_margin="10dip"
-                        android:background="@color/lightgray" />
+                        android:background="@color/lightGray" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -320,9 +317,9 @@
         android:id="@+id/btnInfo"
         android:layout_width="wrap_content"
         android:layout_height="41dp"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:backgroundTint="#00070707"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/information"
         app:srcCompat="@android:drawable/ic_menu_info_details" />
 
 

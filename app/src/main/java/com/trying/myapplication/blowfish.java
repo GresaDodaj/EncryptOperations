@@ -9,23 +9,19 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 class blowfish {
-    static byte[] secretKeyBytes = new byte[1000];
-    static String secretKeyString;
-    static byte[] raw;
+    private static byte[] raw;
 
-    static void generate_symetric_key() {
+    static void generate_symmetric_key() {
         try {
             Random r = new Random();
             int num = r.nextInt(10000);
             String knum = String.valueOf(num);
             byte[] knumb = knum.getBytes();
-            secretKeyBytes = get_raw_key(knumb);
-            secretKeyString = new String(secretKeyBytes);  //blowfish secret key
+            byte[] secretKeyBytes = get_raw_key(knumb);
+            String secretKeyString = new String(secretKeyBytes);  //blowfish secret key
 
         }
-        catch(Exception e) {
-            System.out.println(e);
-        }
+        catch(Exception e) { e.printStackTrace(); }
     }
     private static byte[] get_raw_key(byte[] seed) throws Exception {
         KeyGenerator key = KeyGenerator.getInstance("Blowfish");
@@ -36,18 +32,18 @@ class blowfish {
         raw = secretKey.getEncoded();
         return raw;
     }
-    static byte[] encrypt(byte[] input) throws Exception {
+    static void encrypt(byte[] input) throws Exception {
         SecretKeySpec secretKey = new SecretKeySpec(raw, "Blowfish");
         Cipher cipher = Cipher.getInstance("Blowfish");
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-        return cipher.doFinal(input);  //return the encrypted text
+        cipher.doFinal(input);
     }
 
-    static byte[] decrypt(byte[] encrypted) throws Exception {
+  /*  static byte[] decrypt(byte[] encrypted) throws Exception {
         SecretKeySpec secretKey = new SecretKeySpec(raw, "Blowfish");
         Cipher cipher = Cipher.getInstance("Blowfish");
         cipher.init(Cipher.DECRYPT_MODE, secretKey);
         return cipher.doFinal(encrypted);  //return the decrypted text
-    }
+    }*/
 
 }

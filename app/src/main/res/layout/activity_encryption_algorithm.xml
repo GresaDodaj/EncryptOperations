@@ -41,7 +41,7 @@
                         android:background="#AB134561"
                         android:fontFamily="@font/abeezee"
                         android:padding="3dip"
-                        android:text="@string/filesize"
+                        android:text="@string/file_size"
                         android:textColor="#000000"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -259,7 +259,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
-                    android:background="@color/lightgray" />
+                    android:background="@color/lightGray" />
 
                 <TextView
                     android:id="@+id/avgResult"
@@ -280,7 +280,6 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/btnChart"
             android:layout_width="match_parent"
             android:layout_height="150dip"
             android:layout_margin="10dip"
@@ -324,7 +323,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
                     android:layout_margin="10dip"
-                    android:background="@color/lightgray" />
+                    android:background="@color/lightGray" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

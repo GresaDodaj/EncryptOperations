@@ -6,15 +6,12 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -24,36 +21,35 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class EncryptionAlgorithm extends AppCompatActivity {
-    static int[] counterAES = {0};
-    static int[] counterDES = {0};
-    static int[] counterBLOWFISH = {0};
-
-    static long timeAverage = 0;
-
-    static long timeAES10kb = 0;
-    static long timeAES100kb = 0;
-    static long timeAES500kb = 0;
-    static long timeAES1mb = 0;
-
-    static long timeDES10kb = 0;
-    static long timeDES100kb = 0;
-    static long timeDES500kb = 0;
-    static long timeDES1mb = 0;
-
-    static long time3DES10kb = 0;
-    static long time3DES100kb = 0;
-    static long time3DES500kb = 0;
-    static long time3DES1mb = 0;
-
-    static long timeBLOWFISH10kb = 0;
-    static long timeBLOWFISH100kb = 0;
-    static long timeBLOWFISH500kb = 0;
-    static long timeBLOWFISH1mb = 0;
 
 
-    ProgressDialog progressDialog;
+    private static long timeAverage = 0;
+
+    private static long timeAES10kb = 0;
+    private static long timeAES100kb = 0;
+    private static long timeAES500kb = 0;
+    private static long timeAES1mb = 0;
+
+    private static long timeDES10kb = 0;
+    private static long timeDES100kb = 0;
+    private static long timeDES500kb = 0;
+    private static long timeDES1mb = 0;
+
+    private static long time3DES10kb = 0;
+    private static long time3DES100kb = 0;
+    private static long time3DES500kb = 0;
+    private static long time3DES1mb = 0;
+
+    private static long timeBLOWFISH10kb = 0;
+    private static long timeBLOWFISH100kb = 0;
+    private static long timeBLOWFISH500kb = 0;
+    private static long timeBLOWFISH1mb = 0;
+
+
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +83,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
 
         Bundle var = getIntent().getExtras();
-        final String alg = var.getString("ALG");
+        final String alg = Objects.requireNonNull(var).getString("ALG");
         final TextView algorithmTxt = findViewById(R.id.algorithmTxt);
         algorithmTxt.setText(alg);
 
@@ -104,10 +100,10 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
 
         try {
-            AES.encrypt(_10KBfile);
-            AES.encrypt(_100KBfile);
-            AES.encrypt(_500KBfile);
-            AES.encrypt(_1MBfile);
+            AES.encrypt(Objects.requireNonNull(_10KBfile));
+            AES.encrypt(Objects.requireNonNull(_100KBfile));
+            AES.encrypt(Objects.requireNonNull(_500KBfile));
+            AES.encrypt(Objects.requireNonNull(_1MBfile));
             DES.encrypt(_10KBfile.getBytes());
             DES.encrypt(_100KBfile.getBytes());
             DES.encrypt(_500KBfile.getBytes());
@@ -130,7 +126,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    if (alg.equals("AES")) {
+                    if (Objects.requireNonNull(alg).equals("AES")) {
 
                         long average = 0;
                         AES.encrypt(_10KBfile);
@@ -181,7 +177,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             long average = 0;
                             for (int i = 0; i < 50; i++) {
                                 long startTime = System.nanoTime();
-                                blowfish.generate_symetric_key();
+                                blowfish.generate_symmetric_key();
                                 blowfish.encrypt(_10KBfile.getBytes());
                                 long endTime = System.nanoTime();
                                 timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
@@ -197,9 +193,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                     timeDES1mb, time3DES10kb, time3DES100kb, time3DES500kb,
                                     time3DES1mb, timeBLOWFISH10kb, timeBLOWFISH100kb, timeBLOWFISH500kb, timeBLOWFISH1mb);
 
-                        } catch (Exception e) {
-                            System.out.println(e);
-                        } //todo: ma mire formulo errorin
+                        } catch (Exception e) { e.printStackTrace(); }
                     } else if (alg.equals("3DES")) {
                         try {
                             long average = 0;
@@ -244,7 +238,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                     if (task.isSuccessful()) {
-                                        Log.d("TAG", task.getResult().size() + "");
+                                        Log.d("TAG", Objects.requireNonNull(task.getResult()).size() + "");
 
                                         int sum_aes = 0;
                                         int num_of_docs_aes = task.getResult().size();
@@ -270,7 +264,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                     if (task.isSuccessful()) {
-                                        Log.d("TAG", task.getResult().size() + "");
+                                        Log.d("TAG", Objects.requireNonNull(task.getResult()).size() + "");
 
                                         int sum_des = 0;
                                         int num_of_docs_des = task.getResult().size();
@@ -297,7 +291,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                     if (task.isSuccessful()) {
-                                        Log.d("TAG", task.getResult().size() + "");
+                                        Log.d("TAG", Objects.requireNonNull(task.getResult()).size() + "");
 
                                         int sum_blowfish = 0;
                                         int num_of_docs_blowfish = task.getResult().size();
@@ -324,7 +318,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                     if (task.isSuccessful()) {
-                                        Log.d("TAG", task.getResult().size() + "");
+                                        Log.d("TAG", Objects.requireNonNull(task.getResult()).size() + "");
 
                                         int sum_3des = 0;
                                         int num_of_docs_3des = task.getResult().size();
@@ -354,15 +348,14 @@ public class EncryptionAlgorithm extends AppCompatActivity {
         });
 
         btn100KB.setOnClickListener(new View.OnClickListener() {
-            private static final String TAG = "--";
-            private static final String LABEL = "Algoritmi: ";
+            private static final String TAG = "";
 
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
 
                 try {
-                    if (alg.equals("AES")) {
+                    if (Objects.requireNonNull(alg).equals("AES")) {
                         long average = 0;
                         AES.encrypt(_100KBfile);
 
@@ -413,7 +406,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             long average = 0;
                             for (int i = 0; i < 50; i++) {
                                 long startTime = System.nanoTime();
-                                blowfish.generate_symetric_key();
+                                blowfish.generate_symmetric_key();
                                 blowfish.encrypt(_100KBfile.getBytes());
                                 long endTime = System.nanoTime();
                                 timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
@@ -430,9 +423,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                     time3DES1mb, timeBLOWFISH10kb, timeBLOWFISH100kb, timeBLOWFISH500kb, timeBLOWFISH1mb);
 
 
-                        } catch (Exception e) {
-                            System.out.println(e);
-                        }
+                        } catch (Exception e) {e.printStackTrace(); }
                     } else if (alg.equals("3DES")) {
                         try {
                             long average = 0;
@@ -586,7 +577,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
         });
 
         btn500KB.setOnClickListener(new View.OnClickListener() {
-            private static final String TAG = "--";
+            private static final String TAG = "Error: ";
 
             @SuppressLint("SetTextI18n")
             @Override
@@ -640,7 +631,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             long average = 0;
                             for (int i = 0; i < 50; i++) {
                                 long startTime = System.nanoTime();
-                                blowfish.generate_symetric_key();
+                                blowfish.generate_symmetric_key();
                                 blowfish.encrypt(_500KBfile.getBytes());
                                 long endTime = System.nanoTime();
                                 timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
@@ -655,9 +646,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                     timeDES1mb, time3DES10kb, time3DES100kb, time3DES500kb,
                                     time3DES1mb, timeBLOWFISH10kb, timeBLOWFISH100kb, timeBLOWFISH500kb, timeBLOWFISH1mb);
 
-                        } catch (Exception e) {
-                            System.out.println(e);
-                        }
+                        } catch (Exception e) {e.printStackTrace();}
                     } else if (alg.equals("3DES")) {
                         try {
                             long average = 0;
@@ -869,7 +858,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             long average = 0;
                             for (int i = 0; i < 50; i++) {
                                 long startTime = System.nanoTime();
-                                blowfish.generate_symetric_key();
+                                blowfish.generate_symmetric_key();
                                 blowfish.encrypt(_1MBfile.getBytes());
                                 long endTime = System.nanoTime();
                                 timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
@@ -884,9 +873,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             myChart myChart = new myChart(timeAES10kb, timeAES100kb, timeAES500kb, timeAES1mb, timeDES10kb, timeDES100kb, timeDES500kb,
                                     timeDES1mb, time3DES10kb, time3DES100kb, time3DES500kb,
                                     time3DES1mb, timeBLOWFISH10kb, timeBLOWFISH100kb, timeBLOWFISH500kb, timeBLOWFISH1mb);
-                        } catch (Exception e) {
-                            System.out.println(e);
-                        }
+                        } catch (Exception e) {e.printStackTrace(); }
                     } else if (alg.equals("3DES")) {
                         try {
                             long average = 0;
@@ -1037,7 +1024,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     long avgDES = avg(timeDES10kb, timeDES100kb, timeDES500kb, timeDES1mb);
                     long avgBLOWFISH = avg(timeBLOWFISH10kb, timeBLOWFISH100kb, timeBLOWFISH500kb, timeBLOWFISH1mb);
                     long avg3DES = avg(time3DES10kb, time3DES100kb, time3DES500kb, time3DES1mb);
-                    Averages avgclass = new Averages(avgAes, avgDES, avg3DES, avgBLOWFISH);
+                    Averages avgClass = new Averages(avgAes, avgDES, avg3DES, avgBLOWFISH);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1313,7 +1300,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                     long average = 0;
                                     for(int i = 0; i<50; i++) {
                                         long startTime = System.nanoTime();
-                                        blowfish.generate_symetric_key();
+                                        blowfish.generate_symmetric_key();
                                         blowfish.encrypt(_10KBfile.getBytes());
                                         long endTime = System.nanoTime();
                                         timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
@@ -1330,7 +1317,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                     long average = 0;
                                     for(int i = 0; i<50; i++) {
                                         long startTime = System.nanoTime();
-                                        blowfish.generate_symetric_key();
+                                        blowfish.generate_symmetric_key();
                                         blowfish.encrypt(_100KBfile.getBytes());
                                         long endTime = System.nanoTime();
                                         timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
@@ -1346,7 +1333,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                     long average = 0;
                                     for(int i = 0; i<50; i++) {
                                         long startTime = System.nanoTime();
-                                        blowfish.generate_symetric_key();
+                                        blowfish.generate_symmetric_key();
                                         blowfish.encrypt(_500KBfile.getBytes());
                                         long endTime = System.nanoTime();
                                         timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
@@ -1362,7 +1349,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                     long average = 0;
                                     for(int i = 0; i<50; i++) {
                                         long startTime = System.nanoTime();
-                                        blowfish.generate_symetric_key();
+                                        blowfish.generate_symmetric_key();
                                         blowfish.encrypt(_1MBfile.getBytes());
                                         long endTime = System.nanoTime();
                                         timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
@@ -1380,6 +1367,8 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                         time3DES1mb,timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
 
                             }
+
+
                             timeAverage = average(time10KB.getText().toString(),time100KB.getText().toString(),
                                     time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
 
@@ -1387,7 +1376,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             long avgDES= avg(timeDES10kb,timeDES100kb,timeDES500kb, timeDES1mb);
                             long avg3DES= avg(time3DES10kb,time3DES100kb,time3DES500kb, time3DES1mb);
                             long avgBLOWFISH= avg(timeBLOWFISH10kb,timeBLOWFISH100kb,timeBLOWFISH500kb,timeBLOWFISH1mb);
-                            Averages avgclass = new Averages(avgAes,avgDES,avg3DES,avgBLOWFISH);
+                            Averages avgClass = new Averages(avgAes,avgDES,avg3DES,avgBLOWFISH);
                             if(timeAverage!=0){
 
                                 avgResult.setText("AVERAGE: " + (int) timeAverage + " milliseconds");
@@ -1512,10 +1501,6 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     }
                 }).start();
 
-                
-
-
-
 
             }
 
@@ -1542,10 +1527,6 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
         if(!txt10kb.equals("") && !txt100kb.equals("")&& !txt500kb.equals("") && !txt1mb.equals("")){
 
-
-            if(alg.equals("AES")){ counterAES[0] = counterAES[0] +1;  }
-            else if(alg.equals("DES")){ counterDES[0] = counterDES[0] +1; }
-            else{ if(alg.equals("BLOWFISH")){ counterBLOWFISH[0] = counterBLOWFISH[0] +1;}}
 
             long  average ;
             String time10kb = txt10kb;

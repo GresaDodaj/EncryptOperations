@@ -21,29 +21,44 @@ public class myChart extends AppCompatActivity {
     public  myChart(){
 
     }
-    static long a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p;
+    private static long a;
+    private static long b;
+    private static long c;
+    private static long d;
+    private static long e;
+    private static long f;
+    private static long g;
+    private static long h;
+    private static long i;
+    private static long j;
+    private static long k;
+    private static long l;
+    private static long m;
+    private static long n;
+    private static long o;
+    private static long p;
 
     myChart(long a , long b, long c, long d,long e, long f, long g, long h,long i ,long j, long k, long l,long m, long n, long o, long p){
 
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        this.d = d;
+        myChart.a = a;
+        myChart.b = b;
+        myChart.c = c;
+        myChart.d = d;
 
-        this.e = e;
-        this.f = f;
-        this.g = g;
-        this.h = h;
+        myChart.e = e;
+        myChart.f = f;
+        myChart.g = g;
+        myChart.h = h;
 
-        this.i = i;
-        this.j = j;
-        this.k = k;
-        this.l = l;
+        myChart.i = i;
+        myChart.j = j;
+        myChart.k = k;
+        myChart.l = l;
 
-        this.m = m;
-        this.n = n;
-        this.o = o;
-        this.p = p;
+        myChart.m = m;
+        myChart.n = n;
+        myChart.o = o;
+        myChart.p = p;
 
     }
     @Override
@@ -83,7 +98,7 @@ public class myChart extends AppCompatActivity {
         chart.getXAxis().setAxisMinimum(0);
         chart.getXAxis().setAxisMaximum(0 + chart.getBarData().getGroupWidth(groupSpace, barSpace) * 4); //minimum+ chart data *number of bars
         //chart.getAxisLeft().setAxisMinimum(0);
-        chart.groupBars(0, groupSpace, barSpace); // me i grupu
+        chart.groupBars(0, groupSpace, barSpace); //to group the bars
 
 
 
@@ -91,11 +106,11 @@ public class myChart extends AppCompatActivity {
         final String[] files = new String[]{"10KB", "100KB", "500KB", "1MB"};
         XAxis xAxis = chart.getXAxis();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(files));
-        xAxis.setCenterAxisLabels(true);//me i vendos labels poshte ne center
+        xAxis.setCenterAxisLabels(true);//labels of xAxis in the center of a division
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setGranularity(1);
         xAxis.setGranularityEnabled(true);
-        chart.setDrawGridBackground(false); ///nuk po heket gridi
+        chart.setDrawGridBackground(false);
         chart.setDrawBorders(true);
 
      /* YAxis leftAxis = chart.getAxisLeft();
@@ -116,7 +131,7 @@ public class myChart extends AppCompatActivity {
         Legend legend = chart.getLegend();
         //legend.setTextColor(getColor(R.color.colorPrimaryDark));
         //legend.setTextSize(15);
-        // legend.setForm(Legend.LegendForm.CIRCLE); munesh edhe square --by default
+        // legend.setForm(Legend.LegendForm.CIRCLE); by default it is square
         //legend.setFormSize(2);
         legend.setXEntrySpace(15);
         legend.setFormToTextSpace(10);

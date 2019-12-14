@@ -20,6 +20,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class Averages extends AppCompatActivity {
@@ -28,24 +29,24 @@ public class Averages extends AppCompatActivity {
 
     }
 
-    static long a;
-    static long b;
-    static long c;
-    static long d;
+    private static long a;
+    private static long b;
+    private static long c;
+    private static long d;
     Averages(long a, long b, long c,long d){
 
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        this.d = d;
+        Averages.a = a;
+        Averages.b = b;
+        Averages.c = c;
+        Averages.d = d;
     }
 
     private static final String TAG = "Error: " ;
 
-    static int db_aes;
-    static int db_des;
-    static int db_blowfish;
-    static int db_3des;
+    private static int db_aes;
+    private static int db_des;
+    private static int db_blowfish;
+    private static int db_3des;
 
 
     @Override
@@ -65,7 +66,7 @@ public class Averages extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    Log.d("TAG", task.getResult().size() + "");
+                    Log.d("TAG", Objects.requireNonNull(task.getResult()).size() + "");
 
                         String _3des = String.valueOf(task.getResult().getDocuments().get(0).get("3DES"));
                         String aes = String.valueOf(task.getResult().getDocuments().get(1).get("AES"));

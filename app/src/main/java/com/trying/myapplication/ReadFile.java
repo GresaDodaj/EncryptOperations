@@ -2,7 +2,6 @@ package com.trying.myapplication;
 import android.content.Context;
 import android.util.Log;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,10 +9,9 @@ import java.io.InputStreamReader;
 
 class ReadFile {
 
-    private static final String TAG = "Gresa";
+    private static final String TAG = "Reading File- ";
 
     static String readFile(String filepath, Context context){
-        File file=new File(filepath);
 
         try {
             //AssetManager aManager = selectFileSize.this.getAssets();

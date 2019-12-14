@@ -9,7 +9,7 @@
         android:roundIcon="@drawable/lock1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Averages"></activity>
+        <activity android:name=".Averages"/>
         <activity android:name=".myChart" />
         <activity android:name=".EncryptionAlgorithm" />
 <!--
