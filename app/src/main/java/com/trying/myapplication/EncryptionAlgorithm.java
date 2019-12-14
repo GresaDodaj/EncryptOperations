@@ -222,7 +222,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     }
 
                     timeAverage = average(time10KB.getText().toString(), time100KB.getText().toString(),
-                            time500KB.getText().toString(), time1MB.getText().toString(), algorithmTxt.getText().toString());
+                            time500KB.getText().toString(), time1MB.getText().toString());
 
                     if (timeAverage != 0) {
 
@@ -452,7 +452,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     }
 
                     timeAverage = average(time10KB.getText().toString(), time100KB.getText().toString(),
-                            time500KB.getText().toString(), time1MB.getText().toString(), algorithmTxt.getText().toString());
+                            time500KB.getText().toString(), time1MB.getText().toString());
 
                     if (timeAverage != 0) {
 
@@ -678,7 +678,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                 }
 
                 timeAverage = average(time10KB.getText().toString(), time100KB.getText().toString(),
-                        time500KB.getText().toString(), time1MB.getText().toString(), algorithmTxt.getText().toString());
+                        time500KB.getText().toString(), time1MB.getText().toString());
 
                 if (timeAverage != 0) {
 
@@ -902,7 +902,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     }
 
                     timeAverage = average(time10KB.getText().toString(), time100KB.getText().toString(),
-                            time500KB.getText().toString(), time1MB.getText().toString(), algorithmTxt.getText().toString());
+                            time500KB.getText().toString(), time1MB.getText().toString());
 
                     if (timeAverage != 0) {
                         Map<String, Object> averageDB = new HashMap<>();
@@ -1370,7 +1370,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
 
                             timeAverage = average(time10KB.getText().toString(),time100KB.getText().toString(),
-                                    time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
+                                    time500KB.getText().toString(),time1MB.getText().toString());
 
                             long avgAes= avg(timeAES10kb,timeAES100kb,timeAES500kb,timeAES1mb);
                             long avgDES= avg(timeDES10kb,timeDES100kb,timeDES500kb, timeDES1mb);
@@ -1488,7 +1488,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
 
                                 timeAverage = average(time10KB.getText().toString(),time100KB.getText().toString(),
-                                        time500KB.getText().toString(),time1MB.getText().toString(),algorithmTxt.getText().toString());
+                                        time500KB.getText().toString(),time1MB.getText().toString());
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -1522,7 +1522,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
             }
         });
     }
-    private   long  average(String txt10kb, String txt100kb, String txt500kb, String txt1mb, String alg){
+    private   long  average(String txt10kb, String txt100kb, String txt500kb, String txt1mb){
 
 
         if(!txt10kb.equals("") && !txt100kb.equals("")&& !txt500kb.equals("") && !txt1mb.equals("")){
