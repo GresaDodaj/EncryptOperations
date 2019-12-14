@@ -93,8 +93,8 @@ public class myChart extends AppCompatActivity {
         BarData data = new BarData(barDataSet1[0], barDataSet2[0],barDataSet3[0], barDataSet4[0]);
         chart.setData(data);
         float barSpace = 0.04f;
-        float groupSpace = 0.18f;
-        data.setBarWidth(0.17f);
+        float groupSpace = 0.19f;
+        data.setBarWidth(0.16f);
         chart.getXAxis().setAxisMinimum(0);
         chart.getXAxis().setAxisMaximum(0 + chart.getBarData().getGroupWidth(groupSpace, barSpace) * 4); //minimum+ chart data *number of bars
         //chart.getAxisLeft().setAxisMinimum(0);

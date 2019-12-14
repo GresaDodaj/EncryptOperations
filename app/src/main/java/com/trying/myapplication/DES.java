@@ -7,16 +7,16 @@ import javax.crypto.spec.SecretKeySpec;
 class DES {
 
     private static byte[] initKey() throws Exception {
-        KeyGenerator keyGenerator = KeyGenerator.getInstance("DESede");
-        keyGenerator.init(168);//should be 16 or 24 bytes / 112 or 168 bits
+        KeyGenerator keyGenerator = KeyGenerator.getInstance("DES");
+        keyGenerator.init(64);
         SecretKey secretKey = keyGenerator.generateKey();
         return secretKey.getEncoded();
     }
 
     static void encrypt(byte[] input) throws Exception {
         byte [] key = initKey();
-        SecretKey secretKey = new SecretKeySpec(key, "DESede");
-        Cipher cipher = Cipher.getInstance("DESede/CBC/PKCS5Padding");
+        SecretKey secretKey = new SecretKeySpec(key, "DES");
+        Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
         cipher.doFinal(input);
     }
