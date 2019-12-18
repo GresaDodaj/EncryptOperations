@@ -99,6 +99,24 @@ public class EncryptionAlgorithm extends AppCompatActivity {
         final long[] timeLengthAES = new long[1];
 
 
+        try {
+            AES.encrypt(Objects.requireNonNull(_10KBfile));
+            AES.encrypt(Objects.requireNonNull(_100KBfile));
+            AES.encrypt(Objects.requireNonNull(_500KBfile));
+            AES.encrypt(Objects.requireNonNull(_1MBfile));
+            DES.encrypt(_10KBfile.getBytes());
+            DES.encrypt(_100KBfile.getBytes());
+            DES.encrypt(_500KBfile.getBytes());
+            DES.encrypt(_1MBfile.getBytes());
+            tripleDES.encrypt(_10KBfile.getBytes());
+            tripleDES.encrypt(_100KBfile.getBytes());
+            tripleDES.encrypt(_500KBfile.getBytes());
+            tripleDES.encrypt(_1MBfile.getBytes());
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         btn10KB.setOnClickListener(new View.OnClickListener() {
@@ -157,8 +175,6 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                         try {
                             //byte[] text2Bytes = _10KBfile.getBytes();
                             long average = 0;
-                            blowfish.generate_symmetric_key();
-                            blowfish.encrypt(_10KBfile.getBytes());
                             for (int i = 0; i < 50; i++) {
                                 long startTime = System.nanoTime();
                                 blowfish.generate_symmetric_key();
@@ -342,6 +358,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     if (Objects.requireNonNull(alg).equals("AES")) {
                         long average = 0;
                         AES.encrypt(_100KBfile);
+
                         for (int i = 0; i < 50; i++) {
                             long startTime = System.nanoTime();
                             AES.encrypt(_100KBfile);
@@ -387,8 +404,6 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                         try {
 
                             long average = 0;
-                            blowfish.generate_symmetric_key();
-                            blowfish.encrypt(_100KBfile.getBytes());
                             for (int i = 0; i < 50; i++) {
                                 long startTime = System.nanoTime();
                                 blowfish.generate_symmetric_key();
@@ -614,8 +629,6 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     } else if (alg.equals("BLOWFISH")) {
                         try {
                             long average = 0;
-                            blowfish.generate_symmetric_key();
-                            blowfish.encrypt(_500KBfile.getBytes());
                             for (int i = 0; i < 50; i++) {
                                 long startTime = System.nanoTime();
                                 blowfish.generate_symmetric_key();
@@ -843,8 +856,6 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                         try {
 
                             long average = 0;
-                            blowfish.generate_symmetric_key();
-                            blowfish.encrypt(_1MBfile.getBytes());
                             for (int i = 0; i < 50; i++) {
                                 long startTime = System.nanoTime();
                                 blowfish.generate_symmetric_key();
@@ -1041,7 +1052,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                 try {
                                     long average=0;
                                     AES.encrypt(_10KBfile);
-                                    for(int i = 0; i<100; i++) {
+                                    for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
                                         AES.encrypt(_10KBfile);
                                         long endTime = System.nanoTime();
@@ -1049,7 +1060,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                         if(i>3)
                                             average = average+timeLengthAES[0];
                                     }
-                                    average=average/96;
+                                    average=average/46;
                                     //time of the execution in nanoseconds/1000000 = time in milliseconds
 
                                     time10KB.setText(average + " milliseconds");
@@ -1063,7 +1074,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                     long average=0;
                                     AES.encrypt(_100KBfile);
 
-                                    for(int i = 0; i<100; i++) {
+                                    for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
                                         AES.encrypt(_100KBfile);
                                         long endTime = System.nanoTime();
@@ -1071,7 +1082,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                         if(i>3)
                                             average = average+timeLengthAES[0];
                                     }
-                                    average=average/96;
+                                    average=average/46;
                                     time100KB.setText(average + " milliseconds");
                                     timeAES100kb = average;
 
@@ -1082,7 +1093,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                 try {
                                     long average=0;
                                     AES.encrypt(_500KBfile);
-                                    for(int i = 0; i<100; i++) {
+                                    for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
                                         AES.encrypt(_500KBfile);
                                         long endTime = System.nanoTime();
@@ -1090,7 +1101,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                         if(i>3)
                                             average = average+timeLengthAES[0];
                                     }
-                                    average=average/96;
+                                    average=average/46;
                                     time500KB.setText(average + " milliseconds");
                                     timeAES500kb = average;
 
@@ -1101,7 +1112,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                 try {
                                     long average=0;
                                     AES.encrypt(_1MBfile);
-                                    for(int i = 0; i<100; i++) {
+                                    for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
                                         AES.encrypt(_1MBfile);
                                         long endTime = System.nanoTime();
@@ -1109,7 +1120,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                         if(i>3)
                                             average = average+timeLengthAES[0];
                                     }
-                                    average=average/96;
+                                    average=average/46;
                                     time1MB.setText(average + " milliseconds");
                                     timeAES1mb = average;
 
@@ -1126,7 +1137,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                 try {
                                     long average=0;
                                     DES.encrypt(_10KBfile.getBytes());
-                                    for(int i = 0; i<100; i++) {
+                                    for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
                                         DES.encrypt(_10KBfile.getBytes());
                                         long endTime = System.nanoTime();
@@ -1134,7 +1145,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                         if(i>3)
                                             average = average+timeLengthDES[0];
                                     }
-                                    average=average/96;
+                                    average=average/46;
                                     time10KB.setText(average + " milliseconds");
                                     timeDES10kb = average;
 
@@ -1145,7 +1156,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                 try {
                                     long average=0;
                                     DES.encrypt(_100KBfile.getBytes());
-                                    for(int i = 0; i<100; i++) {
+                                    for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
                                         DES.encrypt(_100KBfile.getBytes());
                                         long endTime = System.nanoTime();
@@ -1153,7 +1164,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                         if(i>3)
                                             average = average+timeLengthDES[0];
                                     }
-                                    average=average/96;
+                                    average=average/46;
                                     time100KB.setText(average + " milliseconds");
                                     timeDES100kb = average;
 
@@ -1164,7 +1175,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                 try {
                                     long average=0;
                                     DES.encrypt(_500KBfile.getBytes());
-                                    for(int i = 0; i<100; i++) {
+                                    for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
                                         DES.encrypt(_500KBfile.getBytes());
                                         long endTime = System.nanoTime();
@@ -1172,7 +1183,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                         if(i>3)
                                             average = average+timeLengthDES[0];
                                     }
-                                    average=average/96;
+                                    average=average/46;
                                     time500KB.setText(average + " milliseconds");
                                     timeDES500kb =  average;
 
@@ -1183,7 +1194,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                 try {
                                     long average=0;
                                     DES.encrypt(_1MBfile.getBytes());
-                                    for(int i = 0; i<100; i++) {
+                                    for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
                                         DES.encrypt(_1MBfile.getBytes());
                                         long endTime = System.nanoTime();
@@ -1191,7 +1202,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                         if(i>3)
                                             average = average+timeLengthDES[0];
                                     }
-                                    average=average/96;
+                                    average=average/46;
                                     time1MB.setText(average + " milliseconds");
                                     timeDES1mb =  average;
 
@@ -1207,7 +1218,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                 try {
                                     long average=0;
                                     tripleDES.encrypt(_10KBfile.getBytes());
-                                    for(int i = 0; i<100; i++) {
+                                    for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
                                         tripleDES.encrypt(_10KBfile.getBytes());
                                         long endTime = System.nanoTime();
@@ -1215,7 +1226,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                         if(i>3)
                                             average = average+timeLength3DES[0];
                                     }
-                                    average=average/96;
+                                    average=average/46;
                                     time10KB.setText(average + " milliseconds");
                                     time3DES10kb = average;
 
@@ -1226,7 +1237,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                 try {
                                     long average=0;
                                     tripleDES.encrypt(_100KBfile.getBytes());
-                                    for(int i = 0; i<100; i++) {
+                                    for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
                                         tripleDES.encrypt(_100KBfile.getBytes());
                                         long endTime = System.nanoTime();
@@ -1234,7 +1245,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                         if(i>3)
                                             average = average+timeLength3DES[0];
                                     }
-                                    average=average/96;
+                                    average=average/46;
                                     time100KB.setText(average + " milliseconds");
                                     time3DES100kb = average;
 
@@ -1245,7 +1256,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                 try {
                                     long average=0;
                                     tripleDES.encrypt(_500KBfile.getBytes());
-                                    for(int i = 0; i<100; i++) {
+                                    for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
                                         tripleDES.encrypt(_500KBfile.getBytes());
                                         long endTime = System.nanoTime();
@@ -1253,7 +1264,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                         if(i>3)
                                             average = average+timeLength3DES[0];
                                     }
-                                    average=average/96;
+                                    average=average/46;
                                     time500KB.setText(average + " milliseconds");
                                     time3DES500kb =  average;
 
@@ -1264,7 +1275,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                 try {
                                     long average=0;
                                     tripleDES.encrypt(_1MBfile.getBytes());
-                                    for(int i = 0; i<100; i++) {
+                                    for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
                                         tripleDES.encrypt(_1MBfile.getBytes());
                                         long endTime = System.nanoTime();
@@ -1272,7 +1283,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                         if(i>3)
                                             average = average+timeLength3DES[0];
                                     }
-                                    average=average/96;
+                                    average=average/46;
                                     time1MB.setText(average + " milliseconds");
                                     time3DES1mb =  average;
 
@@ -1287,7 +1298,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             else{
                                 try {
                                     long average = 0;
-                                    for(int i = 0; i<100; i++) {
+                                    for(int i = 0; i<50; i++) {
                                         long startTime = System.nanoTime();
                                         blowfish.generate_symmetric_key();
                                         blowfish.encrypt(_10KBfile.getBytes());
@@ -1297,14 +1308,14 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                         if(i>3)
                                             average = average+ timeLengthBLOWFISH[0];
                                     }
-                                    average = average/96;
+                                    average = average/46;
                                     time10KB.setText(average + " milliseconds");
                                     timeBLOWFISH10kb =  average;
                                 } catch (Exception e) { e.printStackTrace(); }
 
                                 try {
                                     long average = 0;
-                                    for(int i = 0; i<100; i++) {
+                                    for(int i = 0; i<50; i++) {
                                         long startTime = System.nanoTime();
                                         blowfish.generate_symmetric_key();
                                         blowfish.encrypt(_100KBfile.getBytes());
@@ -1314,13 +1325,13 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                         if(i>3)
                                             average = average+ timeLengthBLOWFISH[0];
                                     }
-                                    average = average/96;
+                                    average = average/46;
                                     time100KB.setText(average + " milliseconds");
                                     timeBLOWFISH100kb =  average;
                                 } catch (Exception e) { e.printStackTrace(); }
                                 try {
                                     long average = 0;
-                                    for(int i = 0; i<100; i++) {
+                                    for(int i = 0; i<50; i++) {
                                         long startTime = System.nanoTime();
                                         blowfish.generate_symmetric_key();
                                         blowfish.encrypt(_500KBfile.getBytes());
@@ -1330,13 +1341,13 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                         if(i>3)
                                             average = average+ timeLengthBLOWFISH[0];
                                     }
-                                    average = average/96;
+                                    average = average/46;
                                     time500KB.setText(average + " milliseconds");
                                     timeBLOWFISH500kb =  average;
                                 } catch (Exception e) { e.printStackTrace(); }
                                 try {
                                     long average = 0;
-                                    for(int i = 0; i<100; i++) {
+                                    for(int i = 0; i<50; i++) {
                                         long startTime = System.nanoTime();
                                         blowfish.generate_symmetric_key();
                                         blowfish.encrypt(_1MBfile.getBytes());
@@ -1346,7 +1357,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                         if(i>3)
                                             average = average+ timeLengthBLOWFISH[0];
                                     }
-                                    average = average/96;
+                                    average = average/46;
                                     time1MB.setText(average + " milliseconds");
                                     timeBLOWFISH1mb = average;
                                 } catch (Exception e) { e.printStackTrace(); }
