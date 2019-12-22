@@ -71,7 +71,6 @@ public class EncryptionAlgorithm extends AppCompatActivity {
         Button btn500KB = findViewById(R.id.btn500kb);
         Button btn1MB = findViewById(R.id.btn1mb);
         Button btnRunAll = findViewById(R.id.btnRunAll);
-
         LinearLayout btnchart = findViewById(R.id.showChart);
 
         final TextView avgResult = findViewById(R.id.avgResult);
@@ -99,24 +98,6 @@ public class EncryptionAlgorithm extends AppCompatActivity {
         final long[] timeLengthAES = new long[1];
 
 
-        try {
-            AES.encrypt(Objects.requireNonNull(_10KBfile));
-            AES.encrypt(Objects.requireNonNull(_100KBfile));
-            AES.encrypt(Objects.requireNonNull(_500KBfile));
-            AES.encrypt(Objects.requireNonNull(_1MBfile));
-            DES.encrypt(_10KBfile.getBytes());
-            DES.encrypt(_100KBfile.getBytes());
-            DES.encrypt(_500KBfile.getBytes());
-            DES.encrypt(_1MBfile.getBytes());
-            tripleDES.encrypt(_10KBfile.getBytes());
-            tripleDES.encrypt(_100KBfile.getBytes());
-            tripleDES.encrypt(_500KBfile.getBytes());
-            tripleDES.encrypt(_1MBfile.getBytes());
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
 
         btn10KB.setOnClickListener(new View.OnClickListener() {
@@ -149,16 +130,17 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     } else if (alg.equals("DES")) {
                         try {
                             long average = 0;
-                            DES.encrypt(_10KBfile.getBytes());
+                            byte [] initKey = DES.initKey();
+                            DES.encrypt(_10KBfile.getBytes(),initKey);
                             for (int i = 0; i < 50; i++) {
                                 long startTime = System.nanoTime();
-                                DES.encrypt(_10KBfile.getBytes());
+                                byte [] initKey1 = DES.initKey();
+                                DES.encrypt(_10KBfile.getBytes(),initKey1);
                                 long endTime = System.nanoTime();
                                 timeLengthDES[0] = (endTime - startTime) / 1000000;
 
                                 if (i > 3)
                                     average = average + timeLengthDES[0];
-
                             }
 
                             average = average / 46;
@@ -168,12 +150,10 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                     timeDES1mb, time3DES10kb, time3DES100kb, time3DES500kb,
                                     time3DES1mb, timeBLOWFISH10kb, timeBLOWFISH100kb, timeBLOWFISH500kb, timeBLOWFISH1mb);
 
-                        } catch (Exception e) {
-                            Log.e(TAG, "DES: " + e.getMessage());
-                        }
+                        } catch (Exception e) { Log.e(TAG, "DES: " + e.getMessage()); }
+
                     } else if (alg.equals("BLOWFISH")) {
                         try {
-                            //byte[] text2Bytes = _10KBfile.getBytes();
                             long average = 0;
                             for (int i = 0; i < 50; i++) {
                                 long startTime = System.nanoTime();
@@ -181,7 +161,6 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                 blowfish.encrypt(_10KBfile.getBytes());
                                 long endTime = System.nanoTime();
                                 timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
-
                                 if (i > 3)
                                     average = average + timeLengthBLOWFISH[0];
                             }
@@ -197,10 +176,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     } else if (alg.equals("3DES")) {
                         try {
                             long average = 0;
-                            tripleDES.encrypt(_10KBfile.getBytes());
+                            byte [] initKey = tripleDES.initKey();
+                            tripleDES.encrypt(_10KBfile.getBytes(),initKey);
                             for (int i = 0; i < 50; i++) {
                                 long startTime = System.nanoTime();
-                                tripleDES.encrypt(_10KBfile.getBytes());
+                                byte [] initKey1 = tripleDES.initKey();
+                                tripleDES.encrypt(_10KBfile.getBytes(),initKey1);
                                 long endTime = System.nanoTime();
                                 timeLength3DES[0] = (endTime - startTime) / 1000000;
 
@@ -347,7 +328,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
             }
         });
 
-        btn100KB.setOnClickListener(new View.OnClickListener() {
+      btn100KB.setOnClickListener(new View.OnClickListener() {
             private static final String TAG = "";
 
             @SuppressLint("SetTextI18n")
@@ -378,10 +359,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     } else if (alg.equals("DES")) {
                         try {
                             long average = 0;
-                            DES.encrypt(_100KBfile.getBytes());
+                             byte [] initKey = DES.initKey();
+                            DES.encrypt(_100KBfile.getBytes(),initKey);
                             for (int i = 0; i < 50; i++) {
                                 long startTime = System.nanoTime();
-                                DES.encrypt(_100KBfile.getBytes());
+                                byte [] initKey1 = DES.initKey();
+                                DES.encrypt(_100KBfile.getBytes(),initKey1);
                                 long endTime = System.nanoTime();
                                 timeLengthDES[0] = (endTime - startTime) / 1000000;
 
@@ -427,10 +410,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     } else if (alg.equals("3DES")) {
                         try {
                             long average = 0;
-                            tripleDES.encrypt(_100KBfile.getBytes());
+                            byte [] initKey = tripleDES.initKey();
+                            tripleDES.encrypt(_100KBfile.getBytes(),initKey);
                             for (int i = 0; i < 50; i++) {
                                 long startTime = System.nanoTime();
-                                tripleDES.encrypt(_100KBfile.getBytes());
+                                byte [] initKey1 = tripleDES.initKey();
+                                tripleDES.encrypt(_100KBfile.getBytes(),initKey1);
                                 long endTime = System.nanoTime();
                                 timeLength3DES[0] = (endTime - startTime) / 1000000;
 
@@ -606,10 +591,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     } else if (alg.equals("DES")) {
                         try {
                             long average = 0;
-                            DES.encrypt(_500KBfile.getBytes());
+                            byte [] initKey = DES.initKey();
+                            DES.encrypt(_500KBfile.getBytes(),initKey);
                             for (int i = 0; i < 50; i++) {
                                 long startTime = System.nanoTime();
-                                DES.encrypt(_500KBfile.getBytes());
+                                byte [] initKey1 = DES.initKey();
+                                DES.encrypt(_500KBfile.getBytes(),initKey1);
                                 long endTime = System.nanoTime();
                                 timeLengthDES[0] = (endTime - startTime) / 1000000;
 
@@ -650,10 +637,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     } else if (alg.equals("3DES")) {
                         try {
                             long average = 0;
-                            tripleDES.encrypt(_500KBfile.getBytes());
+                            byte [] initKey = tripleDES.initKey();
+                            tripleDES.encrypt(_500KBfile.getBytes(),initKey);
                             for (int i = 0; i < 50; i++) {
                                 long startTime = System.nanoTime();
-                                tripleDES.encrypt(_500KBfile.getBytes());
+                                byte [] initKey1 = tripleDES.initKey();
+                                tripleDES.encrypt(_500KBfile.getBytes(),initKey1);
                                 long endTime = System.nanoTime();
                                 timeLength3DES[0] = (endTime - startTime) / 1000000;
 
@@ -830,10 +819,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     } else if (alg.equals("DES")) {
                         try {
                             long average = 0;
-                            DES.encrypt(_1MBfile.getBytes());
+                            byte [] initKey = DES.initKey();
+                            DES.encrypt(_1MBfile.getBytes(),initKey);
                             for (int i = 0; i < 50; i++) {
                                 long startTime = System.nanoTime();
-                                DES.encrypt(_1MBfile.getBytes());
+                                byte [] initKey1 = DES.initKey();
+                                DES.encrypt(_1MBfile.getBytes(),initKey1);
                                 long endTime = System.nanoTime();
                                 timeLengthDES[0] = (endTime - startTime) / 1000000;
 
@@ -877,10 +868,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                     } else if (alg.equals("3DES")) {
                         try {
                             long average = 0;
-                            tripleDES.encrypt(_1MBfile.getBytes());
+                            byte [] initKey = tripleDES.initKey();
+                            tripleDES.encrypt(_1MBfile.getBytes(),initKey);
                             for (int i = 0; i < 50; i++) {
                                 long startTime = System.nanoTime();
-                                tripleDES.encrypt(_1MBfile.getBytes());
+                                byte [] initKey1 = tripleDES.initKey();
+                                tripleDES.encrypt(_1MBfile.getBytes(),initKey1);
                                 long endTime = System.nanoTime();
                                 timeLength3DES[0] = (endTime - startTime) / 1000000;
 
@@ -1032,7 +1025,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
         });
 
-        btnRunAll.setOnClickListener(new View.OnClickListener() {
+      btnRunAll.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
@@ -1072,6 +1065,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
                                 try {
                                     long average=0;
+
                                     AES.encrypt(_100KBfile);
 
                                     for(int i = 0; i<50; i++) {
@@ -1136,10 +1130,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             else if (alg.equals("DES")){
                                 try {
                                     long average=0;
-                                    DES.encrypt(_10KBfile.getBytes());
+                                    byte [] initKey = DES.initKey();
+                                    DES.encrypt(_10KBfile.getBytes(),initKey);
                                     for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
-                                        DES.encrypt(_10KBfile.getBytes());
+                                        byte [] initKey1 = DES.initKey();
+                                        DES.encrypt(_10KBfile.getBytes(),initKey1);
                                         long endTime = System.nanoTime();
                                         timeLengthDES[0] = (endTime - startTime) / 1000000;
                                         if(i>3)
@@ -1155,10 +1151,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
                                 try {
                                     long average=0;
-                                    DES.encrypt(_100KBfile.getBytes());
+                                    byte [] initKey = DES.initKey();
+                                    DES.encrypt(_100KBfile.getBytes(),initKey);
                                     for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
-                                        DES.encrypt(_100KBfile.getBytes());
+                                        byte [] initKey1 = DES.initKey();
+                                        DES.encrypt(_100KBfile.getBytes(),initKey1);
                                         long endTime = System.nanoTime();
                                         timeLengthDES[0] = (endTime - startTime) / 1000000;
                                         if(i>3)
@@ -1174,10 +1172,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
                                 try {
                                     long average=0;
-                                    DES.encrypt(_500KBfile.getBytes());
+                                    byte [] initKey = DES.initKey();
+                                    DES.encrypt(_500KBfile.getBytes(),initKey);
                                     for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
-                                        DES.encrypt(_500KBfile.getBytes());
+                                        byte [] initKey1 = DES.initKey();
+                                        DES.encrypt(_500KBfile.getBytes(),initKey1);
                                         long endTime = System.nanoTime();
                                         timeLengthDES[0] = (endTime - startTime) / 1000000;
                                         if(i>3)
@@ -1193,10 +1193,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
                                 try {
                                     long average=0;
-                                    DES.encrypt(_1MBfile.getBytes());
+                                    byte [] initKey = DES.initKey();
+                                    DES.encrypt(_1MBfile.getBytes(),initKey);
                                     for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
-                                        DES.encrypt(_1MBfile.getBytes());
+                                        byte [] initKey1 = DES.initKey();
+                                        DES.encrypt(_1MBfile.getBytes(),initKey1);
                                         long endTime = System.nanoTime();
                                         timeLengthDES[0] = (endTime - startTime) / 1000000;
                                         if(i>3)
@@ -1217,10 +1219,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                             else if (alg.equals("3DES")){
                                 try {
                                     long average=0;
-                                    tripleDES.encrypt(_10KBfile.getBytes());
+                                    byte [] initKey = tripleDES.initKey();
+                                    tripleDES.encrypt(_10KBfile.getBytes(),initKey);
                                     for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
-                                        tripleDES.encrypt(_10KBfile.getBytes());
+                                        byte [] initKey1 = tripleDES.initKey();
+                                        tripleDES.encrypt(_10KBfile.getBytes(),initKey1);
                                         long endTime = System.nanoTime();
                                         timeLength3DES[0] = (endTime - startTime) / 1000000;
                                         if(i>3)
@@ -1236,10 +1240,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
                                 try {
                                     long average=0;
-                                    tripleDES.encrypt(_100KBfile.getBytes());
+                                    byte [] initKey = tripleDES.initKey();
+                                    tripleDES.encrypt(_100KBfile.getBytes(),initKey);
                                     for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
-                                        tripleDES.encrypt(_100KBfile.getBytes());
+                                        byte [] initKey1 = tripleDES.initKey();
+                                        tripleDES.encrypt(_100KBfile.getBytes(),initKey1);
                                         long endTime = System.nanoTime();
                                         timeLength3DES[0] = (endTime - startTime) / 1000000;
                                         if(i>3)
@@ -1255,10 +1261,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
                                 try {
                                     long average=0;
-                                    tripleDES.encrypt(_500KBfile.getBytes());
+                                    byte [] initKey = tripleDES.initKey();
+                                    tripleDES.encrypt(_500KBfile.getBytes(),initKey);
                                     for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
-                                        tripleDES.encrypt(_500KBfile.getBytes());
+                                        byte [] initKey1 = tripleDES.initKey();
+                                        tripleDES.encrypt(_500KBfile.getBytes(),initKey1);
                                         long endTime = System.nanoTime();
                                         timeLength3DES[0] = (endTime - startTime) / 1000000;
                                         if(i>3)
@@ -1274,10 +1282,12 @@ public class EncryptionAlgorithm extends AppCompatActivity {
 
                                 try {
                                     long average=0;
-                                    tripleDES.encrypt(_1MBfile.getBytes());
+                                    byte [] initKey = tripleDES.initKey();
+                                    tripleDES.encrypt(_1MBfile.getBytes(),initKey);
                                     for(int i = 0; i<50; i++) {
                                         long startTime  = System.nanoTime();
-                                        tripleDES.encrypt(_1MBfile.getBytes());
+                                        byte [] initKey1 = tripleDES.initKey();
+                                        tripleDES.encrypt(_1MBfile.getBytes(),initKey1);
                                         long endTime = System.nanoTime();
                                         timeLength3DES[0] = (endTime - startTime) / 1000000;
                                         if(i>3)
@@ -1301,7 +1311,7 @@ public class EncryptionAlgorithm extends AppCompatActivity {
                                     for(int i = 0; i<50; i++) {
                                         long startTime = System.nanoTime();
                                         blowfish.generate_symmetric_key();
-                                        blowfish.encrypt(_10KBfile.getBytes());
+                                       blowfish.encrypt(_10KBfile.getBytes());
                                         long endTime = System.nanoTime();
                                         timeLengthBLOWFISH[0] = (endTime - startTime) / 1000000;
 
