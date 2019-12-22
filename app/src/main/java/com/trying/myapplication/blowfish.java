@@ -25,9 +25,7 @@ class blowfish {
     }
     private static byte[] get_raw_key(byte[] seed) throws Exception {
         KeyGenerator key = KeyGenerator.getInstance("Blowfish");
-        SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG"); //Pseudo Random Number Generator (PRNG) algorithm
-        secureRandom.setSeed(seed);
-        key.init(448, secureRandom); // 128, 256 and 448 bits may not be available
+        key.init(448); // 128, 256 and 448 bits may not be available
         SecretKey secretKey = key.generateKey();
         raw = secretKey.getEncoded();
         return raw;
