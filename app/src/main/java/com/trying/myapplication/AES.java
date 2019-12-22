@@ -17,13 +17,7 @@ class AES
         byte_to_hex(result);
     }
 
-   /* public static String decrypt(String encrypted)
-            throws Exception {
 
-        byte[] encryptedBytes = hex_to_byte(encrypted);
-        byte[] result = decrypt(encryptedBytes);
-        return new String(result);
-    }*/
 
     private static byte[] get_raw_key() {
         SecretKey key = new SecretKeySpec(keyValue, "AES");
@@ -37,8 +31,14 @@ class AES
         return cipher.doFinal(clear);   //return encrypted text
     }
 /*
+   /* public static String decrypt(String encrypted)
+            throws Exception {
 
-    private static byte[] decrypt(byte[] encrypted)
+        byte[] encryptedBytes = hex_to_byte(encrypted);
+        byte[] result = decrypt(encryptedBytes);
+        return new String(result);
+    }*/
+   /* private static byte[] decrypt(byte[] encrypted)
             throws Exception {
         SecretKey skeySpec = new SecretKeySpec(keyValue, "AES");
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
